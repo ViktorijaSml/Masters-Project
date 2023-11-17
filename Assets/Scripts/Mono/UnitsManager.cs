@@ -5,26 +5,14 @@ using UnityEngine.UI;
 
 public class UnitsManager : MonoBehaviour
 {
-    public GameObject[] Units; 
+    public GameObject Units; 
     public static UnitsManager instance;
 
     void Awake() => instance = this;
 
-    public void Exit()
-    {
-        foreach (var unit in Units)
-        {
-            unit.SetActive(false);
-        }
-    }
+    public void Exit() =>  Units.SetActive(false);
 
-    public void Open()
-    {
-        foreach (var unit in Units)
-        {
-            unit.SetActive(true);
-        }
-    }
+    public void Open() =>  Units.SetActive(true);
 
 
 }
