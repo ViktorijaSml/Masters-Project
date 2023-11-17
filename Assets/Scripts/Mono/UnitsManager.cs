@@ -1,18 +1,18 @@
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
 
 public class UnitsManager : MonoBehaviour
 {
-    public GameObject Units; 
+    private CanvasGroup Units;
     public static UnitsManager instance;
 
-    void Awake() => instance = this;
+    void Awake() {
+        Units = GameObject.FindGameObjectWithTag("Units").GetComponent<CanvasGroup>();
+        instance = this;
+    }
 
-    public void Exit() =>  Units.SetActive(false);
+    public void Close() =>  Units.enabled = true;
 
-    public void Open() =>  Units.SetActive(true);
+    public void Open() =>  Units.enabled = false;
 
 
 }

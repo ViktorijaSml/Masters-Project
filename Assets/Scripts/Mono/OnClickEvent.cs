@@ -8,7 +8,7 @@ public class OnClickEvent : MonoBehaviour
 
     private void Start()
     {
-         unitButton = GetComponent<Button>();
+        unitButton = GetComponent<Button>();
         // Provjerava ima li objekt spozobnost kreiranje vlastitog objekta.
         if(disableCreateObject == false)
         {
@@ -16,7 +16,7 @@ public class OnClickEvent : MonoBehaviour
             unitButton.onClick.AddListener(() => 
             {
                 CreateUnitObject();
-                UnitsManager.instance.Exit();
+                UnitsManager.instance.Close();
             });            
         }
         else

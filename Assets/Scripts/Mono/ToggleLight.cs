@@ -1,32 +1,36 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ToggleLight : MonoBehaviour
 {
+    public static ToggleLight instance;
     public bool isOn = false;
     public Color LightOn = new Color(1, 1, 1, 1);
     public Color LightOff = new Color(1, 1, 1, 1);
-    private Image light;
+    private Image lightImage;
+
+    void Awake() => instance = this;
 
     void Start() {
-        light = GetComponent<Image>();
+        lightImage = GetComponent<Image>();
         StartCoroutine(OnValueChange());
     }
 
-    public void Light()
-    {
+    public void Light() {
         isOn = !isOn;
-        light.color = isOn ? LightOn : LightOff;
+        lightImage.color = isOn ? LightOn : LightOff;
     }
 
-    public IEnumerator OnValueChange()
-    {
-        while(true)
-        {
+    public void SetLightOn(bool value) {
+        isOn = value;
+        lightImage.color = isOn ? LightOn : LightOff;
+    }
+
+    public IEnumerator OnValueChange() {
+        while(true) {
             yield return new WaitForSeconds(0.1f);
-            light.color = isOn ? LightOn : LightOff;
+            lightImage.color = isOn ? LightOn : LightOff;
         }
     }
 }
