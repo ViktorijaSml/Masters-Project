@@ -9,18 +9,25 @@ public class OnClickEvent : MonoBehaviour
     private void Start()
     {
         unitButton = GetComponent<Button>();
-        // Provjerava ima li objekt spozobnost kreiranje vlastitog objekta.
+        // Provjerava ima li objekt sposobnost kreiranje vlastitog objekta.
+        // Odnosno, je li objekt kreiran 
         if(disableCreateObject == false)
         {
-            // Dodavanje metode koja će se pozvati pritiskom na tipku objekta
+            // Ako objekt nije kreiran (nema jos modula dodanih),
+            // Dodaje se metoda koja će se pozvati pritiskom na tipku objekta:
+            // "Kreiraj mi taj objekt/modul"
             unitButton.onClick.AddListener(() => 
             {
                 CreateUnitObject();
-                UnitsManager.instance.Close();
+                UnitsManager.instance.Close(); //Makni Units prozor
             });            
         }
         else
         {
+
+            //Ako je objet kreiran (dodali smo modul),
+            //Makni prethodni Listener i dodaj novi sa novom metodom:
+            //Zatvori/Makni modul 
             unitButton.onClick.RemoveAllListeners();
             unitButton.onClick.AddListener(() => 
             {
@@ -39,8 +46,8 @@ public class OnClickEvent : MonoBehaviour
 
         // Postavljanje parenta na "UnitSlot"
         unit.transform.SetParent(unitSlot.transform, false);
-        unit.GetComponent<OnClickEvent>().disableCreateObject = true;
-        unit.transform.GetChild(0).GetComponent<Image>().enabled = true;
+        unit.GetComponent<OnClickEvent>().disableCreateObject = true; 
+        unit.transform.GetChild(0).GetComponent<Image>().enabled = true; //otkrivanje ikonice 'x'
         unit.gameObject.name = unit.gameObject.name.Replace("(Clone)", "");
 
         // Postavljanje svojstava RectTransform za pravilno pozicioniranje i skaliranje
