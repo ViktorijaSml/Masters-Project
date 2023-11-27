@@ -1,0 +1,23 @@
+[
+  {
+    "type": "screen_backgroundColor",
+    "message0": "%{BKY_SET_BACKGROUND_COLOR} %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "COLOR",
+        "options": [
+          [ "%{BKY_COLOR_BLACK}", "BLACK" ],
+          [ "%{BKY_COLOR_RED}", "RED" ],
+          [ "%{BKY_COLOR_BLUE}", "BLUE" ],
+          [ "%{BKY_COLOR_YELLOW}", "YELLOW" ],
+          [ "%{BKY_COLOR_GREEN}", "GREEN" ],
+          [ "%{BKY_COLOR_PURPLE}", "PURPLE" ],
+          [ "%{BKY_COLOR_WHITE}", "WHITE" ]
+        ]
+      }
+    ],
+    "previousStatement": null,
+    "inputInline": true
+  }
+]
