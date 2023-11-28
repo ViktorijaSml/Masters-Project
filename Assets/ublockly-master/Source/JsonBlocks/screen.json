@@ -19,5 +19,57 @@
     ],
     "previousStatement": null,
     "inputInline": true
+  },
+
+  {
+    "type": "screen_setColorRGB",
+    "message0": "%{BKY_SET_BACKGROUND_COLOR_RGB}",
+    "args0": [
+      {
+        "type": "field_label"
+      }
+    ],
+    "message1": "%{BKY_RGB_RED} %1",
+    "args1": [
+      {
+        "type": "input_value",
+        "name": "RGB_RED",
+        "check": "Number",
+        "align": "RIGHT"
+      }
+    ],
+    "message2": "%{BKY_RGB_GREEN} %1",
+    "args2": [
+      {
+        "type": "input_value",
+        "name": "RGB_GREEN",
+        "check": "Number",
+        "align": "RIGHT"
+      }
+    ],
+    "message3": "%{BKY_RGB_BLUE} %1",
+    "args3": [
+      {
+        "type": "input_value",
+        "name": "RGB_BLUE",
+        "check": "Number",
+        "align": "RIGHT"
+      }
+    ],
+    "previousStatement": null
+  },
+
+  {
+    "type": "screen_backgroundBrightness",
+    "message0": "%{BKY_SET_BACKGROUND_BRIGHTNESS} %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "BRIGHTNESS",
+        "check": "Number",
+        "align": "RIGHT"
+      }
+    ],
+    "previousStatement": null
   }
 ]

@@ -1096,13 +1096,21 @@
   "TIME_UNIT_MINUTES": "minute",
   "TIME_UNIT_TOO_HIGH": "too high to count",
 
-  //Screen defines
+  //********Screen defines**************/
+  //Function titles
   "SET_BACKGROUND_COLOR": "Set background color",
+  "SET_BACKGROUND_BRIGHTNESS": "Set background brightness",
+  "SET_BACKGROUND_COLOR_RGB": "Set background color with RGB",
+  //Options for background colors (clear colors)
   "COLOR_BLACK": "black",
   "COLOR_RED": "red",
   "COLOR_BLUE": "blue",
   "COLOR_YELLOW": "yellow",
   "COLOR_GREEN": "green",
   "COLOR_PURPLE": "purple",
-  "COLOR_WHITE": "white"
+  "COLOR_WHITE": "white",
+  //Inputs for function set background color with RGB
+  "RGB_RED": "red",
+  "RGB_GREEN": "green",
+  "RGB_BLUE": "blue"
 }

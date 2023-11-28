@@ -9,7 +9,7 @@ public class UnitsManager : MonoBehaviour
         Units = GameObject.FindGameObjectWithTag("Units").GetComponent<CanvasGroup>();
         instance = this;
     }
-
+   
     public void Close() =>  Units.enabled = true;
 
     public void Open() =>  Units.enabled = false;

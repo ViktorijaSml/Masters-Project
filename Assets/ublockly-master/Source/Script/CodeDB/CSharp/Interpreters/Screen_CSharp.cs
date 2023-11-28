@@ -1,10 +1,9 @@
-using System.Diagnostics;
-using UnityEngine;
+using System;
+using System.Collections;
+
 
 namespace UBlockly
 {
-    // This next block of code is for one block, if the 
-    //category has multiple blocks repeat this for each one
     [CodeInterpreter(BlockType = "screen_backgroundColor")]
     public class Screen_BackgroundColor_Cmdtor : VoidCmdtor
     {
@@ -15,29 +14,64 @@ namespace UBlockly
             switch (value)
             {
                 case "BLACK":
-                    ScreenColor.instance.ChangeToBlack();
+                    ScreenColor.instance.SetColorBlack();
                     break;
                 case "RED":
-                    ScreenColor.instance.ChangeToRed();
+                    ScreenColor.instance.SetColorRed();
                     break;
                 case "BLUE":
-                    ScreenColor.instance.ChangeToBlue();
+                    ScreenColor.instance.SetColorBlue();
                     break;
                 case "YELLOW":
-                    ScreenColor.instance.ChangeToYellow();
+                    ScreenColor.instance.SetColorYellow();
                     break;
                 case "GREEN":
-                    ScreenColor.instance.ChangeToGreen();
+                    ScreenColor.instance.SetColorGreen();
                     break;
                 case "PURPLE":
-                    ScreenColor.instance.ChangeToPurple();
+                    ScreenColor.instance.SetColorPurple();
                     break;
                 case "WHITE":
-                    ScreenColor.instance.ChangeToWhite();
+                    ScreenColor.instance.SetColorWhite();
                     break;
             }
         }
 
        
+    }
+
+    [CodeInterpreter(BlockType = "screen_backgroundBrightness")]
+    public class Screen_BackgroundBrightness_Cmdtor : EnumeratorCmdtor
+    {
+        protected override IEnumerator Execute(Block block)
+        {
+            CmdEnumerator ctor = CSharp.Interpreter.ValueReturn(block, "BRIGHTNESS", new DataStruct(0));
+            yield return ctor;
+            float value = Math.Clamp(ctor.Data.NumberValue.Value / 255f, 0f, 1f);
+
+            ScreenColor.instance.SetBrigthness(value);
+        }
+    }
+
+    [CodeInterpreter(BlockType = "screen_setColorRGB")]
+    public class Screen_BackgroundColorRGB_Cmdtor : EnumeratorCmdtor
+    {
+        protected override IEnumerator Execute(Block block)
+        {
+            CmdEnumerator ctor = CSharp.Interpreter.ValueReturn(block, "RGB_RED", new DataStruct(0));
+            yield return ctor;
+            float colorRed = Math.Clamp(ctor.Data.NumberValue.Value / 255f, 0f, 1f );
+
+            CmdEnumerator ctor2 = CSharp.Interpreter.ValueReturn(block, "RGB_GREEN", new DataStruct(0));
+            yield return ctor2;
+            float colorGreen = Math.Clamp(ctor2.Data.NumberValue.Value / 255f, 0f, 1f);
+
+            CmdEnumerator ctor3 = CSharp.Interpreter.ValueReturn(block, "RGB_BLUE", new DataStruct(0));
+            yield return ctor3;
+            float colorBlue = Math.Clamp(ctor3.Data.NumberValue.Value / 255f, 0f, 1f);
+
+            ScreenColor.instance.SetColorRGB(colorRed, colorGreen, colorBlue);
+            }
+
     }
 }

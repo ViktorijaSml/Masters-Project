@@ -5,25 +5,72 @@ public class ScreenColor : MonoBehaviour
 {
     public static ScreenColor instance;
     private Image imageScreen;
+    private Color backgroundColor;
     void Awake()
     {
         instance = this;
         imageScreen = GetComponent<Image>();
+        backgroundColor = imageScreen.color;
     }
-   
-    public void ChangeToBlack() => imageScreen.color = new Color(0, 0, 0);
 
-    public void ChangeToRed() => imageScreen.color = new Color(255, 0, 0);
+    // Funkcija za postavljanje svijetline ekrana mikrokontrolera
+    // Uzmi vec postojecu boju ali promijeni svijetlinu
+    
+    // U setBrigthness i setColor moramo spremat u backgroundColor kako bi mogli sacuvat taj broj i mijenat
+    // samo tu odredenu stvar
+    public void SetBrigthness(float brigthness)
+    {
+        imageScreen.color = new Color (imageScreen.color.r, imageScreen.color.g, imageScreen.color.b, brigthness);
+        backgroundColor = imageScreen.color;
 
-    public void ChangeToBlue() => imageScreen.color = new Color(0, 0, 255);
+    }
 
-    public void ChangeToYellow() => imageScreen.color = new Color(255, 255, 0);
+    // Slijedeci set funkcija sluze za mijenjanje boje ekrana mikrokontrolera
+    // Stavi novu boju ali sacuvaj svijetlinu 
+    public void SetColorRGB(float red, float green, float blue)
+    {
+        imageScreen.color = new Color(red, green, blue, backgroundColor.a);
+        backgroundColor = imageScreen.color;
+    }
 
-    public void ChangeToGreen() => imageScreen.color = new Color(0, 255, 0);
-
-    public void ChangeToPurple() => imageScreen.color = new Color(255, 0, 255);
-
-    public void ChangeToWhite() => imageScreen.color = new Color(255, 255, 255);
-
-    public void RandomColor() =>  imageScreen.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
-}
+    public void SetColorBlack()
+    {
+        imageScreen.color = new Color(0f, 0f, 0f, backgroundColor.a);
+        backgroundColor = imageScreen.color;
+    }
+    public void SetColorRed()
+    {
+        imageScreen.color = new Color(255f, 0f, 0f, backgroundColor.a);
+        backgroundColor = imageScreen.color;
+    }
+    public void SetColorBlue()
+    {
+        imageScreen.color = new Color(0f, 0f, 255f, backgroundColor.a);
+        backgroundColor = imageScreen.color;
+    }
+    public void SetColorYellow()
+    {
+        imageScreen.color = new Color(255f, 255f, 0f, backgroundColor.a);
+        backgroundColor = imageScreen.color;
+    }
+    public void SetColorGreen()
+    {
+        imageScreen.color = new Color(0f, 255f, 0f);
+        backgroundColor = imageScreen.color;
+    }
+    public void SetColorPurple()
+    {
+        imageScreen.color = new Color(255f, 0f, 255f);
+        backgroundColor = imageScreen.color;
+    }
+    public void SetColorWhite()
+    {
+        imageScreen.color = new Color(255f, 255f, 255f);
+        backgroundColor = imageScreen.color;
+    }
+    public void SetColorColor()
+    {
+        imageScreen.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
+        backgroundColor = imageScreen.color;
+    }
+    }
