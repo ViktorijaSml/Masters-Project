@@ -18,7 +18,7 @@
       }
     ],
     "previousStatement": null,
-    "inputInline": true
+    "nextStatement":  null
   },
 
   {
@@ -56,7 +56,8 @@
         "align": "RIGHT"
       }
     ],
-    "previousStatement": null
+    "previousStatement": null,
+    "nextStatement": null
   },
 
   {
@@ -70,6 +71,7 @@
         "align": "RIGHT"
       }
     ],
-    "previousStatement": null
+    "previousStatement": null,
+    "nextStatement": null
   }
 ]

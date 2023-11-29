@@ -1,0 +1,11 @@
+[
+  {
+    "type": "speaker_setVolume",
+    "message0": "%{BKY_SPEAKER_SET_VOLUME} ",
+    "args0": [
+      {
+        "type": "field_label"
+      }
+    ]
+  }
+]
