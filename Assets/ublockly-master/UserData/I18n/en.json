@@ -10,6 +10,7 @@
   "COLOR": "Color",
   "COROUTINE": "Coroutines",
   "SCREEN": "Screen",
+  "SPEAKER": "Volume",
 
   /// default name - A simple: general default name for a variable: preferably short.
   "VARIABLES_DEFAULT_NAME": "item",
@@ -1112,5 +1113,8 @@
   //Inputs for function set background color with RGB
   "RGB_RED": "red",
   "RGB_GREEN": "green",
-  "RGB_BLUE": "blue"
+  "RGB_BLUE": "blue",
+
+  //*********Speaker defines**************/
+  "SPEAKER_SET_VOLUME":  "Set volume of the speaker",
 }
