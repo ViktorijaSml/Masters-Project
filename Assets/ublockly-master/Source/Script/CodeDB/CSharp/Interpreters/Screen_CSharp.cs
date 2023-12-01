@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 
 
@@ -47,7 +46,7 @@ namespace UBlockly
         {
             CmdEnumerator ctor = CSharp.Interpreter.ValueReturn(block, "BRIGHTNESS", new DataStruct(0));
             yield return ctor;
-            float value = Math.Clamp(ctor.Data.NumberValue.Value / 255f, 0f, 1f);
+            float value = ctor.Data.NumberValue.Value;
 
             ScreenColor.instance.SetBrigthness(value);
         }
@@ -60,15 +59,15 @@ namespace UBlockly
         {
             CmdEnumerator ctor = CSharp.Interpreter.ValueReturn(block, "RGB_RED", new DataStruct(0));
             yield return ctor;
-            float colorRed = Math.Clamp(ctor.Data.NumberValue.Value / 255f, 0f, 1f );
+            float colorRed = ctor.Data.NumberValue.Value;
 
             CmdEnumerator ctor2 = CSharp.Interpreter.ValueReturn(block, "RGB_GREEN", new DataStruct(0));
             yield return ctor2;
-            float colorGreen = Math.Clamp(ctor2.Data.NumberValue.Value / 255f, 0f, 1f);
+            float colorGreen = ctor2.Data.NumberValue.Value;
 
             CmdEnumerator ctor3 = CSharp.Interpreter.ValueReturn(block, "RGB_BLUE", new DataStruct(0));
             yield return ctor3;
-            float colorBlue = Math.Clamp(ctor3.Data.NumberValue.Value / 255f, 0f, 1f);
+            float colorBlue = ctor3.Data.NumberValue.Value;
 
             ScreenColor.instance.SetColorRGB(colorRed, colorGreen, colorBlue);
             }

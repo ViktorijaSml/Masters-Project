@@ -18,9 +18,10 @@ public class ScreenColor : MonoBehaviour
     
     // U setBrigthness i setColor moramo spremat u backgroundColor kako bi mogli sacuvat taj broj i mijenat
     // samo tu odredenu stvar
-    public void SetBrigthness(float brigthness)
+    public void SetBrigthness(float brightness)
     {
-        imageScreen.color = new Color (imageScreen.color.r, imageScreen.color.g, imageScreen.color.b, brigthness);
+        brightness = Mathf.Clamp01(brightness / 255f);
+        imageScreen.color = new Color (imageScreen.color.r, imageScreen.color.g, imageScreen.color.b, brightness);
         backgroundColor = imageScreen.color;
 
     }
@@ -29,6 +30,10 @@ public class ScreenColor : MonoBehaviour
     // Stavi novu boju ali sacuvaj svijetlinu 
     public void SetColorRGB(float red, float green, float blue)
     {
+        red = Mathf.Clamp01(red/255f);
+        green = Mathf.Clamp01(green/255f);
+        blue = Mathf.Clamp01(blue/255f);
+
         imageScreen.color = new Color(red, green, blue, backgroundColor.a);
         backgroundColor = imageScreen.color;
     }
