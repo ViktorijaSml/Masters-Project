@@ -53,7 +53,7 @@ namespace UBlockly.UGUI
         public string CategoryName;
         public string ColorHex;
         public string BlockTypePrefix;
-        public List<string> BlockList;
+        public List<string> BlockList = new List<string>();
 
         [NonSerialized] private bool mInited = false;
         
@@ -65,7 +65,11 @@ namespace UBlockly.UGUI
 
             if (!string.IsNullOrEmpty(BlockTypePrefix))
             {
-                BlockList.AddRange(BlockFactory.Instance.GetBlockTypesOfPrefix(BlockTypePrefix));
+                var blockTypes = BlockFactory.Instance.GetBlockTypesOfPrefix(BlockTypePrefix);
+                if (blockTypes != null)
+                {
+                    BlockList.AddRange(blockTypes);
+                }
             }
 
             Color color;
