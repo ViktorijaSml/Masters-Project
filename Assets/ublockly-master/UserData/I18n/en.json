@@ -1111,10 +1111,40 @@
   "COLOR_PURPLE": "purple",
   "COLOR_WHITE": "white",
   //Inputs for function set background color with RGB
-  "RGB_RED": "red",
-  "RGB_GREEN": "green",
-  "RGB_BLUE": "blue",
+  "RGB_RED": "red:",
+  "RGB_GREEN": "green:",
+  "RGB_BLUE": "blue:",
 
   //*********Speaker defines**************/
-  "SPEAKER_SET_VOLUME":  "Set volume of the speaker",
+  //function setVolume
+  "SPEAKER_SET_VOLUME": "Set volume of the speaker",
+  //funtion playTone
+  "PLAY_TONE": "Play tone",
+  "FOR": "for",
+  "DURATION": "beat",
+  //inputs for function playTone
+  "TONE_C": "C",
+  "TONE_CSHARP": "C#",
+  "TONE_D": "D",
+  "TONE_DSHARP": "D#",
+  "TONE_E": "E",
+  "TONE_F": "F",
+  "TONE_FSHARP": "F#",
+  "TONE_G": "G",
+  "TONE_GSHARP": "G#",
+  "TONE_A": "A",
+  "TONE_ASHARP": "A#",
+  "TONE_H": "H",
+  "TONE_CTWO": "C2",
+  "ONE_BEAT": "1",
+  "HALF_BEAT": "1/2",
+  "FOURTH_BEAT": "1/4",
+  "TWO_BEAT": "2",
+  "FOUR_BEAT": "4",
+  //function playBeep
+  "SPEAKER_PLAY_BEEP": "Play beep",
+  "SPEAKER_FREQUENCY": "frequency:",
+  "SPEAKER_DURATION": "duration:",
+  "HZ": "(Hz)",
+  "MILISEC":  "(miliseconds)"
 }

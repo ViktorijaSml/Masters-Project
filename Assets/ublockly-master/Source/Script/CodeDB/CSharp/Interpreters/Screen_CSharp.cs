@@ -54,23 +54,15 @@ namespace UBlockly
     }
 
     [CodeInterpreter(BlockType = "screen_setColorRGB")]
-    public class Screen_BackgroundColorRGB_Cmdtor : EnumeratorCmdtor
+    public class Screen_BackgroundColorRGB_Cmdtor : VoidCmdtor
     {
-        protected override IEnumerator Execute(Block block)
+        protected override void Execute(Block block)
         {
-            CmdEnumerator ctor = CSharp.Interpreter.ValueReturn(block, "RGB_RED", new DataStruct(0));
-            yield return ctor;
-            float colorRed = Math.Clamp(ctor.Data.NumberValue.Value / 255f, 0f, 1f );
+            Number colorRed = new Number(block.GetFieldValue("RGB_RED"));
+            Number colorGreen = new Number(block.GetFieldValue("RGB_GREEN"));
+            Number colorBlue = new Number(block.GetFieldValue("RGB_BLUE"));
 
-            CmdEnumerator ctor2 = CSharp.Interpreter.ValueReturn(block, "RGB_GREEN", new DataStruct(0));
-            yield return ctor2;
-            float colorGreen = Math.Clamp(ctor2.Data.NumberValue.Value / 255f, 0f, 1f);
-
-            CmdEnumerator ctor3 = CSharp.Interpreter.ValueReturn(block, "RGB_BLUE", new DataStruct(0));
-            yield return ctor3;
-            float colorBlue = Math.Clamp(ctor3.Data.NumberValue.Value / 255f, 0f, 1f);
-
-            ScreenColor.instance.SetColorRGB(colorRed, colorGreen, colorBlue);
+            ScreenColor.instance.SetColorRGB(colorRed.Value, colorGreen.Value, colorBlue.Value);
             }
 
     }
