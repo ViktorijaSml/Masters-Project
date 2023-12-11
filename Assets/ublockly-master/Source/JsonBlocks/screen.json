@@ -29,31 +29,31 @@
         "type": "field_label"
       }
     ],
-    "message1": "%{BKY_RGB_RED} %1",
+    "message1": "%{BKY_RGB_RED} %1 %{BKY_RGB_GREEN} %2 %{BKY_RGB_BLUE} %3",
     "args1": [
       {
-        "type": "input_value",
+        "type": "field_number",
         "name": "RGB_RED",
-        "check": "Number",
-        "align": "RIGHT"
-      }
-    ],
-    "message2": "%{BKY_RGB_GREEN} %1",
-    "args2": [
+        "value": "0",
+        "min": "0",
+        "max": "255",
+        "int": true
+      },
       {
-        "type": "input_value",
+        "type": "field_number",
         "name": "RGB_GREEN",
-        "check": "Number",
-        "align": "RIGHT"
-      }
-    ],
-    "message3": "%{BKY_RGB_BLUE} %1",
-    "args3": [
+        "value": "0",
+        "min": "0",
+        "max": "255",
+        "int": true
+      },
       {
-        "type": "input_value",
+        "type": "field_number",
         "name": "RGB_BLUE",
-        "check": "Number",
-        "align": "RIGHT"
+        "value": "0",
+        "min": "0",
+        "max": "255",
+        "int": true
       }
     ],
     "previousStatement": null,
