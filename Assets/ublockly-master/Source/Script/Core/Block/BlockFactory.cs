@@ -48,7 +48,7 @@ namespace UBlockly
         /// </summary>
         public List<string> GetBlockTypesOfPrefix(string prefix)
         {
-            List<string> blockTypes;
+            List<string> blockTypes = new List<string>();
             mPrefixCategories.TryGetValue(prefix, out blockTypes);
             return blockTypes;
         }
