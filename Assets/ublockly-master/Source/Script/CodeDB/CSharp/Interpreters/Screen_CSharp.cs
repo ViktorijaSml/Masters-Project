@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-
 
 namespace UBlockly
 {
@@ -47,7 +45,7 @@ namespace UBlockly
         {
             CmdEnumerator ctor = CSharp.Interpreter.ValueReturn(block, "BRIGHTNESS", new DataStruct(0));
             yield return ctor;
-            float value = Math.Clamp(ctor.Data.NumberValue.Value / 255f, 0f, 1f);
+            float value = ctor.Data.NumberValue.Value;
 
             ScreenColor.instance.SetBrigthness(value);
         }

@@ -11,6 +11,7 @@
   "COROUTINE": "Coroutines",
   "SCREEN": "Screen",
   "SPEAKER": "Volume",
+  "RTC": "RTC",
 
   /// default name - A simple: general default name for a variable: preferably short.
   "VARIABLES_DEFAULT_NAME": "item",
@@ -1146,5 +1147,22 @@
   "SPEAKER_FREQUENCY": "frequency:",
   "SPEAKER_DURATION": "duration:",
   "HZ": "(Hz)",
-  "MILISEC":  "(miliseconds)"
+  "MILISEC": "(miliseconds)",
+  //************RTC Defines*************/
+  //function setDate
+  "RTC_SET_YEAR": "Set year",
+  "RTC_SET_MONTH": "Set month",
+  "RTC_SET_DAY": "Set day",
+  "RTC_SET_HOUR": "Set hour",
+  "RTC_SET_MINUTE": "Set minute",
+  "RTC_SET_SECOND": "Set second",
+  //get functions
+  "RTC_GET_YEAR": "Get year",
+  "RTC_GET_MONTH": "Get month",
+  "RTC_GET_DAY": "Get day",
+  "RTC_GET_HOUR": "Get hour",
+  "RTC_GET_MINUTE": "Get minute",
+  "RTC_GET_SECOND": "Get second",
+  "RTC_GET_LOCALTIME": "Get local time"
+
 }

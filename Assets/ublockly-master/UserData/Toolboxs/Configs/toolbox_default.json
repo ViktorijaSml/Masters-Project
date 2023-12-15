@@ -2,6 +2,11 @@
      "Style": "classic",
   "BlockCategoryList": [
     {
+      "CategoryName": "RTC",
+      "ColorHex": "#7faaf0",
+      "BlockTypePrefix": "rtc"
+    },
+    {
       "CategoryName": "SPEAKER",
       "ColorHex": "#cefa8c",
       "BlockTypePrefix": "speaker"
