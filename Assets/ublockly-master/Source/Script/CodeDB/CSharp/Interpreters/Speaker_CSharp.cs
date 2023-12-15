@@ -1,4 +1,3 @@
-using System.Collections;
 using UBlockly;
 using UnityEngine;
 
@@ -22,8 +21,7 @@ public class Speaker_CSharp : MonoBehaviour
         {
             string tone = block.GetFieldValue("TONE");
             string beat = block.GetFieldValue("BEAT");
-            Debug.Log(tone);
-            Debug.Log(beat);
+
             switch (tone)
             {
                 case "C":

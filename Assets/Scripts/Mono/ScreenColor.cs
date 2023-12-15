@@ -11,7 +11,7 @@ public class ScreenColor : MonoBehaviour
         instance = this;
         imageScreen = GetComponent<Image>();
         backgroundColor = imageScreen.color;
-    }
+    }    
 
     // Funkcija za postavljanje svijetline ekrana mikrokontrolera
     // Uzmi vec postojecu boju ali promijeni svijetlinu

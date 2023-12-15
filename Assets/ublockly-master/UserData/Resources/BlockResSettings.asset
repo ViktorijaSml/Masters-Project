@@ -52,6 +52,9 @@ MonoBehaviour:
   - IndexName: speaker
     ResName: speaker
     TextFile: {fileID: 4900000, guid: d0732d3dd5eccbb498d7853a8aedefcc, type: 3}
+  - IndexName: rtc
+    ResName: rtc
+    TextFile: {fileID: 4900000, guid: 59f82197fe150084e909276c6eecfc6a, type: 3}
   m_ToolboxFiles:
   - IndexName: default
     ResName: toolbox_default
