@@ -1,42 +1,48 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class TimerFunctions : MonoBehaviour
 {
-    private bool isActiveFeedWDT = false;
-   
-    void Start()
-    {
-        StartCoroutine(StartCountdown(5000));
-        StartCoroutine(Wait(2));
-        FeedWDT();
-    }
+	private bool isTimerActive = false;
+	private float countdownDuration = 5f;
 
-    public void FeedWDT()
-    {
-        isActiveFeedWDT = true;
-    }
-    public IEnumerator StartCountdown(int miliseconds)
-    {
-        for (int i = miliseconds/1000; i > 0; i--)
-        {
-            if (isActiveFeedWDT)
-            {
-                isActiveFeedWDT = false;
-                i = miliseconds/1000;
-                Debug.Log("Reseting timer... " + i);
-            }
-            else
-            {
-                Debug.Log(i);
-                yield return new WaitForSeconds(1);
-            }
-        }
-        throw new System.Exception("WDT has finished! There must be an error!");
-    }
-    public IEnumerator Wait(int seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        Debug.Log("Im waiting!");
-    }
+	void Start()
+	{
+		StartCoroutine(StartWatchdogTimer(countdownDuration));
+		InvokeRepeating("FeedWatchdogTimer", 2, 2);
+	}
+
+	void FeedWatchdogTimer() => isTimerActive = true;
+
+	IEnumerator StartWatchdogTimer(float seconds)
+	{
+		while (true)
+		{
+			float timer = seconds;
+
+			while (timer > 0f)
+			{
+				if (isTimerActive)
+				{
+					isTimerActive = false;
+					timer = seconds;
+					Debug.Log("Reset to: " + timer.ToString("F2"));
+				}
+				else
+				{
+					Debug.Log(timer.ToString("F2"));
+					yield return new WaitForSeconds(0.1f);
+					timer -= 0.1f;
+				}
+			}
+
+			Debug.LogError("Watchdog vrijeme je isteklo! Vjerojatno se radi o grešci.");
+			OnErrorEvent();
+		}
+	}
+
+	void OnErrorEvent()
+	{
+		// DO SOMETHING
+	}
 }
