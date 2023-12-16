@@ -2,6 +2,11 @@
      "Style": "classic",
   "BlockCategoryList": [
     {
+      "CategoryName": "WDT",
+      "ColorHex": "#aa6fd6",
+      "BlockTypePrefix": "wdt"
+    },
+    {
       "CategoryName": "RTC",
       "ColorHex": "#7faaf0",
       "BlockTypePrefix": "rtc"
