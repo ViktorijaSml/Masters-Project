@@ -12,6 +12,16 @@ public class TimerFunctions : MonoBehaviour
 		InvokeRepeating("FeedWatchdogTimer", 2, 2);
 	}
 
+	private void Update()
+	{
+		// Ovo je čisto za testiranje kad stisneš space da se resetira timer ako želiš ovako
+		// Ako želiš testirati na ovaj način samo zakomentiraj InvokeRepeating u Startu.
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			FeedWatchdogTimer();
+		}
+	}
+
 	void FeedWatchdogTimer() => isTimerActive = true;
 
 	IEnumerator StartWatchdogTimer(float seconds)
