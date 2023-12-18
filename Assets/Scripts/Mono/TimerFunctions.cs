@@ -10,27 +10,25 @@ public class TimerFunctions : MonoBehaviour
     }
     public void Start()
     {
-        InitWatchDogTimer(5000);
-		Test();
-        FeedWatchdogTimer();
+       // InitWatchDogTimer(5000);
+		//Test();
+        //FeedWatchdogTimer();
     }
     public async void Test()
     {
 		await Task.Delay(2000);
     }
-    public void  InitWatchDogTimer(int miliseconds)
-	{
+    public void  InitWatchDogTimer(int miliseconds) => StartCoroutine(StartWatchdogTimer(miliseconds));
 
-        StartCoroutine(StartWatchdogTimer(miliseconds));
-	}
-    private bool isTimerActive = false;
-	private int timer = 2000;
-	public async Task FeedWatchdogTimer()
+	private bool isTimerActive = false;
+	private int timer;
+	public async Task FeedWatchdogTimer(int value)
 	{
+		timer += value;
+		Debug.Log("TIMERRRR " + timer);
         await Task.Delay(timer);
         Debug.Log("wait");
         isTimerActive = true;
-		timer += timer;
 	}
     IEnumerator StartWatchdogTimer(int miliseconds)
 	{

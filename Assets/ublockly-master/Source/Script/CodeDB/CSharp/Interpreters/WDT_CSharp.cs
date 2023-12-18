@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace UBlockly
@@ -19,8 +20,9 @@ namespace UBlockly
     {
         protected override async void Execute(Block block)
         {
-            await TimerFunctions.instance.FeedWatchdogTimer(); 
-            UnityEngine.Debug.Log("Reset");
+			Number timeout = new Number(block.GetFieldValue("TIMEOUT"));
+			await TimerFunctions.instance.FeedWatchdogTimer(2000);
+			UnityEngine.Debug.Log("Reset");
         }
     }
 
