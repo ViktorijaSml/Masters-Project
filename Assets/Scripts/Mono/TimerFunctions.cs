@@ -1,58 +1,53 @@
 ﻿using System.Collections;
 using UnityEngine;
-
+using System.Threading.Tasks;
 public class TimerFunctions : MonoBehaviour
 {
-	private bool isTimerActive = false;
-	private float countdownDuration = 5f;
-
-	void Start()
+	public static TimerFunctions instance;
+    public void Awake()
+    {
+        instance = this; 
+    }
+    public void Start()
+    {
+        InitWatchDogTimer(5000);
+		Test();
+        FeedWatchdogTimer();
+    }
+    public async void Test()
+    {
+		await Task.Delay(2000);
+    }
+    public void InitWatchDogTimer(int miliseconds)
 	{
-		StartCoroutine(StartWatchdogTimer(countdownDuration));
-		InvokeRepeating("FeedWatchdogTimer", 2, 2);
+		StartCoroutine(StartWatchdogTimer(miliseconds));
 	}
-
-	private void Update()
+    private bool isTimerActive = false;
+	public void FeedWatchdogTimer() => isTimerActive = true;
+    IEnumerator StartWatchdogTimer(int miliseconds)
 	{
-		// Ovo je čisto za testiranje kad stisneš space da se resetira timer ako želiš ovako
-		// Ako želiš testirati na ovaj način samo zakomentiraj InvokeRepeating u Startu.
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			FeedWatchdogTimer();
-		}
-	}
-
-	void FeedWatchdogTimer() => isTimerActive = true;
-
-	IEnumerator StartWatchdogTimer(float seconds)
-	{
-		while (true)
-		{
-			float timer = seconds;
+		float timer = miliseconds/1000f;
 
 			while (timer > 0f)
 			{
 				if (isTimerActive)
 				{
 					isTimerActive = false;
-					timer = seconds;
-					Debug.Log("Reset to: " + timer.ToString("F2"));
+					timer = miliseconds/1000f;
 				}
 				else
 				{
-					Debug.Log(timer.ToString("F2"));
-					yield return new WaitForSeconds(0.1f);
-					timer -= 0.1f;
+					yield return new WaitForSeconds(1f);
+				    Debug.Log((int)timer);
+					timer -= 1f;
 				}
 			}
-
-			Debug.LogError("Watchdog vrijeme je isteklo! Vjerojatno se radi o grešci.");
-			OnErrorEvent();
-		}
+			throw new System.Exception("Watchdog timer has finished! There must be an error!");		
 	}
+    IEnumerator Delay(float time)
+    {
+        yield return new WaitForSeconds(time);
 
-	void OnErrorEvent()
-	{
-		// DO SOMETHING
-	}
+    }
 }
+
