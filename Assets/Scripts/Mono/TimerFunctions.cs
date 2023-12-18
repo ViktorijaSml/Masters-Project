@@ -25,7 +25,6 @@ public class TimerFunctions : MonoBehaviour
 	public async Task FeedWatchdogTimer(int value)
 	{
 		timer += value;
-		Debug.Log("TIMERRRR " + timer);
         await Task.Delay(timer);
         Debug.Log("wait");
         isTimerActive = true;
