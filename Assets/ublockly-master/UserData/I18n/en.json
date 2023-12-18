@@ -1168,5 +1168,6 @@
   "RTC_GET_LOCALTIME": "Get local time",
   //************WDT Defines**************/
   "WDT_INIT": "Init WDT timeout",
-  "WDT_FEED": "WDT feed"
+  "WDT_FEED": "WDT feed",
+  "WDT_WAIT":  "Wait"
 }

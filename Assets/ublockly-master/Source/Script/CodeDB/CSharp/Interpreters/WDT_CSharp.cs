@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace UBlockly
 {
     [CodeInterpreter(BlockType = "wdt_initWDT")]
@@ -6,6 +8,8 @@ namespace UBlockly
         protected override void Execute(Block block)
         {
             Number timeout = new Number(block.GetFieldValue("TIMEOUT"));
+            UnityEngine.Debug.Log("Init WDT");
+
             TimerFunctions.instance.InitWatchDogTimer((int)timeout.Value);
         }
     }
@@ -13,11 +17,22 @@ namespace UBlockly
     [CodeInterpreter(BlockType = "wdt_feedWDT")]
     public class WDT_FeedWDT_Cmdtor : VoidCmdtor
     {
-        protected override void Execute(Block block)
+        protected override async void Execute(Block block)
         {
-            TimerFunctions.instance.FeedWatchdogTimer();
+            await TimerFunctions.instance.FeedWatchdogTimer(); 
+            UnityEngine.Debug.Log("Reset");
         }
     }
 
-   
+
+    [CodeInterpreter(BlockType = "wdt_wait")]
+    public class WDT_Wait_Cmdtor : VoidCmdtor
+    {
+        protected override  void Execute(Block block)
+        {
+            Number timeout = new Number(block.GetFieldValue("TIMEOUT"));
+      
+        }
+    }
+
 }
