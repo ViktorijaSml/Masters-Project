@@ -10,16 +10,7 @@ public class TimerFunctions : MonoBehaviour
     {
         instance = this; 
     }
-    public void Start()
-    {
-       // InitWatchDogTimer(5000);
-		//Test();
-        //FeedWatchdogTimer();
-    }
-    public async void Test()
-    {
-		await Task.Delay(2000);
-    }
+      
     public void  InitWatchDogTimer(int miliseconds) => StartCoroutine(StartWatchdogTimer(miliseconds));
 
 	public void FeedWatchdogTimer()
@@ -47,10 +38,5 @@ public class TimerFunctions : MonoBehaviour
 			}
 			throw new System.Exception("Watchdog timer has finished! There must be an error!");		
 	}
-    public IEnumerator Delay(float time)
-    {
-        yield return new WaitForSeconds(time);
-
-    }
 }
 

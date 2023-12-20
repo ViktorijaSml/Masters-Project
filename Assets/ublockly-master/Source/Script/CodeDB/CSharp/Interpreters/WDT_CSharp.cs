@@ -27,17 +27,4 @@ namespace UBlockly
         }
     }
 
-
-    [CodeInterpreter(BlockType = "wdt_wait")]
-    public class WDT_Wait_Cmdtor : VoidCmdtor
-    {
-        private int timer = 0;
-		protected override async void Execute(Block block)
-		{
-			Number timeout = new Number(block.GetFieldValue("TIMEOUT"));
-			timer += (int)timeout.Value;
-			await Task.Delay(timer);
-		}
-	}
-
 }
