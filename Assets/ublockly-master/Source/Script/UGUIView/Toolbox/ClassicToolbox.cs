@@ -36,6 +36,7 @@ namespace UBlockly.UGUI
 
 		protected void Start()
 		{
+            // Iz iste menia uzima količinu i prema njoj dodaje boolean listu.
             for (int i = 0; i < m_MenuList.Count; i++)
             {
 				m_MenuListActive.Add(true);
@@ -49,6 +50,8 @@ namespace UBlockly.UGUI
 
 		protected void Update()
 		{
+            // Vrti objekt za svaki menu i postavlja ga (Enabled/Disabled) prema vrijednosti iz List<bool>
+            // Pošto je List<bool> jednake rijednosti kao List<Gameobject> lako se provjerava podudarnost.
             for (int i = 0; i < m_MenuList.Count; i++)
             {
                 m_MenuList[i].SetActive(m_MenuListActive[i]);
@@ -57,6 +60,7 @@ namespace UBlockly.UGUI
 
         protected void SetMenuActive(string name)
         {
+            // Prema virjednosti "name" iz liste provjerava svako ime i postavlja objekt kao aktivan.
 			for (int i = 0; i < m_MenuList.Count; i++)
 			{
                 if(m_MenuList[i].name == name)
@@ -69,6 +73,7 @@ namespace UBlockly.UGUI
 
 		protected void SetMenuDeactive(string name)
 		{
+			// Prema virjednosti "name" iz liste provjerava svako ime i postavlja objekt kao deaktiviran.
 			for (int i = 0; i < m_MenuList.Count; i++)
 			{
 				if (m_MenuList[i].name == name)
@@ -88,6 +93,7 @@ namespace UBlockly.UGUI
                 GameObject menuItem = GameObject.Instantiate(m_MenuItemPrefab, m_MenuListContent, false);
                 menuItem.name = category.CategoryName;
                 menuItem.GetComponentInChildren<Text>().text = I18n.Get(category.CategoryName);
+                // Sprema svaki Menu u listu.
 				m_MenuList.Add(menuItem);
 				Image[] images = menuItem.GetComponentsInChildren<Image>();
                 for (int i = 0; i < images.Length; i++)
