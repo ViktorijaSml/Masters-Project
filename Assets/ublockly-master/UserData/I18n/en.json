@@ -12,6 +12,8 @@
   "SCREEN": "Screen",
   "SPEAKER": "Volume",
   "RTC": "RTC",
+  "WDT": "Watch Dog Timer",
+
 
   /// default name - A simple: general default name for a variable: preferably short.
   "VARIABLES_DEFAULT_NAME": "item",
@@ -1163,6 +1165,9 @@
   "RTC_GET_HOUR": "Get hour",
   "RTC_GET_MINUTE": "Get minute",
   "RTC_GET_SECOND": "Get second",
-  "RTC_GET_LOCALTIME": "Get local time"
-
+  "RTC_GET_LOCALTIME": "Get local time",
+  //************WDT Defines**************/
+  "WDT_INIT": "Init WDT timeout",
+  "WDT_FEED": "WDT feed",
+  "WDT_WAIT":  "Wait"
 }

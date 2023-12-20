@@ -55,6 +55,9 @@ MonoBehaviour:
   - IndexName: rtc
     ResName: rtc
     TextFile: {fileID: 4900000, guid: 59f82197fe150084e909276c6eecfc6a, type: 3}
+  - IndexName: wdt
+    ResName: wdt
+    TextFile: {fileID: 4900000, guid: 38023c27e5b72214b82b2cce35c14b58, type: 3}
   m_ToolboxFiles:
   - IndexName: default
     ResName: toolbox_default
