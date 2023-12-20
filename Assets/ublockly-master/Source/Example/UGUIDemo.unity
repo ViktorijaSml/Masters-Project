@@ -10556,7 +10556,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.010898907, y: 0.021809787}
+  m_AnchoredPosition: {x: 0.010898907, y: 0.0106097665}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1212201541
@@ -17387,7 +17387,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1009176876}
   m_HandleRect: {fileID: 1009176875}
   m_Direction: 2
-  m_Value: 0.9999954
+  m_Value: 0.99999905
   m_Size: 0.20992482
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -19217,6 +19217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MenuItemPrefab: {fileID: 8097373514952207726}
   m_MenuListContent: {fileID: 8306284287882787038}
+  m_MenuList: []
+  m_MenuListActive: 
   m_BlockScrollList: {fileID: 8096844476979690714}
   m_BlockContentPrefab: {fileID: 8096707746308125750}
   m_BinArea: {fileID: 8097215943747619862}
