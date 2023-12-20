@@ -17,6 +17,7 @@ limitations under the License.
 ****************************************************************************/
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,26 +27,69 @@ namespace UBlockly.UGUI
     {
         [SerializeField] protected GameObject m_MenuItemPrefab;
         [SerializeField] protected RectTransform m_MenuListContent;
+        [SerializeField] protected List<GameObject> m_MenuList = new List<GameObject>();
+        [SerializeField] protected List<bool> m_MenuListActive = new List<bool>();
         [SerializeField] protected GameObject m_BlockScrollList;
         [SerializeField] protected GameObject m_BlockContentPrefab;
         [SerializeField] protected GameObject m_BinArea;
-        
-        protected override void Build()
+
+
+		protected void Start()
+		{
+            for (int i = 0; i < m_MenuList.Count; i++)
+            {
+				m_MenuListActive.Add(true);
+			}
+		}
+
+		protected override void Build()
         {
             BuildMenu();
         }
-        
-        /// <summary>
-        /// Build the left menu list, child class should implement this for custom build
-        /// </summary>
-        protected virtual void BuildMenu()
+
+		protected void Update()
+		{
+            for (int i = 0; i < m_MenuList.Count; i++)
+            {
+                m_MenuList[i].SetActive(m_MenuListActive[i]);
+            }
+		}
+
+        protected void SetMenuActive(string name)
+        {
+			for (int i = 0; i < m_MenuList.Count; i++)
+			{
+                if(m_MenuList[i].name == name)
+                {
+                    m_MenuList[i].SetActive(true);
+				}
+			}
+		}
+
+
+		protected void SetMenuDeactive(string name)
+		{
+			for (int i = 0; i < m_MenuList.Count; i++)
+			{
+				if (m_MenuList[i].name == name)
+				{
+					m_MenuList[i].SetActive(false);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Build the left menu list, child class should implement this for custom build
+		/// </summary>
+		protected virtual void BuildMenu()
         {
             foreach (var category in mConfig.BlockCategoryList)
             {
                 GameObject menuItem = GameObject.Instantiate(m_MenuItemPrefab, m_MenuListContent, false);
                 menuItem.name = category.CategoryName;
                 menuItem.GetComponentInChildren<Text>().text = I18n.Get(category.CategoryName);
-                Image[] images = menuItem.GetComponentsInChildren<Image>();
+				m_MenuList.Add(menuItem);
+				Image[] images = menuItem.GetComponentsInChildren<Image>();
                 for (int i = 0; i < images.Length; i++)
                 {
                     images[i].color = category.Color;
@@ -87,7 +131,7 @@ namespace UBlockly.UGUI
             else
             {
                 contentObj = GameObject.Instantiate(m_BlockContentPrefab, m_BlockContentPrefab.transform.parent);
-                contentObj.name = "Content_" + categoryName;
+				contentObj.name = "Content_" + categoryName;
                 contentObj.SetActive(true);
                 mRootList[categoryName] = contentObj;
 
@@ -101,9 +145,8 @@ namespace UBlockly.UGUI
                 else
                     BuildBlockViewsForActiveCategory();
             }
-
-            //resize the background
-            LayoutRebuilder.ForceRebuildLayoutImmediate(contentTrans);
+			//resize the background
+			LayoutRebuilder.ForceRebuildLayoutImmediate(contentTrans);
             m_BlockScrollList.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, LayoutUtility.GetPreferredWidth(contentTrans));
             
             m_BlockScrollList.GetComponent<ScrollRect>().content = contentTrans;

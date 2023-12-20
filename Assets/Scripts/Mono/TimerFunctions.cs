@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 public class TimerFunctions : MonoBehaviour
 {
 	public static TimerFunctions instance;
+	private bool isTimerActive = false;
+	private int timer;
     public void Awake()
     {
         instance = this; 
@@ -20,12 +22,8 @@ public class TimerFunctions : MonoBehaviour
     }
     public void  InitWatchDogTimer(int miliseconds) => StartCoroutine(StartWatchdogTimer(miliseconds));
 
-	private bool isTimerActive = false;
-	private int timer;
-	public async Task FeedWatchdogTimer(int value)
+	public void FeedWatchdogTimer()
 	{
-		timer += value;
-        await Task.Delay(timer);
         Debug.Log("wait");
         isTimerActive = true;
 	}
