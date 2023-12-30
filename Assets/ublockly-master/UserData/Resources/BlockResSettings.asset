@@ -58,6 +58,9 @@ MonoBehaviour:
   - IndexName: wdt
     ResName: wdt
     TextFile: {fileID: 4900000, guid: 38023c27e5b72214b82b2cce35c14b58, type: 3}
+  - IndexName: label
+    ResName: label
+    TextFile: {fileID: 4900000, guid: 69350a5ce4f524f4da79abfdf0940ded, type: 3}
   m_ToolboxFiles:
   - IndexName: default
     ResName: toolbox_default

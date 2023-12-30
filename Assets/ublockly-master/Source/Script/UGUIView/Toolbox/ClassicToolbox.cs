@@ -36,11 +36,12 @@ namespace UBlockly.UGUI
 
 		protected void Start()
 		{
-            // Iz iste menia uzima količinu i prema njoj dodaje boolean listu.
+            // Iz liste menia uzima količinu i prema njoj dodaje boolean listu.
             for (int i = 0; i < m_MenuList.Count; i++)
             {
 				m_MenuListActive.Add(true);
 			}
+
 		}
 
 		protected override void Build()
@@ -51,16 +52,25 @@ namespace UBlockly.UGUI
 		protected void Update()
 		{
             // Vrti objekt za svaki menu i postavlja ga (Enabled/Disabled) prema vrijednosti iz List<bool>
-            // Pošto je List<bool> jednake rijednosti kao List<Gameobject> lako se provjerava podudarnost.
+            // Pošto je List<bool> jednake vrijednosti kao List<Gameobject> lako se provjerava podudarnost.
             for (int i = 0; i < m_MenuList.Count; i++)
             {
                 m_MenuList[i].SetActive(m_MenuListActive[i]);
+            }
+
+            if (LabelManager.instance.GetLabelCount() > 0)
+            {
+                SetMenuActive("LABEL");
+            }
+            else
+            {
+                SetMenuDeactive("LABEL");
             }
 		}
 
         protected void SetMenuActive(string name)
         {
-            // Prema virjednosti "name" iz liste provjerava svako ime i postavlja objekt kao aktivan.
+            // Prema vriijednosti "name" iz liste provjerava svako ime i postavlja objekt kao aktivan.
 			for (int i = 0; i < m_MenuList.Count; i++)
 			{
                 if(m_MenuList[i].name == name)
@@ -73,7 +83,7 @@ namespace UBlockly.UGUI
 
 		protected void SetMenuDeactive(string name)
 		{
-			// Prema virjednosti "name" iz liste provjerava svako ime i postavlja objekt kao deaktiviran.
+			// Prema vrijednosti "name" iz liste provjerava svako ime i postavlja objekt kao deaktiviran.
 			for (int i = 0; i < m_MenuList.Count; i++)
 			{
 				if (m_MenuList[i].name == name)

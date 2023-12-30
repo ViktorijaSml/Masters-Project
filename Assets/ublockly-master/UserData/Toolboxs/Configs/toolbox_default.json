@@ -2,6 +2,11 @@
      "Style": "classic",
   "BlockCategoryList": [
     {
+      "CategoryName": "LABEL",
+      "ColorHex": "#db856e",
+      "BlockTypePrefix": "label"
+    },
+    {
       "CategoryName": "WDT",
       "ColorHex": "#aa6fd6",
       "BlockTypePrefix": "wdt"

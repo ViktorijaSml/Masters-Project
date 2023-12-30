@@ -13,6 +13,7 @@
   "SPEAKER": "Volume",
   "RTC": "RTC",
   "WDT": "Watch Dog Timer",
+  "LABEL": "Label",
 
 
   /// default name - A simple: general default name for a variable: preferably short.
@@ -1169,5 +1170,13 @@
   //************WDT Defines**************/
   "WDT_INIT": "Init WDT timeout",
   "WDT_FEED": "WDT feed",
-  "WDT_WAIT":  "Wait"
+  "WDT_WAIT": "Wait",
+  //************Label Defines************/
+  "LABEL_DEFINE": "Label",
+  "LABEL_SHOW": "show text",
+  "LABEL_SHOW_VAR": "show variable",
+  "SET_LABEL": "Set",
+  "COLOR_BY_RGB": "color by RGB",
+  "LABEL_COLOR": "color:",
+  "LABEL_HIDE": "hide:"
 }

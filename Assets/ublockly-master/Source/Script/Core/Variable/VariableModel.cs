@@ -61,7 +61,7 @@ namespace UBlockly
         /// <param name="optId"> The unique id of the variable. This will default to a UUID.</param>
         public VariableModel(Workspace workspace, string name, string optType = null, string optId = null)
         {
-            this.Workspace = workspace;
+			this.Workspace = workspace;
             this.Name = name;
             this.Type = string.IsNullOrEmpty(optType) ? "" : optType;
             this.ID = string.IsNullOrEmpty(optId) ? Utils.GenUid() : optId;
@@ -72,7 +72,7 @@ namespace UBlockly
         /// </summary>
         public static int CompareByName(VariableModel var1, VariableModel var2)
         {
-            return String.CompareOrdinal(var1.Name.ToLower(), var2.Name.ToLower());
+			return String.CompareOrdinal(var1.Name.ToLower(), var2.Name.ToLower());
         }
     }
 }

@@ -26,7 +26,7 @@ namespace UBlockly.UGUI
         [SerializeField] private Text m_InputLabel;
         [SerializeField] private InputField m_Input;
 
-        private bool mIsRename = false;
+		private bool mIsRename = false;
         
         private string mOldVarName;
         public void Rename(string varName)
@@ -39,7 +39,6 @@ namespace UBlockly.UGUI
         protected override void OnInit()
         {
             m_InputLabel.text = I18n.Get(MsgDefine.NEW_VARIABLE);
-
             AddCloseEvent(() =>
             {
                 if (mIsRename)
