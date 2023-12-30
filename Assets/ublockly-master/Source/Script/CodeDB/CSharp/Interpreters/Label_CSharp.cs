@@ -75,9 +75,25 @@ namespace UBlockly
             string label = block.GetFieldValue("LABEL");
             CmdEnumerator ctor = CSharp.Interpreter.ValueReturn(block, "TEXT", new DataStruct(0));
             yield return ctor;
-            string tekst = ctor.Data.StringValue;
+            string text = "";
+            if (ctor.Data.IsNumber)
+            {
+                text = ctor.Data.NumberValue.ToString();
+            }
+            else if (ctor.Data.IsBoolean)
+            {
+                text = ctor.Data.BooleanValue.ToString();
+            }
+            else if (ctor.Data.IsString)
+            {
+                text = ctor.Data.StringValue;
+            }
+            else if (ctor.Data.IsList)
+            {
+                text = ctor.Data.ListValue.ToString();
+            }
 
-            LabelManager.instance.WriteText(label, tekst);
+            LabelManager.instance.WriteText(label, text);
 
 
         }

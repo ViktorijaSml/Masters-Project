@@ -25,7 +25,7 @@ public class LabelBehaviour : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     }
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / canvasGroup.transform.localScale.x * 3;
+        rectTransform.anchoredPosition += eventData.delta / canvasGroup.transform.localScale.x * 2;
 
     }
 
