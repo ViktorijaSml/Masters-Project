@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using NUnit.Framework;
 
 namespace UBlockly.Test
@@ -14,8 +15,7 @@ namespace UBlockly.Test
         [Test]
         public void TestInitVariableModel()
         {
-            Workspace workspace = new Workspace();    
-            
+            Workspace workspace = new Workspace();
             //test trivial
             VariableModel variable = new VariableModel(workspace, "test", "test_type", "test_id");
             Assert.AreEqual("test", variable.Name, "init variable with name \'test\'.");

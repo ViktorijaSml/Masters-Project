@@ -6,6 +6,7 @@ using UBlockly.UGUI;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class LabelManager : MonoBehaviour
 {
@@ -61,9 +62,9 @@ public class LabelManager : MonoBehaviour
         label.transform.SetParent(labelParent.transform, false);
         label.gameObject.name = label.gameObject.name.Replace("(Clone)", numOrder.ToString());
         label.GetComponent<TextMeshProUGUI>().text += numOrder.ToString();
+		BlocklyUI.WorkspaceView.Workspace.CreateVariable(label.name);
 
-
-        if (labelCounts.Count <= numOrder)
+		if (labelCounts.Count <= numOrder)
         {
             labelCounts.Add(true);
         }
@@ -83,14 +84,14 @@ public class LabelManager : MonoBehaviour
             if (labelCounts.Count - 1 == number)
             {
                 labelCounts.RemoveAt(number);
-                count--;
+				count--;
             }
             else
             {
                 labelCounts[number] = false;
             }
-
-            Destroy(obj);
+			BlocklyUI.WorkspaceView.Workspace.DeleteVariable(obj.name);
+			Destroy(obj);
         }
     }
 
