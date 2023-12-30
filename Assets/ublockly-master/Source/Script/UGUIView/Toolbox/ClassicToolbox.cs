@@ -60,11 +60,11 @@ namespace UBlockly.UGUI
 
             if (LabelManager.instance.GetLabelCount() > 0)
             {
-                //SetMenuActive("");
+                SetMenuActive("LABEL");
             }
             else
             {
-               // SetMenuDeactive("");
+                SetMenuDeactive("LABEL");
             }
 		}
 

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UBlockly;
 using UBlockly.UGUI;
-using Unity.VisualScripting.Antlr3.Runtime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 public class LabelManager : MonoBehaviour
 {
@@ -13,11 +13,9 @@ public class LabelManager : MonoBehaviour
     public static LabelManager instance;
     public GameObject labelPrefab;
     private int count = 0;
-    private int checkCount = 0;
     private List<bool> labelCounts = new List<bool>();
+    private Color lastColor = new Color();
 
-    //Sta sve triba iskodirat
-    //set label color by rgb
     void Start()
     {
         instance = this;
@@ -26,7 +24,6 @@ public class LabelManager : MonoBehaviour
         buttonLabel.onClick.AddListener(() =>
         {
             AddLabelByCorrectOrder();
-            SetLabelColorByRGB("Label0", 120, 255, 0);
         });
     }
 
@@ -46,15 +43,13 @@ public class LabelManager : MonoBehaviour
         }
     }
     public void AddLabelByCorrectOrder()
-    { 
+    {
         if (labelCounts.Any(x => x == false))
         {
-            Debug.Log("prvi");
             AddLabel(labelCounts.FindIndex(x => x == false));
         }
         else
         {
-            Debug.Log("drugi");
             AddLabel(count);
             count++;
         }
@@ -67,24 +62,25 @@ public class LabelManager : MonoBehaviour
         label.gameObject.name = label.gameObject.name.Replace("(Clone)", numOrder.ToString());
         label.GetComponent<TextMeshProUGUI>().text += numOrder.ToString();
 
+
         if (labelCounts.Count <= numOrder)
         {
-            labelCounts.Add(true); 
+            labelCounts.Add(true);
         }
         else
-        { 
+        {
             labelCounts[numOrder] = true;
         }
     }
     public void RemoveLabel(GameObject obj)
     {
         RectTransform toggleTrans = binArea.transform as RectTransform;
-        if (RectTransformUtility.RectangleContainsScreenPoint(toggleTrans, Input.mousePosition, BlocklyUI.UICanvas.worldCamera))
+        if (RectTransformUtility.RectangleContainsScreenPoint(toggleTrans, UnityEngine.Input.mousePosition, BlocklyUI.UICanvas.worldCamera))
         {
             string numberPart = obj.name.Substring("Label".Length);
-            int number = int.Parse(numberPart); //sada imamo broj te labele
- 
-            if (labelCounts.Count-1 == number) 
+            int number = int.Parse(numberPart);
+
+            if (labelCounts.Count - 1 == number)
             {
                 labelCounts.RemoveAt(number);
                 count--;
@@ -94,15 +90,34 @@ public class LabelManager : MonoBehaviour
                 labelCounts[number] = false;
             }
 
-            Destroy(obj);    
+            Destroy(obj);
         }
     }
 
+    public void HideLabel(bool hide, string labelName)
+    {
+
+        if (hide)
+        {
+             lastColor = GetLabelColor(labelName);
+             Color screenColor = ScreenColor.instance.GetScreenColor();
+             SetLabelColor(labelName, screenColor);
+        }
+        else
+        {
+            SetLabelColor(labelName, lastColor);
+        }
+    } 
     public void WriteText(string labelName, string text)
     {
         GameObject label = GameObject.Find(labelName);
-        label.GetComponent<TextMeshProUGUI>().text  = text;
+        label.GetComponent<TextMeshProUGUI>().text = text;
 
+    }
+    public Color GetLabelColor (string labelName)
+    {
+        GameObject label = GameObject.Find(labelName);
+        return label.GetComponent<TextMeshProUGUI>().color;
     }
     public void SetLabelColorByRGB(string labelName, float red, float green, float blue)
     {
@@ -113,4 +128,16 @@ public class LabelManager : MonoBehaviour
 
         label.GetComponent<TextMeshProUGUI>().color = new Color(red, green, blue);
     }
+    public void SetLabelColor(string labelName, Color color) 
+    {
+        GameObject label = GameObject.Find(labelName);
+        label.GetComponent<TextMeshProUGUI>().color = color;
+    }
+    public Color SetColorBlack() => new Color(0f, 0f, 0f);
+    public Color SetColorRed() => new Color(255f, 0f, 0f);
+    public Color SetColorBlue() => new Color(0f, 0f, 255f);
+    public Color SetColorYellow() => new Color(255f, 255f, 0f);
+    public Color SetColorGreen() => new Color(0f, 255f, 0f);
+    public Color SetColorPurple() => new Color(255f, 0f, 255f);
+    public Color SetColorWhite() => new Color(255f, 255f, 255f);
 }

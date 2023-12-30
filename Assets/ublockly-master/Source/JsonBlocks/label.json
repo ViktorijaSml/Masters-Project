@@ -1,0 +1,122 @@
+[
+  {
+    "type": "label_showString",
+    "message0": "%{BKY_LABEL_DEFINE} %1 %{BKY_LABEL_SHOW} %2",
+    "args0": [
+      {
+        "type": "field_variable",
+        "name": "LABEL",
+        "variable": "Label0"
+      },
+      {
+        "type": "field_input",
+        "name": "TEXT",
+        "text": "Hello world!"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null
+  },
+  {
+    "type": "label_showVariable",
+    "message0": "%{BKY_LABEL_DEFINE} %1 %{BKY_LABEL_SHOW_VAR} %2",
+    "args0": [
+      {
+        "type": "field_variable",
+        "name": "LABEL",
+        "variable": "Label0"
+      },
+      {
+        "type": "input_value",
+        "name": "TEXT",
+        "check": "String"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null
+  },
+  {
+    "type": "label_setColorRGB",
+    "message0": "%{BKY_SET_LABEL} %1 %{BKY_COLOR_BY_RGB}",
+    "args0": [
+      {
+        "type": "field_variable",
+        "name": "LABEL",
+        "variable": "Label0"
+      }
+    ],
+    "message1": "%{BKY_RGB_RED} %1 %{BKY_RGB_GREEN} %2 %{BKY_RGB_BLUE} %3",
+    "args1": [
+      {
+        "type": "field_number",
+        "name": "RGB_RED",
+        "value": "0",
+        "min": "0",
+        "max": "255",
+        "int": true
+      },
+      {
+        "type": "field_number",
+        "name": "RGB_GREEN",
+        "value": "0",
+        "min": "0",
+        "max": "255",
+        "int": true
+      },
+      {
+        "type": "field_number",
+        "name": "RGB_BLUE",
+        "value": "0",
+        "min": "0",
+        "max": "255",
+        "int": true
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null
+  },
+  {
+    "type": "label_setColor",
+    "message0": "%{BKY_SET_LABEL} %1 %{BKY_LABEL_COLOR} %2",
+    "args0": [
+      {
+        "type": "field_variable",
+        "name": "LABEL",
+        "variable": "Label0"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "COLOR",
+        "options": [
+          [ "%{BKY_COLOR_BLACK}", "BLACK" ],
+          [ "%{BKY_COLOR_RED}", "RED" ],
+          [ "%{BKY_COLOR_BLUE}", "BLUE" ],
+          [ "%{BKY_COLOR_YELLOW}", "YELLOW" ],
+          [ "%{BKY_COLOR_GREEN}", "GREEN" ],
+          [ "%{BKY_COLOR_PURPLE}", "PURPLE" ],
+          [ "%{BKY_COLOR_WHITE}", "WHITE" ]
+        ]
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null
+  },
+  {
+    "type": "label_hide",
+    "message0": "%{BKY_LABEL_DEFINE} %1 %{BKY_LABEL_HIDE} %2",
+    "args0": [
+      {
+        "type": "field_variable",
+        "name": "LABEL",
+        "variable": "Label0"
+      },
+      {
+        "type": "field_checkbox",
+        "name": "CHECK",
+        "checked":  true
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null
+  }
+]
