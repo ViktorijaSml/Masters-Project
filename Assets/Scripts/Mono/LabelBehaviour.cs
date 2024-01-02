@@ -8,36 +8,36 @@ public class LabelBehaviour : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     private VerticalLayoutGroup canvasGroup;
     private RectTransform rectTransform;
 
-
     private void Start()
     {
         startPos = transform.localPosition;
         canvasGroup = GetComponentInParent<VerticalLayoutGroup>();
         rectTransform = GetComponent<RectTransform>();
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (canvasGroup != null)
-        {
-            canvasGroup.enabled = false;
-        }
-        LabelManager.instance.ShowBin(true);
+		RefreshCanvasGroup();
+		LabelManager.instance.ShowBin(true);
     }
-    public void OnDrag(PointerEventData eventData)
-    {
-        rectTransform.anchoredPosition += eventData.delta / canvasGroup.transform.localScale.x * 2;
 
-    }
+    public void OnDrag(PointerEventData eventData)
+      => rectTransform.anchoredPosition += eventData.delta / canvasGroup.transform.localScale.x * 2;
 
     public void OnEndDrag(PointerEventData eventData)
     {
-
         transform.localPosition = startPos;
-        if (canvasGroup != null)
-        {
-            canvasGroup.enabled = true;
-        }
-        LabelManager.instance.ShowBin(false);
+		RefreshCanvasGroup();
+		LabelManager.instance.ShowBin(false);
         LabelManager.instance.RemoveLabel(this.gameObject);
+    }
+
+    private void RefreshCanvasGroup()
+    {
+        if (canvasGroup == null) return;
+        canvasGroup.CalculateLayoutInputHorizontal();
+        canvasGroup.CalculateLayoutInputVertical();
+        canvasGroup.SetLayoutHorizontal();
+        canvasGroup.SetLayoutVertical();
     }
 }
