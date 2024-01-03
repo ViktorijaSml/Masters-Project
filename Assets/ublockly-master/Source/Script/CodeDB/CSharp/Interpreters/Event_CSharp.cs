@@ -23,13 +23,10 @@ namespace UBlockly
             }
 
             EventsManager eventsList = GameObject.Find(button).GetComponent<EventsManager>();
-            Button theButton = GameObject.Find("BtnRun").GetComponent<Button>();
+			GameObject.Find("M5 Button").GetComponent<Button>().onClick.RemoveAllListeners();
+			GameObject.Find("Right Button").GetComponent<Button>().onClick.RemoveAllListeners();
 
-            if (theButton.onClick != null) 
-            {
-                yield return null; 
-            }
-             switch (condition)
+			switch (condition)
             {
                 case "WAS_PRESSED":
                     Debug.Log("dodao");

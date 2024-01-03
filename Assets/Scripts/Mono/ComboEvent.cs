@@ -8,12 +8,13 @@ public class ComboEvent : MonoBehaviour
     public static ComboEvent instance; 
     bool isAPressed = false, isBPressed=false;
     Button buttonA, buttonB;
-    void Start()
-    {
-        instance = this;
 
-         buttonA = GameObject.Find("M5 Button").GetComponent<Button>();
-         buttonB = GameObject.Find("Right Button").GetComponent<Button>();
+    void Awake() => instance = this;
+
+	void Start()
+    {
+        buttonA = GameObject.Find("M5 Button").GetComponent<Button>();
+        buttonB = GameObject.Find("Right Button").GetComponent<Button>();
     }
     public void UpdatePressInfo() { 
 
