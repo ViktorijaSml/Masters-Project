@@ -29,7 +29,7 @@ public class LabelBehaviour : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         transform.localPosition = startPos;
 		RefreshCanvasGroup();
 		LabelManager.instance.ShowBin(false);
-        LabelManager.instance.RemoveLabel(this.gameObject);
+        LabelManager.instance.RemoveLabel(gameObject);
     }
 
     private void RefreshCanvasGroup()

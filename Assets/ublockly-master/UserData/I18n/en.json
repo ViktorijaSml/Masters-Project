@@ -3,7 +3,7 @@
   "VARIABLE": "Variables",
   "PROCEDURE": "Procedures",
   "LOGIC": "Logic",
-  "CONTROL": "Controls",
+  "CONTROL": "Loops",
   "MATH": "Math",
   "TEXT": "Text",
   "LIST": "Lists",
@@ -14,6 +14,7 @@
   "RTC": "RTC",
   "WDT": "Watch Dog Timer",
   "LABEL": "Label",
+  "EVENT": "Events",
 
 
   /// default name - A simple: general default name for a variable: preferably short.
@@ -1178,5 +1179,19 @@
   "SET_LABEL": "Set",
   "COLOR_BY_RGB": "color by RGB",
   "LABEL_COLOR": "color:",
-  "LABEL_HIDE": "hide:"
+  "LABEL_HIDE": "hide:",
+  //************Events Defines**********/
+  "EVENT_BUTTON": "Button",
+  "BUTTON_A": "A",
+  "BUTTON_B": "B",
+  "EVENT_WAS_PRESSED": "was pressed",
+  "EVENT_LONG_PRESS": "was long press",
+  "EVENT_DOUBLE_PRESS": "was double press",
+  "EVENT_WAS_RELEASED": "was released",
+  "EVENT_IS": "is",
+  "EVENT_BOOL_RETURN": "(return True or False)",
+  "EVENT_IS_PRESSED": "pressed",
+  "EVENT_IS_RELEASED": "released",
+  "EVENT_OBTAIN_BUTTON": "Obtain button",
+  "EVENT_BUTTONS_PRESS": "A + B press"
 }

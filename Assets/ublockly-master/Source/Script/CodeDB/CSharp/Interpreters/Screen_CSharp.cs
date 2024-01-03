@@ -7,7 +7,7 @@ namespace UBlockly
     {
         protected override void Execute(Block block)
         {
-            var value = block.GetFieldValue("COLOR");
+            string value = block.GetFieldValue("COLOR");
 
             switch (value)
             {
