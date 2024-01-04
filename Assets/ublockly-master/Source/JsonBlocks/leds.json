@@ -1,0 +1,17 @@
+[
+    {
+        "type": "leds_TurnOn",
+        "message0": "%{BKY_LEDS_TURN_ON}",
+        "args0": [],
+        "previousStatement": null,
+        "nextStatement": null
+      },
+
+      {
+        "type": "leds_TurnOff",
+        "message0": "%{BKY_LEDS_TURN_OFF}",
+        "args0": [],
+        "previousStatement": null,
+        "nextStatement": null
+      }
+]

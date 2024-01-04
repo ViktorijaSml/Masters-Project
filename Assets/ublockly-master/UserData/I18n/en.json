@@ -14,6 +14,7 @@
   "RTC": "RTC",
   "WDT": "Watch Dog Timer",
   "LABEL": "Label",
+  "LEDS": "LED",
 
 
   /// default name - A simple: general default name for a variable: preferably short.
@@ -1178,5 +1179,8 @@
   "SET_LABEL": "Set",
   "COLOR_BY_RGB": "color by RGB",
   "LABEL_COLOR": "color:",
-  "LABEL_HIDE": "hide:"
+  "LABEL_HIDE": "hide:",
+  /************LEDs************/
+  "LEDS_TURN_ON": "LED On",
+  "LEDS_TURN_OFF": "LED Off" 
 }
