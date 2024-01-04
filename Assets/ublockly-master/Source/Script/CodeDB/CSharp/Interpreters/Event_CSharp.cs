@@ -23,13 +23,12 @@ namespace UBlockly
             }
 
             EventsManager eventsList = GameObject.Find(button).GetComponent<EventsManager>();
-			GameObject.Find("M5 Button").GetComponent<Button>().onClick.RemoveAllListeners();
-			GameObject.Find("Right Button").GetComponent<Button>().onClick.RemoveAllListeners();
+            eventsList.ClearAllListeners("Right Button");
+			eventsList.ClearAllListeners("M5 Button");
 
 			switch (condition)
             {
                 case "WAS_PRESSED":
-                    Debug.Log("dodao");
                     eventsList.wasPressedEvent.AddListener(()=>EventsManager.instance.WrapFunct(block));
                     break;
                 case "LONG_PRESS":
@@ -46,5 +45,5 @@ namespace UBlockly
             yield return null;
 
         }
-    }
+	}
 }

@@ -11,16 +11,9 @@ public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private float pressTime = 0f, longPressDuration = 1f, doublePressDelay = 0.3f;
     public static EventsManager instance;
 
-    private void Awake()
-    {
-        instance = this;
-    }
+    private void Awake() => instance = this;
 
-    private void Start()
-    {
-        wasPressedEvent.AddListener(ComboEvent.instance.UpdatePressInfo);
-    }
-    public void OnPointerDown(PointerEventData eventData)
+	public void OnPointerDown(PointerEventData eventData)
     {
         isPressed = true;
         isReleased = false;
@@ -53,8 +46,17 @@ public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
             longPressEvent.Invoke();
         }
     }
-    
-    public bool GetIsPressed() => isPressed;
+
+	public void ClearAllListeners(string name)
+	{
+		EventsManager button = GameObject.Find(name).GetComponent<EventsManager>();
+		button.wasPressedEvent.RemoveAllListeners();
+		button.longPressEvent.RemoveAllListeners();
+		button.wasDoublePressedEvent.RemoveAllListeners();
+		button.wasReleasedEvent.RemoveAllListeners();
+	}
+
+	public bool GetIsPressed() => isPressed;
     public bool GetIsReleased() => isReleased;
     public IEnumerator RunBlocks  (Block block)
     {
