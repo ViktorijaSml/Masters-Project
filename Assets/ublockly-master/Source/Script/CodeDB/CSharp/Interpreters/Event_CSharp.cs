@@ -1,6 +1,6 @@
+using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UBlockly
 {
@@ -23,8 +23,7 @@ namespace UBlockly
             }
 
             EventsManager eventsList = GameObject.Find(button).GetComponent<EventsManager>();
-            eventsList.ClearAllListeners("Right Button");
-			eventsList.ClearAllListeners("M5 Button");
+            ButtonManager.instance.ClearAllListenersFromAllButtons();
 
 			switch (condition)
             {
@@ -45,5 +44,97 @@ namespace UBlockly
             yield return null;
 
         }
+
 	}
+
+    [CodeInterpreter(BlockType = "event_buttonComboPress")]
+    public class Event_ButtonComboPress_Cmdtor : EnumeratorCmdtor
+    {
+        protected override IEnumerator Execute(Block block)
+        { 
+            ButtonManager.instance.comboPressEvent.RemoveAllListeners();
+            EventsManager.instance.wasPressedEvent.RemoveAllListeners();
+            EventsManager.instance.wasPressedEvent.AddListener(ButtonManager.instance.UpdatePressInfo);
+            ButtonManager.instance.comboPressEvent.AddListener(() => EventsManager.instance.WrapFunct(block));
+            yield return null;
+
+        }
+    }
+
+    [CodeInterpreter(BlockType = "event_getPresentCondition")]
+    public class Event_GetPresentCondition_Cmdtor : ValueCmdtor
+    {
+        protected override DataStruct Execute(Block block)
+        {
+            string condition = block.GetFieldValue("CONDITION");
+            string button = block.GetFieldValue("BUTTON");
+            bool value = false;
+  
+            switch (button)
+            {
+                case "BUTTON_A":
+                    button = "M5 Button";
+                    break;
+                case "BUTTON_B":
+                    button = "Right Button";
+                    break;
+            }
+            EventsManager eventsList = GameObject.Find(button).GetComponent<EventsManager>();
+            eventsList.wasPressedEvent.RemoveAllListeners();
+            eventsList.wasPressedEvent.AddListener(() => Debug.Log("Listening..."));
+
+            switch (condition)
+            {
+                case "IS_PRESSED":
+                    value = eventsList.GetIsPressed();
+                    break;
+                case "IS_RELEASED":
+                    value = eventsList.GetIsReleased();
+                    break;
+            }
+            Debug.Log(value);
+            Debug.Log(eventsList.GetIsPressed());
+            return new DataStruct(value);
+        }
+    }
+
+    [CodeInterpreter(BlockType = "event_getPastCondition")]
+    public class Event_GetPastCondition_Cmdtor : ValueCmdtor
+    {
+        protected override DataStruct Execute(Block block)
+        {
+            string button = block.GetFieldValue("BUTTON");
+            string condition = block.GetFieldValue("CONDITION");
+
+            switch (button)
+            {
+                case "BUTTON_A":
+                    button = "M5 Button";
+                    break;
+                case "BUTTON_B":
+                    button = "Right Button";
+                    break;
+            }
+
+            EventsManager eventsList = GameObject.Find(button).GetComponent<EventsManager>();
+            eventsList.ResetEventSucces();
+
+            switch (condition)
+            {
+                case "WAS_PRESSED":
+                    eventsList.wasPressedEvent.AddListener(() => eventsList.SetEventSucces());
+                    break;
+                case "LONG_PRESS":
+                    eventsList.longPressEvent.AddListener(() => eventsList.SetEventSucces());
+                    break;
+                case "DOUBLE_PRESS":
+                    eventsList.wasDoublePressedEvent.AddListener(() => eventsList.SetEventSucces());
+                    break;
+                case "WAS_RELEASED":
+                    eventsList.wasReleasedEvent.AddListener(() => eventsList.SetEventSucces());
+                    break;
+            }
+            return new DataStruct(eventsList.GetEventSucces());
+        }
+    }
 }
