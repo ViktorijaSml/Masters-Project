@@ -23,7 +23,6 @@ namespace UBlockly
             }
 
             EventsManager eventsList = GameObject.Find(button).GetComponent<EventsManager>();
-            ButtonManager.instance.ClearAllListenersFromAllButtons();
 
 			switch (condition)
             {

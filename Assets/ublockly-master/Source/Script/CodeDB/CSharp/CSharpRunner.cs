@@ -63,7 +63,8 @@ namespace UBlockly
 
         private void RunSync(List<Block> topBlocks)
         {
-            foreach (Block block in topBlocks)
+			ButtonManager.instance.ClearAllListenersFromAllButtons();
+			foreach (Block block in topBlocks)
             {
                 CmdRunner runner = CmdRunner.Create(block.Type);
                 mCodeRunners.Add(runner);
