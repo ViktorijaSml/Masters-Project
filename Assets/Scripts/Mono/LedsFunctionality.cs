@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LedsFunctionality : MonoBehaviour
@@ -11,16 +9,9 @@ public class LedsFunctionality : MonoBehaviour
         instance = this;
     }
         
-    // Start is called before the first frame update
     void Start()
     {
         LedOff();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     // Turn the LED on

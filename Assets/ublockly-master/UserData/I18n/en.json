@@ -1183,7 +1183,7 @@
   "LABEL_HIDE": "hide:",
   /************LEDs************/
   "LEDS_TURN_ON": "LED On",
-  "LEDS_TURN_OFF": "LED Off" 
+  "LEDS_TURN_OFF": "LED Off", 
   //************Events Defines**********/
   "EVENT_BUTTON": "Button",
   "BUTTON_A": "A",
