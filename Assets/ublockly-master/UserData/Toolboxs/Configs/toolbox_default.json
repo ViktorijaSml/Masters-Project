@@ -75,11 +75,6 @@
       "CategoryName": "LIST",
       "ColorHex": "#ff8b42",
       "BlockTypePrefix": "lists"
-    },
-    {
-      "CategoryName": "COLOR",
-      "ColorHex": "#b42695",
-      "BlockTypePrefix": "colour"
     }
   ]
 }
