@@ -32,6 +32,11 @@
       "BlockTypePrefix": "screen"
     },
     {
+      "CategoryName": "LEDS",
+      "ColorHex": "#ee7785",
+      "BlockTypePrefix": "leds"
+    },
+    {
       "CategoryName": "VARIABLE",
       "ColorHex": "#8a9fc6",
       "BlockTypePrefix": "variables"

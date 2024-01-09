@@ -218,7 +218,8 @@ GameObject:
   - component: {fileID: 73706571}
   - component: {fileID: 73706570}
   - component: {fileID: 73706572}
-  m_Layer: 5
+  - component: {fileID: 73706573}
+  m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,8 +243,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 13.899994, y: -14.399994}
-  m_SizeDelta: {x: 38.02, y: 38.02}
+  m_AnchoredPosition: {x: 1.8300018, y: -13.799988}
+  m_SizeDelta: {x: 333.32, y: 333.32}
   m_Pivot: {x: 0.49999997, y: 0.49999973}
 --- !u!114 &73706570
 MonoBehaviour:
@@ -265,7 +266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a7c232eeae0ceda4aa0b7610bda421a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 56748b23b223c3444bc8c6fcfc99777d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -290,7 +291,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73706568}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e28a9ff28e011943be87268d7527edd, type: 3}
   m_Name: 
@@ -298,6 +299,18 @@ MonoBehaviour:
   isOn: 0
   LightOn: {r: 0.16735196, g: 1, b: 0, a: 1}
   LightOff: {r: 1, g: 0.16651765, b: 0, a: 1}
+--- !u!114 &73706573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73706568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48e4984b9ddc264ea8087174d5d3e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &75354125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11626,7 +11639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.010898907, y: -0.001476964}
+  m_AnchoredPosition: {x: 0.010898907, y: 0.013746952}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1212201541
@@ -18950,8 +18963,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1009176876}
   m_HandleRect: {fileID: 1009176875}
   m_Direction: 2
-  m_Value: 0.99999774
-  m_Size: 0.19929905
+  m_Value: 0.9999979
+  m_Size: 0.18102196
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

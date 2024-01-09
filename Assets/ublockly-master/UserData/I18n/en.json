@@ -14,6 +14,7 @@
   "RTC": "RTC",
   "WDT": "Watch Dog Timer",
   "LABEL": "Label",
+  "LEDS": "LED",
   "EVENT": "Events",
 
 
@@ -1180,6 +1181,9 @@
   "COLOR_BY_RGB": "color by RGB",
   "LABEL_COLOR": "color:",
   "LABEL_HIDE": "hide:",
+  /************LEDs************/
+  "LEDS_TURN_ON": "LED On",
+  "LEDS_TURN_OFF": "LED Off" 
   //************Events Defines**********/
   "EVENT_BUTTON": "Button",
   "BUTTON_A": "A",
