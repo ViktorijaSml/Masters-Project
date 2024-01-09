@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
-
 namespace UBlockly
 {
     [CodeInterpreter(BlockType = "wdt_initWDT")]
@@ -23,8 +19,6 @@ namespace UBlockly
         {
 			Number timeout = new Number(block.GetFieldValue("TIMEOUT"));
 			TimerFunctions.instance.FeedWatchdogTimer();
-			UnityEngine.Debug.Log("Reset");
         }
     }
-
 }

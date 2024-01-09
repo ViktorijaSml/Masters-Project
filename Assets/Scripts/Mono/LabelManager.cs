@@ -1,12 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UBlockly;
 using UBlockly.UGUI;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class LabelManager : MonoBehaviour
 {
@@ -17,13 +14,12 @@ public class LabelManager : MonoBehaviour
     private List<bool> labelCounts = new List<bool>();
     private Color lastColor = new Color();
 
+    private void Awake() => instance = this;
     void Start()
     {
-        instance = this;
         Button buttonLabel = GameObject.FindGameObjectWithTag("Label").GetComponent<Button>();
         buttonLabel.onClick.RemoveAllListeners();
         buttonLabel.onClick.AddListener(AddLabelByCorrectOrder);
-        
     }
 
     public int GetLabelCount()
@@ -95,7 +91,6 @@ public class LabelManager : MonoBehaviour
 
     public void HideLabel(bool hide, string labelName)
     {
-
         if (hide)
         {
              lastColor = GetLabelColor(labelName);

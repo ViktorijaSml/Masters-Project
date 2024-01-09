@@ -42,9 +42,7 @@ public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
             longPressEvent.Invoke();
         }
     }
-    public void ResetEventSucces() => eventSucces = false;
-    public void SetEventSucces()=> eventSucces = true;
-    public bool GetEventSucces() => eventSucces;
+ 
 	public bool GetIsPressed() => isPressed;
     public bool GetIsReleased() => !isPressed;
     public IEnumerator RunBlocks  (Block block)

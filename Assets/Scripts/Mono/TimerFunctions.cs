@@ -4,7 +4,6 @@ public class TimerFunctions : MonoBehaviour
 {
 	public static TimerFunctions instance;
 	private bool isTimerActive = false;
-	private int timer;
     public void Awake()
     {
         instance = this; 
@@ -14,7 +13,7 @@ public class TimerFunctions : MonoBehaviour
 
 	public void FeedWatchdogTimer()
 	{
-        Debug.Log("feed WDT");
+        Debug.Log("Feed WDT");
         isTimerActive = true;
 	}
     IEnumerator StartWatchdogTimer(int miliseconds)
@@ -35,7 +34,7 @@ public class TimerFunctions : MonoBehaviour
 					timer -= 1f;
 				}
 			}
-			throw new System.Exception("Watchdog timer has finished! There must be an error!");		
+		throw new System.Exception("Watchdog timer has finished! There must be an error!");		
 	}
 }
 

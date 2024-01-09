@@ -48,6 +48,7 @@ public class ButtonManager : MonoBehaviour
         button.longPressEvent.RemoveAllListeners();
         button.wasDoublePressedEvent.RemoveAllListeners();
         button.wasReleasedEvent.RemoveAllListeners();
+        comboPressEvent.RemoveAllListeners();
     }
     
 }

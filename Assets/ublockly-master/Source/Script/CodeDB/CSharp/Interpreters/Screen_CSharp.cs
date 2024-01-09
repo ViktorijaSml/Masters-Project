@@ -34,8 +34,6 @@ namespace UBlockly
                     break;
             }
         }
-
-       
     }
 
     [CodeInterpreter(BlockType = "screen_backgroundBrightness")]
@@ -62,6 +60,5 @@ namespace UBlockly
 
             ScreenColor.instance.SetColorRGB(colorRed.Value, colorGreen.Value, colorBlue.Value);
             }
-
     }
 }

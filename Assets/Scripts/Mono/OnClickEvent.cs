@@ -24,7 +24,6 @@ public class OnClickEvent : MonoBehaviour
         }
         else
         {
-
             //Ako je objekt kreiran (dodali smo modul),
             //Makni prethodni Listener i dodaj novi sa novom metodom:
             //Zatvori/Makni modul 
