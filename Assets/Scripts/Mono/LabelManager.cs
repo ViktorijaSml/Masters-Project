@@ -22,10 +22,8 @@ public class LabelManager : MonoBehaviour
         instance = this;
         Button buttonLabel = GameObject.FindGameObjectWithTag("Label").GetComponent<Button>();
         buttonLabel.onClick.RemoveAllListeners();
-        buttonLabel.onClick.AddListener(() =>
-        {
-            AddLabelByCorrectOrder();
-        });
+        buttonLabel.onClick.AddListener(AddLabelByCorrectOrder);
+        
     }
 
     public int GetLabelCount()

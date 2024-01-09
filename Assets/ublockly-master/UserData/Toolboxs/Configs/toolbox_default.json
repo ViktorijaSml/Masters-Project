@@ -7,6 +7,11 @@
       "BlockTypePrefix": "label"
     },
     {
+      "CategoryName": "EVENT",
+      "ColorHex": "#a14b48",
+      "BlockTypePrefix": "event"
+    },
+    {
       "CategoryName": "WDT",
       "ColorHex": "#aa6fd6",
       "BlockTypePrefix": "wdt"

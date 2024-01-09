@@ -63,7 +63,7 @@ namespace UBlockly
         /// </summary>
         public void StartRun(CmdEnumerator entryCall)
         {
-            curStatus = Runner.Status.Running;
+			curStatus = Runner.Status.Running;
 
             callstack.Clear();
             PushCall(entryCall);
