@@ -55,32 +55,6 @@
     "inputsInline": true
   },
   {
-    "type": "event_getPastCondition",
-    "message0": "%{BKY_EVENT_OBTAIN_BUTTON} %1 %2 %{BKY_EVENT_BOOL_RETURN}",
-    "args0": [
-      {
-        "type": "field_dropdown",
-        "name": "BUTTON",
-        "options": [
-          [ "%{BKY_BUTTON_A}", "BUTTON_A" ],
-          [ "%{BKY_BUTTON_B}", "BUTTON_B" ]
-        ]
-      },
-      {
-        "type": "field_dropdown",
-        "name": "CONDITION",
-        "options": [
-          [ "%{BKY_EVENT_WAS_PRESSED}", "WAS_PRESSED" ],
-          [ "%{BKY_EVENT_LONG_PRESS}", "LONG_PRESS" ],
-          [ "%{BKY_EVENT_DOUBLE_PRESS}", "DOUBLE_PRESS" ],
-          [ "%{BKY_EVENT_WAS_RELEASED}", "WAS_RELEASED" ]
-        ]
-      }
-    ],
-    "output": "Bool",
-    "inputsInline": true
-  },
-  {
     "type": "event_buttonComboPress",
     "message0": "%{BKY_EVENT_BUTTON} %{BKY_EVENT_BUTTONS_PRESS} %1",
     "args0": [

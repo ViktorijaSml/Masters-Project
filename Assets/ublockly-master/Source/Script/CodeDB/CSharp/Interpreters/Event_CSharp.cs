@@ -97,43 +97,4 @@ namespace UBlockly
         }
     }
 
-    [CodeInterpreter(BlockType = "event_getPastCondition")]
-    public class Event_GetPastCondition_Cmdtor : ValueCmdtor
-    {
-        protected override DataStruct Execute(Block block)
-        {
-            string button = block.GetFieldValue("BUTTON");
-            string condition = block.GetFieldValue("CONDITION");
-
-            switch (button)
-            {
-                case "BUTTON_A":
-                    button = "M5 Button";
-                    break;
-                case "BUTTON_B":
-                    button = "Right Button";
-                    break;
-            }
-
-            EventsManager eventsList = GameObject.Find(button).GetComponent<EventsManager>();
-            eventsList.ResetEventSucces();
-
-            switch (condition)
-            {
-                case "WAS_PRESSED":
-                    eventsList.wasPressedEvent.AddListener(() => eventsList.SetEventSucces());
-                    break;
-                case "LONG_PRESS":
-                    eventsList.longPressEvent.AddListener(() => eventsList.SetEventSucces());
-                    break;
-                case "DOUBLE_PRESS":
-                    eventsList.wasDoublePressedEvent.AddListener(() => eventsList.SetEventSucces());
-                    break;
-                case "WAS_RELEASED":
-                    eventsList.wasReleasedEvent.AddListener(() => eventsList.SetEventSucces());
-                    break;
-            }
-            return new DataStruct(eventsList.GetEventSucces());
-        }
-    }
 }
