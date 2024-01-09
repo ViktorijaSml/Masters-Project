@@ -21,6 +21,7 @@ limitations under the License.
 
 using System;
 using System.Collections;
+using UnityEngine;
 
 namespace UBlockly
 {
@@ -158,6 +159,7 @@ namespace UBlockly
             bool condition = until ? !arg.BooleanValue : arg.BooleanValue;
             while (condition)
             {
+                yield return new WaitForSeconds(1 / 60);
                 yield return CSharp.Interpreter.StatementRun(block, "DO");
                 
                 ctor = CSharp.Interpreter.ValueReturn(block, "BOOL", new DataStruct(false));

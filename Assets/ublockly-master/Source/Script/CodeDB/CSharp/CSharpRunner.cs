@@ -50,6 +50,7 @@ namespace UBlockly
             }
             
             CurStatus = Status.Running;
+            ButtonManager.instance.ClearAllListenersFromAllButtons();
 
             if (workspace.Options.Synchronous)
             {
@@ -63,7 +64,8 @@ namespace UBlockly
 
         private void RunSync(List<Block> topBlocks)
         {
-            foreach (Block block in topBlocks)
+            Debug.Log("runsync");
+			foreach (Block block in topBlocks)
             {
                 CmdRunner runner = CmdRunner.Create(block.Type);
                 mCodeRunners.Add(runner);
@@ -85,6 +87,8 @@ namespace UBlockly
 
         private void RunAsync(List<Block> topBlocks)
         {
+            Debug.Log("runasync");
+
             CmdRunner runner = CmdRunner.Create(topBlocks[0].Type);
             mCodeRunners.Add(runner);
 

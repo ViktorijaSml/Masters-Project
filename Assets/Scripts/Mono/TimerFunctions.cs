@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using System.Threading.Tasks;
 public class TimerFunctions : MonoBehaviour
 {
 	public static TimerFunctions instance;
@@ -15,7 +14,7 @@ public class TimerFunctions : MonoBehaviour
 
 	public void FeedWatchdogTimer()
 	{
-        Debug.Log("wait");
+        Debug.Log("feed WDT");
         isTimerActive = true;
 	}
     IEnumerator StartWatchdogTimer(int miliseconds)
