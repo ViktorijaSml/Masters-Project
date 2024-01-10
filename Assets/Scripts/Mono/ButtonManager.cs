@@ -20,6 +20,7 @@ public class ButtonManager : MonoBehaviour
         buttonA = buttons[0];
         buttonB = buttons[1];
     }
+    public void ResetScene() => SystemManager.RefreshApp();
     public void UpdatePressInfo() { 
 
         isAPressed = buttonA.GetComponent<EventsManager>().GetIsPressed();

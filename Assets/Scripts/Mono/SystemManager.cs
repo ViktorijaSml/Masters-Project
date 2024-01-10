@@ -1,8 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class SystemManager 
 {
+    public static void RefreshApp()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public static void SystemReset()
     {
         Debug.Log("System reset..");
