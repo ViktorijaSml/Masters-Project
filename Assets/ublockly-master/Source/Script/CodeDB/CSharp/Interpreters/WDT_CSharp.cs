@@ -19,8 +19,6 @@ namespace UBlockly
         {
 			Number timeout = new Number(block.GetFieldValue("TIMEOUT"));
 			TimerFunctions.instance.FeedWatchdogTimer();
-			UnityEngine.Debug.Log("Reset");
         }
     }
-
 }

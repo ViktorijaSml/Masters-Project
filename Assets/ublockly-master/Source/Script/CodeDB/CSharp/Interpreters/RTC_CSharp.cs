@@ -32,7 +32,6 @@ namespace UBlockly
             int second = (int)ctor6.Data.NumberValue.Value;
 
             RTCFunctions.SetDateTime(year, month, day, hour, minute, second);
-
         }
     }
 

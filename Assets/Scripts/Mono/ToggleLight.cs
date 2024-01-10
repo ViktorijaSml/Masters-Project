@@ -12,22 +12,26 @@ public class ToggleLight : MonoBehaviour
 
     void Awake() => instance = this;
 
-    void Start() {
+    void Start() 
+    {
         lightImage = GetComponent<Image>();
         StartCoroutine(OnValueChange());
     }
 
-    public void Light() {
+    public void Light() 
+    {
         isOn = !isOn;
         lightImage.color = isOn ? LightOn : LightOff;
     }
 
-    public void SetLightOn(bool value) {
+    public void SetLightOn(bool value) 
+    {
         isOn = value;
         lightImage.color = isOn ? LightOn : LightOff;
     }
 
-    public IEnumerator OnValueChange() {
+    public IEnumerator OnValueChange() 
+    {
         while(true) {
             yield return new WaitForSeconds(0.1f);
             lightImage.color = isOn ? LightOn : LightOff;

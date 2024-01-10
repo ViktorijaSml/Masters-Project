@@ -1,5 +1,4 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 namespace UBlockly
@@ -94,8 +93,6 @@ namespace UBlockly
             }
 
             LabelManager.instance.WriteText(label, text);
-
-
         }
     }
 

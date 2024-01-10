@@ -11,8 +11,5 @@ public class UnitsManager : MonoBehaviour
         instance = this;
     }
     public void Close() =>  Units.enabled = true;
-
     public void Open() =>  Units.enabled = false;
-
-
 }

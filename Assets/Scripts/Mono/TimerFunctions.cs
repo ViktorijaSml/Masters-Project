@@ -16,7 +16,7 @@ public class TimerFunctions : MonoBehaviour
 
 	public void FeedWatchdogTimer()
 	{
-        Debug.Log("feed WDT");
+        Debug.Log("Feed WDT");
         isTimerActive = true;
 	}
     IEnumerator StartWatchdogTimer(int miliseconds)
@@ -37,7 +37,7 @@ public class TimerFunctions : MonoBehaviour
 					timer -= 1f;
 				}
 			}
-			throw new System.Exception("Watchdog timer has finished! There must be an error!");		
+		throw new System.Exception("Watchdog timer has finished! There must be an error!");		
 	}
 
 	public bool IsActive() => isTimerActive;
