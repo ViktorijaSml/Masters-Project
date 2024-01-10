@@ -1,12 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UBlockly;
 using UBlockly.UGUI;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class LabelManager : MonoBehaviour
 {
@@ -71,11 +68,16 @@ public class LabelManager : MonoBehaviour
             labelCounts[numOrder] = true;
         }
     }
-    public void RemoveLabel(GameObject obj)
+    public void BinFunctionality(GameObject obj)
     {
         RectTransform toggleTrans = binArea.transform as RectTransform;
-        if (RectTransformUtility.RectangleContainsScreenPoint(toggleTrans, UnityEngine.Input.mousePosition, BlocklyUI.UICanvas.worldCamera))
+        if (RectTransformUtility.RectangleContainsScreenPoint(toggleTrans, Input.mousePosition, BlocklyUI.UICanvas.worldCamera))
         {
+            RemoveLabel(obj);
+        }
+    }
+    public void RemoveLabel(GameObject obj)
+    {
             string numberPart = obj.name.Substring("Label".Length);
             int number = int.Parse(numberPart);
 
@@ -90,7 +92,6 @@ public class LabelManager : MonoBehaviour
             }
 			BlocklyUI.WorkspaceView.Workspace.DeleteVariable(obj.name);
 			Destroy(obj);
-        }
     }
 
     public void HideLabel(bool hide, string labelName)

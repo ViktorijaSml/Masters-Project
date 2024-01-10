@@ -1,0 +1,9 @@
+[
+  {
+    "type": "system_reset",
+    "message0": "%{BKY_SYSTEM_RESET}",
+    "args0": [],
+    "previousStatement": null,
+    "nextStatement": null
+  }
+]

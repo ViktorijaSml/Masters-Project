@@ -7,6 +7,11 @@
       "BlockTypePrefix": "label"
     },
     {
+      "CategoryName": "SYSTEM",
+      "ColorHex": "#cf2525",
+      "BlockTypePrefix": "system"
+    },
+    {
       "CategoryName": "EVENT",
       "ColorHex": "#a14b48",
       "BlockTypePrefix": "event"

@@ -11,7 +11,7 @@ public class SpeakerManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         instance = this;
     }
-  
+    public void ResetAudioClips() => audioSource.clip = null;
     private int position = 0;
     private int samplerate = 44100; //samples per second
     private float freq = 0;
