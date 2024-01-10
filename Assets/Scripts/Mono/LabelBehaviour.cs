@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class LabelBehaviour : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    [SerializeField] GameObject binArea;
     private Vector3 startPos;
     private VerticalLayoutGroup canvasGroup;
     private RectTransform rectTransform;
@@ -29,7 +30,7 @@ public class LabelBehaviour : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         transform.localPosition = startPos;
 		RefreshCanvasGroup();
 		LabelManager.instance.ShowBin(false);
-        LabelManager.instance.RemoveLabel(gameObject);
+        LabelManager.instance.BinFunctionality(gameObject);
     }
 
     private void RefreshCanvasGroup()

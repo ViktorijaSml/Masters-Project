@@ -2,8 +2,11 @@
 using UnityEngine;
 public class TimerFunctions : MonoBehaviour
 {
+	//Can be initialised only once!
 	public static TimerFunctions instance;
 	private bool isTimerActive = false;
+	int timeout = 0;
+	private int timer;
     public void Awake()
     {
         instance = this; 
@@ -19,7 +22,7 @@ public class TimerFunctions : MonoBehaviour
     IEnumerator StartWatchdogTimer(int miliseconds)
 	{
 		float timer = miliseconds/1000f;
-
+		timeout = miliseconds;
 			while (timer > 0f)
 			{
 				if (isTimerActive)
@@ -35,6 +38,12 @@ public class TimerFunctions : MonoBehaviour
 				}
 			}
 		throw new System.Exception("Watchdog timer has finished! There must be an error!");		
+	}
+
+	public bool IsActive() => isTimerActive;
+	public void StopTimer()
+	{
+		StopCoroutine(StartWatchdogTimer(timeout));
 	}
 }
 

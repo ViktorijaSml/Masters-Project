@@ -40,7 +40,7 @@ namespace UBlockly
         {
             mVariableNames.Reset();
             mVariableDatas.Reset();
-            
+
             //start runner from the topmost blocks, exclude the procedure definition blocks
             List<Block> blocks = workspace.GetTopBlocks(true).FindAll(block => !ProcedureDB.IsDefinition(block));
             if (blocks.Count == 0)
@@ -64,7 +64,6 @@ namespace UBlockly
 
         private void RunSync(List<Block> topBlocks)
         {
-            Debug.Log("runsync");
 			foreach (Block block in topBlocks)
             {
                 CmdRunner runner = CmdRunner.Create(block.Type);
@@ -87,8 +86,6 @@ namespace UBlockly
 
         private void RunAsync(List<Block> topBlocks)
         {
-            Debug.Log("runasync");
-
             CmdRunner runner = CmdRunner.Create(topBlocks[0].Type);
             mCodeRunners.Add(runner);
 

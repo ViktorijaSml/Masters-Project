@@ -16,6 +16,7 @@
   "LABEL": "Label",
   "LEDS": "LED",
   "EVENT": "Events",
+  "SYSTEM": "System",
 
 
   /// default name - A simple: general default name for a variable: preferably short.
@@ -1183,7 +1184,7 @@
   "LABEL_HIDE": "hide:",
   /************LEDs************/
   "LEDS_TURN_ON": "LED On",
-  "LEDS_TURN_OFF": "LED Off", 
+  "LEDS_TURN_OFF": "LED Off",
   //************Events Defines**********/
   "EVENT_BUTTON": "Button",
   "BUTTON_A": "A",
@@ -1197,5 +1198,7 @@
   "EVENT_IS_PRESSED": "pressed",
   "EVENT_IS_RELEASED": "released",
   "EVENT_OBTAIN_BUTTON": "Obtain button",
-  "EVENT_BUTTONS_PRESS": "A + B press"
+  "EVENT_BUTTONS_PRESS": "A + B press",
+  //************Systemm Defines********/
+  "SYSTEM_RESET":  "System reset"
 }
