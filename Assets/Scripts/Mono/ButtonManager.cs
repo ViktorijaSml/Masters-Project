@@ -20,7 +20,19 @@ public class ButtonManager : MonoBehaviour
         buttonA = buttons[0];
         buttonB = buttons[1];
     }
-    public void ResetScene() => SystemManager.RefreshApp();
+
+	private void Update()
+	{
+		if(UnityEngine.Input.GetKeyDown(KeyCode.Escape) || UnityEngine.Input.GetKeyDown(KeyCode.Return))
+        {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
+		}
+	}
+	public void ResetScene() => SystemManager.RefreshApp();
     public void UpdatePressInfo() { 
 
         isAPressed = buttonA.GetComponent<EventsManager>().GetIsPressed();
