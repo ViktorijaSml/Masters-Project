@@ -72,9 +72,9 @@ namespace UBlockly.UGUI
             GameObject prefab = BlockResMgr.Get().LoadDialogPrefab(field.Type);
             if (prefab == null)
                 throw new Exception("Can\'t find dialog prefab for " + field.Type + ", Please ensure you configure it in \"BlockResSettings\"");
-            
+
             if (parent == null)
-                parent = BlocklyUI.UICanvas.transform;
+                parent = GameObject.Find("Canvas - Buttons&Screen").transform;
             
             GameObject dialogObj = GameObject.Instantiate(prefab, parent, false);
             FieldDialog dialog = dialogObj.GetComponent<FieldDialog>();
