@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public UnityEvent wasPressedEvent, wasReleasedEvent, longPressEvent, wasDoublePressedEvent;
-    private bool isPressedFirstTime = false, isPressed = false, eventSucces = false;
+    private bool isPressedFirstTime = false, isPressed = false;
     private float pressTime = 0f, longPressDuration = 1f, doublePressDelay = 0.3f;
     public static EventsManager instance;
 

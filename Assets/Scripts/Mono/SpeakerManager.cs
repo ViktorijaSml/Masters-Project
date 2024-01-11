@@ -52,7 +52,7 @@ public class SpeakerManager : MonoBehaviour
     }
     public void PlayAudio(float beat)
     {
-        audioSource.Play();
+        audioSource.PlayOneShot(audioSource.clip);
         Invoke("StopAudio", beat);
     }
     //1 beat = 1 second 
