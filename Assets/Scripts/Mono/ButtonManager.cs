@@ -48,7 +48,6 @@ public class ButtonManager : MonoBehaviour
  
     public void ClearAllListenersFromAllButtons() 
     {
-        Debug.Log("i dood it");
         foreach(Button button in buttons)
         {
            ClearAllListeners(button.name);

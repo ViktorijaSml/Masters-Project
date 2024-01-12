@@ -26,22 +26,30 @@ namespace UBlockly
 			switch (condition)
             {
                 case "WAS_PRESSED":
-                    eventsList.wasPressedEvent.AddListener(()=>EventsManager.instance.WrapFunct(block));
+                    eventsList.wasPressedEvent.AddListener(()=> eventsList.CheckEventSucces());
                     break;
                 case "LONG_PRESS":
-                    eventsList.longPressEvent.AddListener(() => EventsManager.instance.WrapFunct(block));
+                    eventsList.longPressEvent.AddListener(() => eventsList.CheckEventSucces());
                     break;
                 case "DOUBLE_PRESS":
-                    eventsList.wasDoublePressedEvent.AddListener(() => EventsManager.instance.WrapFunct(block));
+                    eventsList.wasDoublePressedEvent.AddListener(() => eventsList.CheckEventSucces());
                     break;
                 case "WAS_RELEASED":
-                    eventsList.wasReleasedEvent.AddListener(() => EventsManager.instance.WrapFunct(block));
+                    eventsList.wasReleasedEvent.AddListener(() => eventsList.CheckEventSucces());
                     break;
             }
-
-            yield return null;
+            while (true)
+            {
+                if (eventsList.eventSucces == true)
+                {
+                    Debug.Log("Button is pressed!");
+                    yield return CSharp.Interpreter.StatementRun(block, "DO");
+                    eventsList.UnCheckEventSucces();
+                }
+                Debug.Log("Waiting...");
+                yield return new WaitForSeconds(1 / 60);
+            }
         }
-
 	}
 
     [CodeInterpreter(BlockType = "event_buttonComboPress")]
@@ -52,9 +60,18 @@ namespace UBlockly
             ButtonManager.instance.comboPressEvent.RemoveAllListeners();
             EventsManager.instance.wasPressedEvent.RemoveAllListeners();
             EventsManager.instance.wasPressedEvent.AddListener(ButtonManager.instance.UpdatePressInfo);
-            ButtonManager.instance.comboPressEvent.AddListener(() => EventsManager.instance.WrapFunct(block));
-            yield return null;
-
+            ButtonManager.instance.comboPressEvent.AddListener(() => EventsManager.instance.CheckEventSucces());
+            while (true)
+            {
+                if (EventsManager.instance.eventSucces == true)
+                {
+                    Debug.Log("Button is pressed!");
+                    yield return CSharp.Interpreter.StatementRun(block, "DO");
+                    EventsManager.instance.UnCheckEventSucces();
+                }
+                Debug.Log("Waiting...");
+                yield return new WaitForSeconds(1 / 60);
+            }
         }
     }
 
@@ -90,7 +107,6 @@ namespace UBlockly
                     break;
             }
             Debug.Log(value);
-            Debug.Log(eventsList.GetIsPressed());
             return new DataStruct(value);
         }
     }

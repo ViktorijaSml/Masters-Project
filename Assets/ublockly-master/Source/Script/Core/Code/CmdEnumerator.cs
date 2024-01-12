@@ -17,6 +17,7 @@ limitations under the License.
 ****************************************************************************/
 
 using System.Collections;
+using System.Diagnostics;
 
 namespace UBlockly
 {

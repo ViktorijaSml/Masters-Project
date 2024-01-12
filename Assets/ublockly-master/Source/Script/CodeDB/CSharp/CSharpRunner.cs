@@ -80,6 +80,7 @@ namespace UBlockly
                         CSharp.Runner.FireUpdate(new RunnerUpdateState(RunnerUpdateState.Stop));
                     }
                 });
+                Debug.Log("RUN SYNC");
                 runner.StartRun(new CmdEnumerator(block));
             }
         }
@@ -107,6 +108,7 @@ namespace UBlockly
                     CSharp.Runner.FireUpdate(new RunnerUpdateState(RunnerUpdateState.Stop));
                 }
             });
+            Debug.Log("RUN ASYNC");
             runner.StartRun(new CmdEnumerator(topBlocks[0]));
         }
 

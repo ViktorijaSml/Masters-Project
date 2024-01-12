@@ -51,7 +51,7 @@
         ]
       }
     ],
-    "output": "Bool",
+    "output": "Boolean",
     "inputsInline": true
   },
   {

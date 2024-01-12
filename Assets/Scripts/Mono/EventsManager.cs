@@ -8,6 +8,7 @@ public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 {
     public UnityEvent wasPressedEvent, wasReleasedEvent, longPressEvent, wasDoublePressedEvent;
     private bool isPressedFirstTime = false, isPressed = false;
+    public bool eventSucces = false;
     private float pressTime = 0f, longPressDuration = 1f, doublePressDelay = 0.3f;
     public static EventsManager instance;
 
@@ -43,7 +44,15 @@ public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         }
     }
  
-	public bool GetIsPressed() => isPressed;
+    public void CheckEventSucces()
+    {
+        eventSucces = true;
+    }
+    public void UnCheckEventSucces()
+    {
+        eventSucces = false;
+    }
+    public bool GetIsPressed() => isPressed;
     public bool GetIsReleased() => !isPressed;
     public IEnumerator RunBlocks  (Block block)
     {

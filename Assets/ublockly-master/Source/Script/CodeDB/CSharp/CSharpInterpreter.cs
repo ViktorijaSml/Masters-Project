@@ -16,6 +16,7 @@ limitations under the License.
 
 ****************************************************************************/
 
+using Mono.Cecil.Cil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -77,8 +78,9 @@ namespace UBlockly
                 Debug.Log(string.Format("Statement input block of {0} must have a previous connection", block.Type));
                 return null;
             }
-
-            return new CmdEnumerator(targetBlock);
+            var test= new CmdEnumerator(targetBlock);
+            Debug.Log(test.Cmdtor + "//////////////////////");
+            return test;
         }
 
         public Cmdtor GetBlockInterpreter(Block block)
