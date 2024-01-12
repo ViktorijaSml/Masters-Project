@@ -54,12 +54,4 @@ public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     }
     public bool GetIsPressed() => isPressed;
     public bool GetIsReleased() => !isPressed;
-    public IEnumerator RunBlocks  (Block block)
-    {
-        yield return CSharp.Interpreter.StatementRun(block, "DO");
-    }
-    public void WrapFunct(Block block)
-    {
-        StartCoroutine(RunBlocks(block));
-    }
 }

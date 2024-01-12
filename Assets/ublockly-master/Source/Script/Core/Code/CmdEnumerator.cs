@@ -49,15 +49,7 @@ namespace UBlockly
         {
             mBlock = block;
             mCmdtor = CSharp.Interpreter.GetBlockInterpreter(block);
-           // if (mCmdtor.ToString() == "UBlockly.Event_ButtonPress_Cmdtor")
-           // {
-           //     CmdRunner runner = CmdRunner.Create(block.Type);
-           //     runner.Run();
-           // }
-          //  else
-           // {
-              mItor = mCmdtor.Run(block);
-           // }
+            mItor = mCmdtor.Run(block);
         }
 
         public bool MoveNext()

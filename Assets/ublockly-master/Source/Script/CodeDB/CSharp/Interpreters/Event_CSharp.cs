@@ -38,7 +38,6 @@ namespace UBlockly
                     eventsList.wasReleasedEvent.AddListener(() => eventsList.CheckEventSucces());
                     break;
             }
-           // yield return CSharp.Interpreter.StatementRun(block, "DO");
 
             while (true)
             {
