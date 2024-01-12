@@ -35,7 +35,7 @@ namespace UBlockly
             mVariableDatas = variableDatas;
             mCodeRunners = new List<CmdRunner>();
         }
-        
+
         public override void Run(Workspace workspace)
         {
             mVariableNames.Reset();

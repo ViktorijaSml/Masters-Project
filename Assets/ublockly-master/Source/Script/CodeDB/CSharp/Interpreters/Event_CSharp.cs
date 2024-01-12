@@ -46,7 +46,6 @@ namespace UBlockly
                     yield return CSharp.Interpreter.StatementRun(block, "DO");
                     eventsList.UnCheckEventSucces();
                 }
-                Debug.Log("Waiting...");
                 yield return new WaitForSeconds(1 / 60);
             }
         }

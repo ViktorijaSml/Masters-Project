@@ -31,9 +31,9 @@ namespace UBlockly.UGUI
                 throw new Exception("Can\'t find dialog prefab for " + dialogId + ", Please ensure you configure it in \"BlockResSettings\"");
 
             if (parent == null)
-                parent = BlocklyUI.UICanvas.transform;
-            
-            GameObject dialogObj = GameObject.Instantiate(prefab, parent, false);
+				parent = GameObject.Find("Canvas - Buttons&Screen").transform;
+
+			GameObject dialogObj = GameObject.Instantiate(prefab, parent, false);
             BaseDialog dialog = dialogObj.GetComponent<BaseDialog>();
             dialog.Init();
             return dialog;
@@ -54,9 +54,9 @@ namespace UBlockly.UGUI
                 throw new Exception("Can\'t find dialog prefab for " + block.Mutator.MutatorId + ", Please ensure you configure it in \"BlockResSettings\"");
             
             if (parent == null)
-                parent = BlocklyUI.UICanvas.transform;
-            
-            GameObject dialogObj = GameObject.Instantiate(prefab, parent, false);
+				parent = GameObject.Find("Canvas - Buttons&Screen").transform;
+
+			GameObject dialogObj = GameObject.Instantiate(prefab, parent, false);
             BaseDialog dialog = dialogObj.GetComponent<BaseDialog>();
             dialog.Init(block);
             return dialog;
