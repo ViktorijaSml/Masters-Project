@@ -127,7 +127,7 @@ namespace UBlockly
         /// Simulate coroutine execution, replacing Unity's,
         /// in case that nestes IEnumerator call brings one more frame delay.
         /// </summary>
-        IEnumerator Run()
+        public IEnumerator Run()
         {
             while (callstack.Count > 0)
             {

@@ -49,7 +49,15 @@ namespace UBlockly
         {
             mBlock = block;
             mCmdtor = CSharp.Interpreter.GetBlockInterpreter(block);
-            mItor = mCmdtor.Run(block);
+           // if (mCmdtor.ToString() == "UBlockly.Event_ButtonPress_Cmdtor")
+           // {
+           //     CmdRunner runner = CmdRunner.Create(block.Type);
+           //     runner.Run();
+           // }
+          //  else
+           // {
+              mItor = mCmdtor.Run(block);
+           // }
         }
 
         public bool MoveNext()
@@ -79,6 +87,7 @@ namespace UBlockly
             //parent loop was break or continue, move out. 
             if (LoopCmdtor.SkipRunByControlFlow(nextblock))
                 return null;
+
 
             return new CmdEnumerator(nextblock);
         }

@@ -17,6 +17,7 @@ limitations under the License.
 ****************************************************************************/
 
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -52,14 +53,18 @@ namespace UBlockly
             CurStatus = Status.Running;
             ButtonManager.instance.ClearAllListenersFromAllButtons();
 
-            if (workspace.Options.Synchronous)
+            foreach(var block in blocks)
             {
-                RunSync(blocks);
+                RunBlock(block);
             }
-            else
-            {
-                RunAsync(blocks);
-            }
+            //if (workspace.Options.Synchronous)
+            //{
+            //    RunSync(blocks);
+            //}
+            //else
+            //{
+            //    RunAsync(blocks);
+            //}
         }
 
         private void RunSync(List<Block> topBlocks)
@@ -84,12 +89,22 @@ namespace UBlockly
                 runner.StartRun(new CmdEnumerator(block));
             }
         }
+        private void RunBlock(Block block)
+        {
+            CmdRunner runner = CmdRunner.Create(block.Type);
+            mCodeRunners.Add(runner);
+
+            runner.RunMode = RunMode;
+            runner.StartRun(new CmdEnumerator(block));
+
+            Debug.Log("RUN BLOCK");
+        }
 
         private void RunAsync(List<Block> topBlocks)
         {
             CmdRunner runner = CmdRunner.Create(topBlocks[0].Type);
             mCodeRunners.Add(runner);
-
+ 
             runner.RunMode = RunMode;
             
             int index = 0;
