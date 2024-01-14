@@ -58,13 +58,14 @@ namespace UBlockly.UGUI
                 m_MenuList[i].SetActive(m_MenuListActive[i]);
             }
 
-            if (LabelManager.instance.GetLabelCount() > 0)
+            if (LabelManager.instance.GetLabelCount() > 0 && LabelManager.instance.AnyTrueInList())
             {
                 SetMenuActive("LABEL");
             }
-            else
+            else 
             {
                 SetMenuDeactive("LABEL");
+                LabelManager.instance.RemoveAllLabels();
             }
 		}
 

@@ -22,10 +22,10 @@ public class LabelManager : MonoBehaviour
         buttonLabel.onClick.AddListener(AddLabelByCorrectOrder);
     }
 
-    public int GetLabelCount()
-    {
-        return labelCounts.Count;
-    }
+    public int GetLabelCount() => labelCounts.Count;
+
+    public bool AnyTrueInList() => labelCounts.Any(x => x == true);
+
     public void ShowBin(bool isDraging)
     {
         if (isDraging)
@@ -92,7 +92,14 @@ public class LabelManager : MonoBehaviour
 			BlocklyUI.WorkspaceView.Workspace.DeleteVariable(obj.name);
 			Destroy(obj);
     }
-
+    public void RemoveAllLabels()
+    {
+        for (int index = labelCounts.Count - 1; index >= 0; index--)
+        {
+            labelCounts.RemoveAt(index);
+            count--;
+        }
+    }
     public void HideLabel(bool hide, string labelName)
     {
         if (hide)
