@@ -54,9 +54,13 @@ public class OnClickEvent : MonoBehaviour
         unit.transform.GetChild(0).GetComponent<Image>().enabled = true; //otkrivanje ikonice 'x'
         unit.gameObject.name = unit.gameObject.name.Replace("(Clone)", "");
         // Postavljanje svojstava RectTransform za pravilno pozicioniranje i skaliranje
-        unitSimulation = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
+
+		unitSimulation = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
         unitSimulation.transform.SetParent (UnitsManager.instance.UnitsSimulation.transform, false);
         unitSimulation.gameObject.name = unitSimulation.gameObject.name.Replace("(Clone)", "");
+        
+        unit.GetComponent<OnClickEvent>().unitSimulation = unitSimulation;
+
         RectTransform rectTransform = unit.GetComponent<RectTransform>();
         if (rectTransform != null)
         {
@@ -70,8 +74,7 @@ public class OnClickEvent : MonoBehaviour
 
     public void DestroyUnitObject() 
     {
-        Debug.Log(unitSimulation);
         Destroy(unitSimulation);
-        Destroy(gameObject, 2);
+        Destroy(gameObject);
     }
 }
