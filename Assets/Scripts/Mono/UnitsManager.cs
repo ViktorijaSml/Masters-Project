@@ -3,6 +3,7 @@ using UnityEngine;
 public class UnitsManager : MonoBehaviour
 {
     private CanvasGroup Units;
+    public GameObject UnitsSimulation;
     public static UnitsManager instance;
 
     void Awake() 
@@ -12,6 +13,9 @@ public class UnitsManager : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-    public void Close() =>  Units.enabled = true;
-    public void Open() =>  Units.enabled = false;
+    public void CloseUnits() =>  Units.enabled = true;
+    public void OpenUnits() =>  Units.enabled = false;
+
+    public void CloseUnitsSimulation() => UnitsSimulation.SetActive(false);
+    public void OpenUnitsSimulation() => UnitsSimulation.SetActive(true);
 }

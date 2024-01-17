@@ -4,7 +4,9 @@ using UnityEngine.UI;
 public class OnClickEvent : MonoBehaviour
 {
     private Button unitButton;
-    [HideInInspector] public bool disableCreateObject;
+    private GameObject unitSimulation;
+    public GameObject objectPrefab;
+   [HideInInspector] public bool disableCreateObject;
 
     private void Start()
     {
@@ -18,8 +20,10 @@ public class OnClickEvent : MonoBehaviour
             // "Kreiraj mi taj objekt/modul"
             unitButton.onClick.AddListener(() => 
             {
+                Debug.Log("create");
                 CreateUnitObject();
-                UnitsManager.instance.Close(); //Makni Units prozor
+                UnitsManager.instance.CloseUnits(); //Makni Units prozor
+                UnitsManager.instance.OpenUnitsSimulation();
             });            
         }
         else
@@ -30,16 +34,17 @@ public class OnClickEvent : MonoBehaviour
             unitButton.onClick.RemoveAllListeners();
             unitButton.onClick.AddListener(() => 
             {
+                Debug.Log("delete");
                 DestroyUnitObject();
+                UnitsManager.instance.CloseUnitsSimulation();
+
             });
         }
     }
 
     public void CreateUnitObject()
     {
-        // Pronalaženje objekta s tagom "UnitSlot"
         GameObject unitSlot = GameObject.FindGameObjectWithTag("UnitSlot");
-
         // Stvaranje novog odabranog objekta
         GameObject unit = Instantiate(gameObject, Vector3.zero, Quaternion.identity);
 
@@ -48,8 +53,10 @@ public class OnClickEvent : MonoBehaviour
         unit.GetComponent<OnClickEvent>().disableCreateObject = true; 
         unit.transform.GetChild(0).GetComponent<Image>().enabled = true; //otkrivanje ikonice 'x'
         unit.gameObject.name = unit.gameObject.name.Replace("(Clone)", "");
-
         // Postavljanje svojstava RectTransform za pravilno pozicioniranje i skaliranje
+        unitSimulation = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
+        unitSimulation.transform.SetParent (UnitsManager.instance.UnitsSimulation.transform, false);
+        unitSimulation.gameObject.name = unitSimulation.gameObject.name.Replace("(Clone)", "");
         RectTransform rectTransform = unit.GetComponent<RectTransform>();
         if (rectTransform != null)
         {
@@ -61,5 +68,10 @@ public class OnClickEvent : MonoBehaviour
         }
     }
 
-    public void DestroyUnitObject() => Destroy(gameObject);
+    public void DestroyUnitObject() 
+    {
+        Debug.Log(unitSimulation);
+        Destroy(unitSimulation);
+        Destroy(gameObject, 2);
+    }
 }
