@@ -16,8 +16,8 @@ limitations under the License.
 
 ****************************************************************************/
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +32,8 @@ namespace UBlockly.UGUI
         [SerializeField] protected GameObject m_BlockScrollList;
         [SerializeField] protected GameObject m_BlockContentPrefab;
         [SerializeField] protected GameObject m_BinArea;
-
+        protected IShowable[] m_ShowableList;
+ 
 
 		protected void Start()
 		{
@@ -42,7 +43,8 @@ namespace UBlockly.UGUI
 				m_MenuListActive.Add(true);
 			}
 
-		}
+            m_ShowableList = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<IShowable>().ToArray();
+        }
 
 		protected override void Build()
         {
@@ -51,6 +53,8 @@ namespace UBlockly.UGUI
 
 		protected void Update()
 		{
+            //!!ima vec nesto showcategory istrazi!!!
+
             // Vrti objekt za svaki menu i postavlja ga (Enabled/Disabled) prema vrijednosti iz List<bool>
             // Pošto je List<bool> jednake vrijednosti kao List<Gameobject> lako se provjerava podudarnost.
             for (int i = 0; i < m_MenuList.Count; i++)
@@ -58,15 +62,30 @@ namespace UBlockly.UGUI
                 m_MenuList[i].SetActive(m_MenuListActive[i]);
             }
 
-            if (LabelManager.instance.GetLabelCount() > 0 && LabelManager.instance.AnyTrueInList())
+            
+            foreach (var category in m_ShowableList)
             {
-                SetMenuActive("LABEL");
+                if (category.CanShowCategory())
+                {
+                    SetMenuActive(category.GetCategoryName());
+                }
+                else
+                {
+                    SetMenuDeactive(category.GetCategoryName());
+                    category.ClearGarbage();
+                }
             }
-            else 
-            {
-                SetMenuDeactive("LABEL");
-                LabelManager.instance.RemoveAllLabels();
-            }
+           
+            //GameObject unitSlot = GameObject.FindGameObjectWithTag("UnitSlot");
+            //if (unitSlot.transform.childCount > 1)
+            //{
+            //    //pokrenut otkrivanje kategorije
+            //}
+            //else
+            //{
+            //    //sakrivanje kategorije
+            //}
+
 		}
 
         protected void SetMenuActive(string name)

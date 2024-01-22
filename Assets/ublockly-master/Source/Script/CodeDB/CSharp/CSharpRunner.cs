@@ -29,7 +29,6 @@ namespace UBlockly
         private readonly Names mVariableNames;
         private readonly Datas mVariableDatas;
         private readonly List<CmdRunner> mCodeRunners;
-        
         public CSharpRunner(Names variableNames, Datas variableDatas)
         {
             mVariableNames = variableNames;
@@ -52,8 +51,15 @@ namespace UBlockly
             
             CurStatus = Status.Running;
             ButtonManager.instance.ClearAllListenersFromAllButtons();
+            //TREBA POPRAVIT
+            GameObject unitSlot = GameObject.FindGameObjectWithTag("UnitSlot");
+            if (unitSlot.transform.childCount > 1)
+            {
+                UnitsManager.instance.OpenUnitsSimulation();
+            }
 
-            foreach(var block in blocks)
+
+            foreach (var block in blocks)
             {
                 RunBlock(block);
             }
@@ -85,7 +91,7 @@ namespace UBlockly
                         CSharp.Runner.FireUpdate(new RunnerUpdateState(RunnerUpdateState.Stop));
                     }
                 });
-                Debug.Log("RUN SYNC");
+                Debug.Log("---------- Run sync ----------");
                 runner.StartRun(new CmdEnumerator(block));
             }
         }
@@ -97,7 +103,7 @@ namespace UBlockly
             runner.RunMode = RunMode;
             runner.StartRun(new CmdEnumerator(block));
 
-            Debug.Log("RUN BLOCK");
+            Debug.Log("---------- Run blocks ----------");
         }
 
         private void RunAsync(List<Block> topBlocks)
@@ -123,7 +129,7 @@ namespace UBlockly
                     CSharp.Runner.FireUpdate(new RunnerUpdateState(RunnerUpdateState.Stop));
                 }
             });
-            Debug.Log("RUN ASYNC");
+            Debug.Log("---------- Run async ----------");
             runner.StartRun(new CmdEnumerator(topBlocks[0]));
         }
 
@@ -132,7 +138,9 @@ namespace UBlockly
             if (RunMode == Mode.Step || CurStatus != Status.Running)
                 return;
             CurStatus = Status.Pause;
-            
+            Debug.Log("---------- Pause ----------");
+            UnitsManager.instance.CloseUnitsSimulation();
+
             foreach (CmdRunner runner in mCodeRunners)
             {
                 if (runner.CurStatus == Runner.Status.Running)
@@ -146,7 +154,14 @@ namespace UBlockly
             if (RunMode == Mode.Step || CurStatus != Status.Pause)
                 return;
             CurStatus = Status.Running;
-            
+            Debug.Log("---------- Resume ----------");
+            //TREBA POPRAVIT
+            GameObject unitSlot = GameObject.FindGameObjectWithTag("UnitSlot");
+            if (unitSlot.transform.childCount > 1)
+            {
+                UnitsManager.instance.OpenUnitsSimulation();
+            }
+
             foreach (CmdRunner runner in mCodeRunners)
             {
                 if (runner.CurStatus == Runner.Status.Pause)
@@ -160,7 +175,9 @@ namespace UBlockly
             if (CurStatus == Status.Stop)
                 return;
             CurStatus = Status.Stop;
-            
+            UnitsManager.instance.CloseUnitsSimulation();
+            Debug.Log("---------- Stop ----------");
+
             foreach (CmdRunner runner in mCodeRunners)
             {
                 runner.Stop();
