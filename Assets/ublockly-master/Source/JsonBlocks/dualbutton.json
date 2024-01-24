@@ -1,0 +1,60 @@
+[
+  {
+    "type": "dualbutton_buttonPress",
+    "message0": "%{BKY_DUAL_BUTTON} %1 %2 ",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "BUTTON",
+        "options": [
+          [ "%{BKY_BUTTON_RED}", "BUTTON_RED" ],
+          [ "%{BKY_BUTTON_BLUE}", "BUTTON_BLUE" ]
+        ]
+      },
+      {
+        "type": "field_dropdown",
+        "name": "CONDITION",
+        "options": [
+          [ "%{BKY_EVENT_WAS_PRESSED}", "WAS_PRESSED" ],
+          [ "%{BKY_EVENT_LONG_PRESS}", "LONG_PRESS" ],
+          [ "%{BKY_EVENT_DOUBLE_PRESS}", "DOUBLE_PRESS" ],
+          [ "%{BKY_EVENT_WAS_RELEASED}", "WAS_RELEASED" ]
+        ]
+      }
+    ],
+    "message1": "%{BKY_CONTROLS_IF_MSG_THEN} %1",
+    "args1": [
+      {
+        "type": "input_statement",
+        "name": "DO"
+      }
+    ]
+  },
+
+  {
+    "type": "dualbutton_getPastCondition",
+    "message0": "%{BKY_OBTAIN_DUAL_BUTTON} %1 %2 %{BKY_EVENT_BOOL_RETURN}",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "BUTTON",
+        "options": [
+          [ "%{BKY_BUTTON_RED}", "BUTTON_RED" ],
+          [ "%{BKY_BUTTON_BLUE}", "BUTTON_BLUE" ]
+        ]
+      },
+      {
+        "type": "field_dropdown",
+        "name": "CONDITION",
+        "options": [
+          [ "%{BKY_EVENT_WAS_PRESSED}", "WAS_PRESSED" ],
+          [ "%{BKY_EVENT_LONG_PRESS}", "LONG_PRESS" ],
+          [ "%{BKY_EVENT_DOUBLE_PRESS}", "DOUBLE_PRESS" ],
+          [ "%{BKY_EVENT_WAS_RELEASED}", "WAS_RELEASED" ]
+        ]
+      }
+    ],
+    "output": "Boolean",
+    "inputsInline": true
+  }
+]

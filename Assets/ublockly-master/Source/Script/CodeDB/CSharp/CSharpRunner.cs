@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UBlockly
 {
@@ -29,6 +30,7 @@ namespace UBlockly
         private readonly Names mVariableNames;
         private readonly Datas mVariableDatas;
         private readonly List<CmdRunner> mCodeRunners;
+        private IInteractible[] mManagers;
         public CSharpRunner(Names variableNames, Datas variableDatas)
         {
             mVariableNames = variableNames;
@@ -41,6 +43,9 @@ namespace UBlockly
             mVariableNames.Reset();
             mVariableDatas.Reset();
 
+            GameObject manager = GameObject.Find("Managers");
+            mManagers = manager.GetComponentsInChildren<IInteractible>();
+
             //start runner from the topmost blocks, exclude the procedure definition blocks
             List<Block> blocks = workspace.GetTopBlocks(true).FindAll(block => !ProcedureDB.IsDefinition(block));
             if (blocks.Count == 0)
@@ -51,9 +56,8 @@ namespace UBlockly
             
             CurStatus = Status.Running;
             ButtonManager.instance.ClearAllListenersFromAllButtons();
-            //TREBA POPRAVIT
-            GameObject unitSlot = GameObject.FindGameObjectWithTag("UnitSlot");
-            if (unitSlot.transform.childCount > 1)
+            
+            if (UnitsManager.instance.UnitSlotHasChildren())
             {
                 UnitsManager.instance.OpenUnitsSimulation();
             }
@@ -73,6 +77,21 @@ namespace UBlockly
             //}
         }
 
+        private void RunBlock(Block block)
+        {
+            CmdRunner runner = CmdRunner.Create(block.Type);
+            mCodeRunners.Add(runner);
+
+            runner.RunMode = RunMode;
+
+            Debug.Log("---------- Run blocks ----------");
+            foreach (var manager in  mManagers)
+            {
+                manager.SetButtonInteractive(false);
+            }
+
+            runner.StartRun(new CmdEnumerator(block));
+        }
         private void RunSync(List<Block> topBlocks)
         {
 			foreach (Block block in topBlocks)
@@ -94,16 +113,6 @@ namespace UBlockly
                 Debug.Log("---------- Run sync ----------");
                 runner.StartRun(new CmdEnumerator(block));
             }
-        }
-        private void RunBlock(Block block)
-        {
-            CmdRunner runner = CmdRunner.Create(block.Type);
-            mCodeRunners.Add(runner);
-
-            runner.RunMode = RunMode;
-            runner.StartRun(new CmdEnumerator(block));
-
-            Debug.Log("---------- Run blocks ----------");
         }
 
         private void RunAsync(List<Block> topBlocks)
@@ -138,8 +147,13 @@ namespace UBlockly
             if (RunMode == Mode.Step || CurStatus != Status.Running)
                 return;
             CurStatus = Status.Pause;
+
             Debug.Log("---------- Pause ----------");
             UnitsManager.instance.CloseUnitsSimulation();
+            foreach (var manager in mManagers)
+            {
+                manager.SetButtonInteractive(true);
+            }
 
             foreach (CmdRunner runner in mCodeRunners)
             {
@@ -154,12 +168,15 @@ namespace UBlockly
             if (RunMode == Mode.Step || CurStatus != Status.Pause)
                 return;
             CurStatus = Status.Running;
+
             Debug.Log("---------- Resume ----------");
-            //TREBA POPRAVIT
-            GameObject unitSlot = GameObject.FindGameObjectWithTag("UnitSlot");
-            if (unitSlot.transform.childCount > 1)
+            if (UnitsManager.instance.UnitSlotHasChildren())
             {
                 UnitsManager.instance.OpenUnitsSimulation();
+            }
+            foreach (var manager in mManagers)
+            {
+                manager.SetButtonInteractive(false);
             }
 
             foreach (CmdRunner runner in mCodeRunners)
@@ -175,8 +192,13 @@ namespace UBlockly
             if (CurStatus == Status.Stop)
                 return;
             CurStatus = Status.Stop;
-            UnitsManager.instance.CloseUnitsSimulation();
+
             Debug.Log("---------- Stop ----------");
+            UnitsManager.instance.CloseUnitsSimulation();
+            foreach (var manager in mManagers)
+            {
+                manager.SetButtonInteractive(true);
+            }
 
             foreach (CmdRunner runner in mCodeRunners)
             {

@@ -2,6 +2,11 @@
      "Style": "classic",
   "BlockCategoryList": [
     {
+      "CategoryName": "DUALBUTTON",
+      "ColorHex": "#0facdb",
+      "BlockTypePrefix": "dualbutton"
+    },
+    {
       "CategoryName": "LABEL",
       "ColorHex": "#db856e",
       "BlockTypePrefix": "label"

@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 3583480683530533935}
   - component: {fileID: 7122232935382485834}
   - component: {fileID: 172624173905378682}
+  - component: {fileID: 792378439924047472}
   m_Layer: 5
   m_Name: dualbutton
   m_TagString: Untagged
@@ -257,6 +258,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &792378439924047472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702986600359693409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d040560fc1809f54aaaf6c2135ba594c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7412271206082010360
 GameObject:
   m_ObjectHideFlags: 0

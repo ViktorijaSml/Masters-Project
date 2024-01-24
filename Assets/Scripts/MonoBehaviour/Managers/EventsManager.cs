@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -52,4 +53,11 @@ public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     }
     public bool GetIsPressed() => isPressed;
     public bool GetIsReleased() => !isPressed;
+    public List<UnityEvent> GetAllEvents() => new List<UnityEvent>()
+                                                {
+                                                    wasPressedEvent,
+                                                    wasDoublePressedEvent,
+                                                    wasReleasedEvent,
+                                                    longPressEvent
+                                                };
 }
