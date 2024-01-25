@@ -20,6 +20,7 @@ limitations under the License.
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -52,16 +53,16 @@ namespace UBlockly
             {
                 CSharp.Runner.FireUpdate(new RunnerUpdateState(RunnerUpdateState.Stop));
                 return;
-            }
-            
+            }            
             CurStatus = Status.Running;
+
             ButtonManager.instance.ClearAllListenersFromAllButtons();
-            
             if (UnitsManager.instance.UnitSlotHasChildren())
             {
                 UnitsManager.instance.OpenUnitsSimulation();
+              //  while (UnitsManager.instance.GetActiveUnit() == null) { /*wait until the object is active*/}
+                UnitsManager.instance.GetActiveUnit().GetComponent<IShowable>().ClearGarbage();
             }
-
 
             foreach (var block in blocks)
             {
@@ -84,7 +85,7 @@ namespace UBlockly
 
             runner.RunMode = RunMode;
 
-            Debug.Log("---------- Run blocks ----------");
+            Debug.Log("---------- Run block ----------");
             foreach (var manager in  mManagers)
             {
                 manager.SetButtonInteractive(false);

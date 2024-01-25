@@ -12,8 +12,8 @@ public class DummyScript : MonoBehaviour, IShowable
     }
     public void ClearGarbage()
     {
-           ButtonManager.instance.ClearAllListeners("RedBtn");
-           ButtonManager.instance.ClearAllListeners("BlueBtn");
+           ButtonManager.instance.ClearAllListeners("Red Button");
+           ButtonManager.instance.ClearAllListeners("Blue Button");
     }
     public string GetCategoryName() => this.name.ToUpper();
 }

@@ -35,8 +35,6 @@ namespace UBlockly.UGUI
         [SerializeField] protected GameObject m_BlockContentPrefab;
         [SerializeField] protected GameObject m_BinArea;
         protected List <IShowable> m_ShowableList;
-        protected string[] guids;
-        protected GameObject unitPrefab;
  
 
 		protected void Start()
@@ -47,22 +45,7 @@ namespace UBlockly.UGUI
             }
 
             m_ShowableList = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<IShowable>().ToList();
-
-            guids = AssetDatabase.FindAssets("t:prefab", new string[] { "Assets/Prefab/Units Objects" });
-            foreach (string guid in guids)
-            {
-                string path = AssetDatabase.GUIDToAssetPath(guid);
-                unitPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-
-                if (unitPrefab != null)
-                {
-                    IShowable showableUnit = unitPrefab.GetComponent<IShowable>();
-                    if (showableUnit != null)
-                    {
-                        m_ShowableList.Add(showableUnit);
-                    }
-                }
-            }
+            m_ShowableList.AddRange(UnitsManager.instance.GetUnitsType());
         }
 
 		protected override void Build()
