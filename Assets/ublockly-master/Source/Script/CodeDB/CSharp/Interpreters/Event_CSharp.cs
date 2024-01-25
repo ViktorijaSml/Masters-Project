@@ -41,9 +41,9 @@ namespace UBlockly
 
             while (true)
             {
-                if (eventsList.eventSucces == true)
+                if (eventsList.eventSucces)
                 {
-                    Debug.Log("Button is pressed!");
+                    Debug.Log(button + " is pressed!");
                     yield return CSharp.Interpreter.StatementRun(block, "DO");
                     eventsList.UnCheckEventSucces();
                 }
@@ -65,7 +65,7 @@ namespace UBlockly
             {
                 if (EventsManager.instance.eventSucces == true)
                 {
-                    Debug.Log("Button is pressed!");
+                    Debug.Log("Buttons are pressed!");
                     yield return CSharp.Interpreter.StatementRun(block, "DO");
                     EventsManager.instance.UnCheckEventSucces();
                 }
@@ -109,5 +109,30 @@ namespace UBlockly
             return new DataStruct(value);
         }
     }
+    [CodeInterpreter(BlockType = "event_getPastCondition")]
+    public class Event_GetPastCondition_Cmdtor : ValueCmdtor
+    {
+        protected override DataStruct Execute(Block block)
+        {
+            string condition = block.GetFieldValue("CONDITION");
+            string button = block.GetFieldValue("BUTTON");
 
+            switch (button)
+            {
+                case "BUTTON_A":
+                    button = "M5 Button";
+                    break;
+                case "BUTTON_B":
+                    button = "Right Button";
+                    break;
+            }
+
+            EventsManager eventsList = GameObject.Find(button).GetComponent<EventsManager>();
+
+            bool value = eventsList.GetEventState(condition);
+            eventsList.ResetEventStates();
+
+            return new DataStruct(value);
+        }
+    }
 }

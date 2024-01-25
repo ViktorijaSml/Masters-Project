@@ -6,7 +6,7 @@ using UBlockly.UGUI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LabelManager : MonoBehaviour, IShowable
+public class LabelManager : MonoBehaviour, IShowable, IInteractible
 {
     [SerializeField] GameObject binArea;
     public static LabelManager instance;
@@ -16,12 +16,6 @@ public class LabelManager : MonoBehaviour, IShowable
     private Color lastColor = new Color();
 
     private void Awake() => instance = this;
-    void Start()
-    {
-        Button buttonLabel = GameObject.FindGameObjectWithTag("Label").GetComponent<Button>();
-        buttonLabel.onClick.RemoveAllListeners();
-        buttonLabel.onClick.AddListener(AddLabelByCorrectOrder);
-    }
 
     public int GetLabelCount() => labelCounts.Count;
 
@@ -38,6 +32,8 @@ public class LabelManager : MonoBehaviour, IShowable
             binArea.gameObject.SetActive(false);
         }
     }
+    public Button GetLabelButton() => GameObject.FindGameObjectWithTag("Label").transform.GetChild(0).gameObject.GetComponent<Button>();
+    public void SetButtonInteractive(bool isInteractive) => GetLabelButton().interactable = isInteractive;   
     public void AddLabelByCorrectOrder()
     {
         if (labelCounts.Any(x => x == false))
@@ -93,14 +89,6 @@ public class LabelManager : MonoBehaviour, IShowable
 			BlocklyUI.WorkspaceView.Workspace.DeleteVariable(obj.name);
 			Destroy(obj);
     }
-    public void RemoveAllLabels()
-    {
-        for (int index = labelCounts.Count - 1; index >= 0; index--)
-        {
-            labelCounts.RemoveAt(index);
-            count--;
-        }
-    }
     public void HideLabel(bool hide, string labelName)
     {
         if (hide)
@@ -149,5 +137,5 @@ public class LabelManager : MonoBehaviour, IShowable
 
     public bool CanShowCategory() => GetLabelCount() > 0 && AnyTrueInList();
     public string GetCategoryName() => "LABEL";
-    public void ClearGarbage() => RemoveAllLabels();
+    public void ClearGarbage() { /*do nothing*/}
 }

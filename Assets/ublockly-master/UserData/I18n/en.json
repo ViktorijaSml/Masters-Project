@@ -17,6 +17,7 @@
   "LEDS": "LED",
   "EVENT": "Events",
   "SYSTEM": "System",
+  "DUALBUTTON": "Dual Button",
 
 
   /// default name - A simple: general default name for a variable: preferably short.
@@ -1200,5 +1201,10 @@
   "EVENT_OBTAIN_BUTTON": "Obtain button",
   "EVENT_BUTTONS_PRESS": "A + B press",
   //************Systemm Defines********/
-  "SYSTEM_RESET":  "System reset"
+  "SYSTEM_RESET": "System reset",
+  //************Dual Button Defines **********/
+  "BUTTON_RED": "Red",
+  "BUTTON_BLUE": "Blue",
+  "DUAL_BUTTON": "Dual Button",
+  "OBTAIN_DUAL_BUTTON":  "Obtain dual button"
 }

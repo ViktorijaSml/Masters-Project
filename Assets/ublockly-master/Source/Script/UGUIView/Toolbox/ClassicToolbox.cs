@@ -17,7 +17,9 @@ limitations under the License.
 ****************************************************************************/
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,18 +34,18 @@ namespace UBlockly.UGUI
         [SerializeField] protected GameObject m_BlockScrollList;
         [SerializeField] protected GameObject m_BlockContentPrefab;
         [SerializeField] protected GameObject m_BinArea;
-        protected IShowable[] m_ShowableList;
+        protected List <IShowable> m_ShowableList;
  
 
 		protected void Start()
 		{
-            // Iz liste menia uzima količinu i prema njoj dodaje boolean listu.
             for (int i = 0; i < m_MenuList.Count; i++)
             {
 				m_MenuListActive.Add(true);
-			}
+            }
 
-            m_ShowableList = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<IShowable>().ToArray();
+            m_ShowableList = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<IShowable>().ToList();
+            m_ShowableList.AddRange(UnitsManager.instance.GetUnitsType());
         }
 
 		protected override void Build()
@@ -53,62 +55,33 @@ namespace UBlockly.UGUI
 
 		protected void Update()
 		{
-            //!!ima vec nesto showcategory istrazi!!!
-
-            // Vrti objekt za svaki menu i postavlja ga (Enabled/Disabled) prema vrijednosti iz List<bool>
-            // Pošto je List<bool> jednake vrijednosti kao List<Gameobject> lako se provjerava podudarnost.
             for (int i = 0; i < m_MenuList.Count; i++)
             {
                 m_MenuList[i].SetActive(m_MenuListActive[i]);
             }
 
-            
             foreach (var category in m_ShowableList)
             {
                 if (category.CanShowCategory())
                 {
-                    SetMenuActive(category.GetCategoryName());
+                    SetCategoryActive(category.GetCategoryName(), true);
                 }
                 else
                 {
-                    SetMenuDeactive(category.GetCategoryName());
-                    category.ClearGarbage();
+                    SetCategoryActive(category.GetCategoryName(), false);
                 }
             }
-           
-            //GameObject unitSlot = GameObject.FindGameObjectWithTag("UnitSlot");
-            //if (unitSlot.transform.childCount > 1)
-            //{
-            //    //pokrenut otkrivanje kategorije
-            //}
-            //else
-            //{
-            //    //sakrivanje kategorije
-            //}
-
 		}
-
-        protected void SetMenuActive(string name)
+        /// <summary>
+		/// Hide or show the specific category in the menu list
+		/// </summary>
+        protected void SetCategoryActive(string categoryName, bool isActive)
         {
-            // Prema vriijednosti "name" iz liste provjerava svako ime i postavlja objekt kao aktivan.
 			for (int i = 0; i < m_MenuList.Count; i++)
 			{
-                if(m_MenuList[i].name == name)
+                if(m_MenuList[i].name == categoryName)
                 {
-                    m_MenuList[i].SetActive(true);
-				}
-			}
-		}
-
-
-		protected void SetMenuDeactive(string name)
-		{
-			// Prema vrijednosti "name" iz liste provjerava svako ime i postavlja objekt kao deaktiviran.
-			for (int i = 0; i < m_MenuList.Count; i++)
-			{
-				if (m_MenuList[i].name == name)
-				{
-					m_MenuList[i].SetActive(false);
+                    m_MenuList[i].SetActive(isActive);
 				}
 			}
 		}
@@ -143,7 +116,9 @@ namespace UBlockly.UGUI
                 mMenuList[category.CategoryName] = toggle;
             }
         }
-        
+        /// <summary>
+        /// Show (open) the selected category and its blocks
+        /// </summary>
         public void ShowBlockCategory(string categoryName)
         {
             if (string.Equals(categoryName, mActiveCategory))
@@ -188,6 +163,9 @@ namespace UBlockly.UGUI
             m_BlockScrollList.GetComponent<ScrollRect>().content = contentTrans;
         }
 
+        /// <summary>
+        /// Hide the selected (opened) category and its blocks
+        /// </summary>
         public void HideBlockCategory()
         {
             if (string.IsNullOrEmpty(mActiveCategory))

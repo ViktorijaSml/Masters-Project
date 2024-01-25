@@ -227,5 +227,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 738970eab11fca547b4f4c05e4df1ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 0}
   disableCreateObject: 0

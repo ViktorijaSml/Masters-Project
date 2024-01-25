@@ -70,6 +70,9 @@ MonoBehaviour:
   - IndexName: system
     ResName: system
     TextFile: {fileID: 4900000, guid: a3c2b3c69d586f44fb6e6fd9ef766d4d, type: 3}
+  - IndexName: dualbutton
+    ResName: dualbutton
+    TextFile: {fileID: 4900000, guid: 3a9495218270d9d4c81962c5aea25d4a, type: 3}
   m_ToolboxFiles:
   - IndexName: default
     ResName: toolbox_default

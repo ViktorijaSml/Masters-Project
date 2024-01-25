@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using UBlockly;
@@ -56,11 +57,11 @@ public class ButtonManager : MonoBehaviour
     public void ClearAllListeners(string name)
     {
         EventsManager button = GameObject.Find(name).GetComponent<EventsManager>();
-        button.wasPressedEvent.RemoveAllListeners();
-        button.longPressEvent.RemoveAllListeners();
-        button.wasDoublePressedEvent.RemoveAllListeners();
-        button.wasReleasedEvent.RemoveAllListeners();
+        List<UnityEvent> eventList = button.GetAllEvents();
+        foreach (var myEvent in eventList)
+        {
+            myEvent.RemoveAllListeners();
+        }
         comboPressEvent.RemoveAllListeners();
     }
-    
 }

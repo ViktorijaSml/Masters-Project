@@ -79,7 +79,6 @@ namespace UBlockly
                 return null;
             }
             var test= new CmdEnumerator(targetBlock);
-            Debug.Log(test.Cmdtor + "---------------------------------");
             return test;
         }
 

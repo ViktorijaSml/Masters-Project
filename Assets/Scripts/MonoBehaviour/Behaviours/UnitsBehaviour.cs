@@ -5,16 +5,18 @@ using UnityEngine.UI;
 public class UnitsBehaviour : MonoBehaviour
 {
     private Button unitButton;
-    private GameObject unitSimulation, objectPrefab;
+    private GameObject unitSimulation, objectPrefab, unitSlot;
    [HideInInspector] public bool disableCreateObject;
+    public GameObject bla { get; set; } 
 
     private void Start()
     {
         objectPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Units Objects/" + this.name + ".prefab");
         unitButton = GetComponent<Button>();
+        unitSlot = UnitsManager.instance.GetUnitSlot();
         // Provjerava ima li objekt sposobnost kreiranje vlastitog objekta.
         // Odnosno, je li objekt kreiran 
-        if(disableCreateObject == false)
+        if (disableCreateObject == false)
         {
             // Ako objekt nije kreiran (nema jos modula dodanih),
             // Dodaje se metoda koja će se pozvati pritiskom na tipku objekta:
@@ -37,12 +39,12 @@ public class UnitsBehaviour : MonoBehaviour
                 Debug.Log("Unit deleted: " + this.name);
                 DestroyUnitObject();
             });
+            
         }
     }
 
     public void CreateUnitObject()
     {
-        GameObject unitSlot = GameObject.FindGameObjectWithTag("UnitSlot");
         // Stvaranje novog odabranog objekta
         GameObject unit = Instantiate(gameObject, Vector3.zero, Quaternion.identity);
 
@@ -71,6 +73,7 @@ public class UnitsBehaviour : MonoBehaviour
 
     public void DestroyUnitObject() 
     {
+        //this.GetComponent<IShowable>().ClearGarbage();
         Destroy(unitSimulation);
         Destroy(gameObject);
     }
