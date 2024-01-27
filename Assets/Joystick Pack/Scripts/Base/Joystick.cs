@@ -1,14 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
+    public UnityEvent joystickPress;
+    private float pressTime = 0f;
+    private bool isPressed = false, isDragging;
+    private float tolerance = 0.1f;
+    private Vector2 touchStartPosition;
     public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
     public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
 
+    public bool IsPressed 
+    { 
+        get { return isPressed; } 
+        set { isPressed = value; } 
+    }
     public float HandleRange
     {
         get { return handleRange; }
@@ -57,9 +66,45 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         handle.anchoredPosition = Vector2.zero;
     }
 
+    private void Update()
+    {
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            Touch touch = Input.GetTouch(i);
+            Vector2 touchPosition = touch.position;
+            if (RectTransformUtility.RectangleContainsScreenPoint(handle, Input.mousePosition, cam))
+            {
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        isDragging = false; 
+                        pressTime = Time.time;
+                        touchStartPosition = touchPosition;
+                        break;
+                    case TouchPhase.Moved:
+                        if(Vector2.Distance(touchPosition, touchStartPosition) >= tolerance)   
+                        {
+                            isDragging = true; 
+                        }
+                        break;
+                    case TouchPhase.Stationary:
+                        if ( !isDragging && Time.time - pressTime >= 0.2f)
+                        {
+                            joystickPress.Invoke();
+                        }
+                        break;
+                    case TouchPhase.Ended:
+                    case TouchPhase.Canceled:
+                        isDragging = false;
+                        break;
+                }
+            }
+        }
+
+    }
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        OnDrag(eventData);
+       // OnDrag(eventData); //forcing the user to drag the handle instead of it just appearing
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -145,6 +190,6 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         }
         return Vector2.zero;
     }
-}
 
+}
 public enum AxisOptions { Both, Horizontal, Vertical }

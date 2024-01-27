@@ -18,6 +18,7 @@
   "EVENT": "Events",
   "SYSTEM": "System",
   "DUALBUTTON": "Dual Button",
+  "JOYSTICK": "Joystick",
 
 
   /// default name - A simple: general default name for a variable: preferably short.
@@ -1171,7 +1172,7 @@
   "RTC_GET_MINUTE": "Get minute",
   "RTC_GET_SECOND": "Get second",
   "RTC_GET_LOCALTIME": "Get local time",
-  //************WDT Defines**************/
+  //************WDT Defines************/
   "WDT_INIT": "Init WDT timeout",
   "WDT_FEED": "WDT feed",
   "WDT_WAIT": "Wait",
@@ -1183,10 +1184,10 @@
   "COLOR_BY_RGB": "color by RGB",
   "LABEL_COLOR": "color:",
   "LABEL_HIDE": "hide:",
-  /************LEDs************/
+  //************LEDs************/
   "LEDS_TURN_ON": "LED On",
   "LEDS_TURN_OFF": "LED Off",
-  //************Events Defines**********/
+  //************Events Defines************/
   "EVENT_BUTTON": "Button",
   "BUTTON_A": "A",
   "BUTTON_B": "B",
@@ -1200,11 +1201,20 @@
   "EVENT_IS_RELEASED": "released",
   "EVENT_OBTAIN_BUTTON": "Obtain button",
   "EVENT_BUTTONS_PRESS": "A + B press",
-  //************Systemm Defines********/
+  //************Systemm Defines************/
   "SYSTEM_RESET": "System reset",
-  //************Dual Button Defines **********/
+  //************Dual Button Defines************/
   "BUTTON_RED": "Red",
   "BUTTON_BLUE": "Blue",
   "DUAL_BUTTON": "Dual Button",
-  "OBTAIN_DUAL_BUTTON":  "Obtain dual button"
+  "OBTAIN_DUAL_BUTTON": "Obtain dual button",
+  //************Joystick Defines************/
+  "JOYSTICK_GET_X": "Get joystick X",
+  "JOYSTICK_GET_Y": "Get joystick Y",
+  "JOYSTICK_RETURN_INT": "(return int 0 ~ 255)",
+  "JOYSTICK_GET_REVERSE_X": "Get joystick Reverse X",
+  "JOYSTICK_GET_REVERSE_Y": "Get joystick Reverse Y",
+  "JOYSTICK_GET_ISPRESSED": "Get joystick is pressed",
+  "JOYSTICK_RETURN_BINARY": "(return 0 or 1)"
+
 }

@@ -93,8 +93,6 @@ namespace UBlockly
                     break;
             }
             EventsManager eventsList = GameObject.Find(button).GetComponent<EventsManager>();
-            eventsList.wasPressedEvent.RemoveAllListeners();
-            eventsList.wasPressedEvent.AddListener(() => Debug.Log("Listening..."));
 
             switch (condition)
             {

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1817977740962309133}
   - component: {fileID: 1817977740962309135}
   - component: {fileID: 1817977740962309134}
-  - component: {fileID: 1817977740962309120}
   m_Layer: 5
   m_Name: Fixed Joystick
   m_TagString: Untagged
@@ -78,25 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1817977740962309120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817977740962309132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handleRange: 1
-  deadZone: 0
-  axisOptions: 0
-  snapX: 0
-  snapY: 0
-  background: {fileID: 1817977740962309133}
-  handle: {fileID: 1817977742253156343}
 --- !u!1 &1817977742253156342
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +241,7 @@ GameObject:
   - component: {fileID: 4929165573462744063}
   - component: {fileID: 2256910152963398332}
   - component: {fileID: 3817057134452080440}
+  - component: {fileID: 6960630523721788271}
   m_Layer: 5
   m_Name: joystick
   m_TagString: Untagged
@@ -327,3 +308,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6960630523721788271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929165573462744048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2fbea66df0114f41a147de906747346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handleRange: 1
+  deadZone: 0
+  axisOptions: 0
+  snapX: 0
+  snapY: 0
+  background: {fileID: 1817977740962309133}
+  handle: {fileID: 1817977742253156343}
