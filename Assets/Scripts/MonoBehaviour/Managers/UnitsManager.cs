@@ -15,7 +15,6 @@ public class UnitsManager : MonoBehaviour, IInteractible
         instance = this;
         Application.targetFrameRate = 60;
     }
-
     public List<IShowable> GetUnitsType()
     {
         List<IShowable> unitList = new List<IShowable>();
@@ -27,7 +26,7 @@ public class UnitsManager : MonoBehaviour, IInteractible
 
             if (unitPrefab != null)
             {
-                IShowable showableUnit = unitPrefab.GetComponent<IShowable>();
+                IShowable showableUnit = unitPrefab.GetComponentInChildren<IShowable>();
                 if (showableUnit != null)
                 {
                     unitList.Add(showableUnit);

@@ -2,6 +2,11 @@
      "Style": "classic",
   "BlockCategoryList": [
     {
+      "CategoryName": "JOYSTICK",
+      "ColorHex": "#de3a68",
+      "BlockTypePrefix": "joystick"
+    },
+    {
       "CategoryName": "DUALBUTTON",
       "ColorHex": "#0facdb",
       "BlockTypePrefix": "dualbutton"

@@ -73,6 +73,9 @@ MonoBehaviour:
   - IndexName: dualbutton
     ResName: dualbutton
     TextFile: {fileID: 4900000, guid: 3a9495218270d9d4c81962c5aea25d4a, type: 3}
+  - IndexName: joystick
+    ResName: joystick
+    TextFile: {fileID: 4900000, guid: 53ee44b24a23143498c9ca7a40885d8c, type: 3}
   m_ToolboxFiles:
   - IndexName: default
     ResName: toolbox_default

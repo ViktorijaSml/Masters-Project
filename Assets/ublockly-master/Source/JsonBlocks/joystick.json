@@ -1,0 +1,37 @@
+[
+  {
+    "type": "joystick_getXPosition",
+    "message0": "%{BKY_JOYSTICK_GET_X} %{BKY_JOYSTICK_RETURN_INT}",
+    "args0": [],
+    "output": "Number",
+    "inputsInline": true
+  },
+  {
+    "type": "joystick_getYPosition",
+    "message0": "%{BKY_JOYSTICK_GET_Y} %{BKY_JOYSTICK_RETURN_INT}",
+    "args0": [],
+    "output": "Number",
+    "inputsInline": true
+  },
+  {
+    "type": "joystick_getIsPressed",
+    "message0": "%{BKY_JOYSTICK_GET_ISPRESSED} %{BKY_JOYSTICK_RETURN_BINARY}",
+    "args0": [],
+    "output": "Number",
+    "inputsInline": true
+  },
+  {
+    "type": "joystick_getReverseXPosition",
+    "message0": "%{BKY_JOYSTICK_GET_REVERSE_X} %{BKY_JOYSTICK_RETURN_INT}",
+    "args0": [],
+    "output": "Number",
+    "inputsInline": true
+  },
+  {
+    "type": "joystick_getReverseYPosition",
+    "message0": "%{BKY_JOYSTICK_GET_REVERSE_Y} %{BKY_JOYSTICK_RETURN_INT}",
+    "args0": [],
+    "output": "Number",
+    "inputsInline": true
+  }
+]
