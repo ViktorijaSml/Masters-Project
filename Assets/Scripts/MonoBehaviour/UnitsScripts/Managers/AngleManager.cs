@@ -4,23 +4,26 @@ public class AngleManager : MonoBehaviour, IShowable
 {
     private float _totalAngle = 0, _previousAngle = 0, _prevDelta = 0;
     public static AngleManager instance;
-    private bool _isCounterClockwise;
+    public bool _isCounterClockwise;
     private void Awake() => instance = this;
   
     private void Update()
     {
-       Debug.Log(GetAngle());
-        //GetAngle();
+      // Debug.Log(GetAngle());
+        GetAngle();
     }
     public int GetAngle()
     {
-        float _currentAngle = transform.GetChild(0).GetComponent<AngleBehaviour>().Angle;
+        float _currentAngle = transform.GetChild(0).GetComponent<AngleBehaviour>().totalRotation;
         float currDelta = _currentAngle - _previousAngle;
-        if (currDelta > 180 || currDelta < 0) //clockwise
+        float calculated = currDelta % 360;
+
+       //Debug.Log(calculated);
+        if (calculated > 180 || calculated < 0) //clockwise
         {
             _isCounterClockwise = false;
         }
-        else if (currDelta < -180 || currDelta > 0) //counterclockwise
+        else if (calculated < -180 || calculated > 0) //counterclockwise
         {
             _isCounterClockwise = true;
         }
