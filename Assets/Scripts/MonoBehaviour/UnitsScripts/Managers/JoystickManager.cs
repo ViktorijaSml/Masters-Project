@@ -24,14 +24,13 @@ public class JoystickManager : Joystick, IShowable
     public int GetXPosition() => (int)((Horizontal + 1)/2f * 255);
     public int GetYPosition() => (int)((Vertical + 1) / 2f * 255);
 
-    public bool CanShowCategory()
-    {
-        GameObject unitSlot = UnitsManager.instance.GetUnitSlot();
-        return UnitsManager.instance.UnitSlotHasChildren() && UnitsManager.instance.GetUnitImage().name.ToUpper() == GetCategoryName();
-    }
+    public bool CanShowCategory() => UnitsManager.instance.UnitSlotHasChildren() && UnitsManager.instance.GetUnitImage().name.ToUpper() == GetCategoryName();
     public void ClearGarbage()
     {
+        if (CanShowCategory()) 
+        { 
         joystickPress.RemoveAllListeners();
+        }
     }
     public string GetCategoryName() => this.name.ToUpper();
 }

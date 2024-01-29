@@ -2,6 +2,11 @@
      "Style": "classic",
   "BlockCategoryList": [
     {
+      "CategoryName": "ANGLE",
+      "ColorHex": "#24bf60",
+      "BlockTypePrefix": "angle"
+    },
+    {
       "CategoryName": "JOYSTICK",
       "ColorHex": "#de3a68",
       "BlockTypePrefix": "joystick"

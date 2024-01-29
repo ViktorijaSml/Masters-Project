@@ -5,18 +5,18 @@ using UnityEngine.EventSystems;
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     public UnityEvent joystickPress;
-    private float pressTime = 0f;
-    private bool isPressed = false, isDragging;
-    private float tolerance = 0.1f;
-    private Vector2 touchStartPosition;
+    private float _pressTime = 0f;
+    private bool _isPressed = false, _isDragging;
+    private float _tolerance = 0.1f;
+    private Vector2 _touchStartPosition;
     public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
     public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
 
     public bool IsPressed 
     { 
-        get { return isPressed; } 
-        set { isPressed = value; } 
+        get { return _isPressed; } 
+        set { _isPressed = value; } 
     }
     public float HandleRange
     {
@@ -77,25 +77,25 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
-                        isDragging = false; 
-                        pressTime = Time.time;
-                        touchStartPosition = touchPosition;
+                        _isDragging = false; 
+                        _pressTime = Time.time;
+                        _touchStartPosition = touchPosition;
                         break;
                     case TouchPhase.Moved:
-                        if(Vector2.Distance(touchPosition, touchStartPosition) >= tolerance)   
+                        if(Vector2.Distance(touchPosition, _touchStartPosition) >= _tolerance)   
                         {
-                            isDragging = true; 
+                            _isDragging = true; 
                         }
                         break;
                     case TouchPhase.Stationary:
-                        if ( !isDragging && Time.time - pressTime >= 0.2f)
+                        if ( !_isDragging && Time.time - _pressTime >= 0.2f)
                         {
                             joystickPress.Invoke();
                         }
                         break;
                     case TouchPhase.Ended:
                     case TouchPhase.Canceled:
-                        isDragging = false;
+                        _isDragging = false;
                         break;
                 }
             }

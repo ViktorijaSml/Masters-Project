@@ -60,7 +60,7 @@ namespace UBlockly
             if (UnitsManager.instance.UnitSlotHasChildren())
             {
                 UnitsManager.instance.OpenUnitsSimulation();
-              //  while (UnitsManager.instance.GetActiveUnit() == null) { /*wait until the object is active*/}
+                //  while (UnitsManager.instance.GetActiveUnit() == null) { /*wait until the object is active*/}
                 UnitsManager.instance.GetActiveUnit().GetComponent<IShowable>().ClearGarbage();
             }
 

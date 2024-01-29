@@ -76,6 +76,9 @@ MonoBehaviour:
   - IndexName: joystick
     ResName: joystick
     TextFile: {fileID: 4900000, guid: 53ee44b24a23143498c9ca7a40885d8c, type: 3}
+  - IndexName: angle
+    ResName: angle
+    TextFile: {fileID: 4900000, guid: 8ecaed61ceecdcd4ba9ae93c324b19ce, type: 3}
   m_ToolboxFiles:
   - IndexName: default
     ResName: toolbox_default
