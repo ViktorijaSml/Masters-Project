@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 5185867387301752111}
   - component: {fileID: 5185867387301752107}
   m_Layer: 5
-  m_Name: env4
+  m_Name: envIV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -35,7 +35,6 @@ public class AngleManager : MonoBehaviour, IShowable
         }
         else
         {
-
             _totalAngle -= Mathf.Abs(angle - _previousAngle);
         }
         

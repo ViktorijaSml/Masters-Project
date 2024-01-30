@@ -20,6 +20,7 @@
   "DUALBUTTON": "Dual Button",
   "JOYSTICK": "Joystick",
   "ANGLE": "Angle",
+  "ENVIV": "Env IV",
 
 
   /// default name - A simple: general default name for a variable: preferably short.
@@ -1216,7 +1217,12 @@
   "JOYSTICK_GET_REVERSE_X": "Get joystick Reverse X",
   "JOYSTICK_GET_REVERSE_Y": "Get joystick Reverse Y",
   "JOYSTICK_GET_ISPRESSED": "Get joystick is pressed",
-  "JOYSTICK_RETURN_BINARY": "(return 0 or 1)"
+  "JOYSTICK_RETURN_BINARY": "(return 0 or 1)",
   //************Angle Unit Defines************/
 
+  //************Env4 Unit Defines************/
+  "ENVIV_GET_PRESSURE": "Get env_4 pressure (hPa)",
+  "ENVIV_GET_TEMPERATURE": "Get env_4 temperature (°C)",
+  "ENVIV_GET_HUMIDITY": "Get env_4 humidity (%)",
+  "ENVIV_RETURN_FLOAT":  "(return float)"
 }

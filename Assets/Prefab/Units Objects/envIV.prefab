@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 299482584215882393}
   - component: {fileID: 3375910682987577317}
   - component: {fileID: 645141735721541732}
+  - component: {fileID: 2311164829177544299}
   m_Layer: 5
-  m_Name: env4
+  m_Name: envIV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,6 +78,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2311164829177544299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299482584215882390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80c3e4d2a47b734aa45fdf0576f9e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2796276139486004591
 GameObject:
   m_ObjectHideFlags: 0

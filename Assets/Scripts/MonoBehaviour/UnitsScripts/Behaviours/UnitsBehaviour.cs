@@ -12,6 +12,7 @@ public class UnitsBehaviour : MonoBehaviour
     private void Start()
     {
         objectPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Units Objects/" + this.name + ".prefab");
+
         unitButton = GetComponent<Button>();
         unitSlot = UnitsManager.instance.GetUnitSlot();
         // Provjerava ima li objekt sposobnost kreiranje vlastitog objekta.
