@@ -1,0 +1,24 @@
+[
+  {
+    "type": "envIV_getPressure",
+    "message0": "%{BKY_ENVIV_GET_PRESSURE} %{BKY_ENVIV_RETURN_FLOAT}",
+    "args0": [],
+    "output": "Number",
+    "inputsInline": true
+  },
+  {
+    "type": "envIV_getTemperature",
+    "message0": "%{BKY_ENVIV_GET_TEMPERATURE} %{BKY_ENVIV_RETURN_FLOAT}",
+    "args0": [],
+    "output": "Number",
+    "inputsInline": true
+  },
+  {
+    "type": "envIV_getHumidity",
+    "message0": "%{BKY_ENVIV_GET_HUMIDITY} %{BKY_ENVIV_RETURN_FLOAT}",
+    "args0": [],
+    "output": "Number",
+    "inputsInline": true
+  }
+
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "type": "angle_getAngle",
+    "message0": "%{BKY_ANGLE_GET}",
+    "args0": [],
+    "output": "Number",
+    "inputsInline": true
+  }
+]
