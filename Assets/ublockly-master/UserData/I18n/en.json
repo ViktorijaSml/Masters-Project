@@ -1219,10 +1219,10 @@
   "JOYSTICK_GET_ISPRESSED": "Get joystick is pressed",
   "JOYSTICK_RETURN_BINARY": "(return 0 or 1)",
   //************Angle Unit Defines************/
-
+  "ANGLE_GET": "Get angle value",
   //************Env4 Unit Defines************/
   "ENVIV_GET_PRESSURE": "Get env_4 pressure (hPa)",
   "ENVIV_GET_TEMPERATURE": "Get env_4 temperature (°C)",
   "ENVIV_GET_HUMIDITY": "Get env_4 humidity (%)",
-  "ENVIV_RETURN_FLOAT":  "(return float)"
+  "ENVIV_RETURN_FLOAT": "(return float)"
 }
