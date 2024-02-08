@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: FER
-  productName: Blocky
+  productName: UIFlow Virtual
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.45098042, g: 0.5529412, b: 0.49803925, a: 1}
@@ -39,7 +39,11 @@ PlayerSettings:
     y: 0
     width: 1
     height: 1
-  m_SplashScreenLogos: []
+  m_SplashScreenLogos:
+  - logo: {fileID: 21300000, guid: b8df36f72bc58104bb698037c449cf46, type: 3}
+    duration: 2
+  - logo: {fileID: 21300000, guid: 5806676c45319fa46b92c64cc688a88b, type: 3}
+    duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920
@@ -274,7 +278,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 5b77a6f1eda2d9f4d87aef28abdaf4d1, type: 3}
+      m_Icon: {fileID: 2800000, guid: 6f12a8ffa7d03bf4095add24c01880b6, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -751,7 +755,7 @@ PlayerSettings:
   ps4IncludedModules: []
   ps4attribVROutputEnabled: 0
   monoEnv: 
-  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: 19761b4eab300474fa119b21e2ab39a2, type: 3}
+  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: fc05cc8818e0eca45957e074c5d51d71, type: 3}
   splashScreenBackgroundSourcePortrait: {fileID: 0}
   blurSplashScreenBackground: 1
   spritePackerPolicy: 
@@ -795,7 +799,7 @@ PlayerSettings:
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
   enableRoslynAnalyzers: 1
-  selectedPlatform: 0
+  selectedPlatform: 2
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 1
