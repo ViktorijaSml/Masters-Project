@@ -15,28 +15,26 @@ public class UnitsManager : MonoBehaviour, IInteractible
         instance = this;
         Application.targetFrameRate = 60;
     }
-    public List<IShowable> GetUnitsType()
-    {
-        List<IShowable> unitList = new List<IShowable>();
-        string[] guids = AssetDatabase.FindAssets("t:prefab", new string[] { "Assets/Prefab/Units Objects" });
-        foreach (string guid in guids)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject unitPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+	public List<IShowable> GetUnitsType()
+	{
+		List<IShowable> unitList = new List<IShowable>();
+		GameObject[] unitPrefabs = Resources.LoadAll<GameObject>("Units Objects");
 
-            if (unitPrefab != null)
-            {
-                IShowable showableUnit = unitPrefab.GetComponentInChildren<IShowable>();
-                if (showableUnit != null)
-                {
-                    unitList.Add(showableUnit);
-                }
-            }
-        }
-        return unitList;
-    }
+		foreach (GameObject unitPrefab in unitPrefabs)
+		{
+			if (unitPrefab != null)
+			{
+				IShowable showableUnit = unitPrefab.GetComponentInChildren<IShowable>();
+				if (showableUnit != null)
+				{
+					unitList.Add(showableUnit);
+				}
+			}
+		}
+		return unitList;
+	}
 
-    public void SetButtonInteractive (bool isInteractive)
+	public void SetButtonInteractive (bool isInteractive)
     {
         Color fadedColor = new Color(200/255f, 198/255f, 192/255f);
 
@@ -51,16 +49,16 @@ public class UnitsManager : MonoBehaviour, IInteractible
         }
     }
     public bool UnitSlotHasChildren() => GetUnitSlot().transform.childCount > 1;
-    public GameObject GetActiveUnit()
-    {
-        if (UnitSlotHasChildren())
-        {
-            GameObject unitImage = GetUnitImage();
-            return AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Units Objects/" + unitImage.name + ".prefab");
-        }
-        return null;
-    }
-    public GameObject GetUnitImage()
+	public GameObject GetActiveUnit()
+	{
+		if (UnitSlotHasChildren())
+		{
+			GameObject unitImage = GetUnitImage();
+			return Resources.Load<GameObject>("Units Objects/" + unitImage.name);
+		}
+		return null;
+	}
+	public GameObject GetUnitImage()
     {
         if (UnitSlotHasChildren())
         {

@@ -8,42 +8,43 @@ public class UnitsBehaviour : MonoBehaviour
     private GameObject unitSimulation, objectPrefab, unitSlot;
    [HideInInspector] public bool disableCreateObject;
 
-    private void Start()
-    {
-        objectPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Units Objects/" + this.name + ".prefab");
+	private void Start()
+	{
+		objectPrefab = Resources.Load<GameObject>("Units Objects/" + this.name);
 
-        unitButton = GetComponent<Button>();
-        unitSlot = UnitsManager.instance.GetUnitSlot();
-        // Provjerava ima li objekt sposobnost kreiranje vlastitog objekta.
-        // Odnosno, je li objekt kreiran 
-        if (disableCreateObject == false)
-        {
-            // Ako objekt nije kreiran (nema jos modula dodanih),
-            // Dodaje se metoda koja će se pozvati pritiskom na tipku objekta:
-            // "Kreiraj mi taj objekt/modul"
-            unitButton.onClick.AddListener(() => 
-            {
-                Debug.Log("Unit added: " + this.name);
-                CreateUnitObject();
-                UnitsManager.instance.CloseUnits(); //Makni Units prozor
-            });            
-        }
-        else
-        {
-            //Ako je objekt kreiran (dodali smo modul),
-            //Makni prethodni Listener i dodaj novi sa novom metodom:
-            //Zatvori/Makni modul 
-            unitButton.onClick.RemoveAllListeners();
-            unitButton.onClick.AddListener(() => 
-            {
-                Debug.Log("Unit deleted: " + this.name);
-                DestroyUnitObject();
-            });
-            
-        }
-    }
+		unitButton = GetComponent<Button>();
+		unitSlot = UnitsManager.instance.GetUnitSlot();
+		// Provjerava ima li objekt sposobnost kreiranje vlastitog objekta.
+		// Odnosno, je li objekt kreiran 
+		if (disableCreateObject == false)
+		{
+			// Ako objekt nije kreiran (nema jos modula dodanih),
+			// Dodaje se metoda koja će se pozvati pritiskom na tipku objekta:
+			// "Kreiraj mi taj objekt/modul"
+			unitButton.onClick.AddListener(() =>
+			{
+				Debug.Log("Unit added: " + this.name);
+				CreateUnitObject();
+				UnitsManager.instance.CloseUnits(); //Makni Units prozor
+			});
+		}
+		else
+		{
+			//Ako je objekt kreiran (dodali smo modul),
+			//Makni prethodni Listener i dodaj novi sa novom metodom:
+			//Zatvori/Makni modul 
+			unitButton.onClick.RemoveAllListeners();
+			unitButton.onClick.AddListener(() =>
+			{
+				Debug.Log("Unit deleted: " + this.name);
+				DestroyUnitObject();
+			});
 
-    public void CreateUnitObject()
+		}
+	}
+
+
+	public void CreateUnitObject()
     {
         // Stvaranje novog odabranog objekta
         GameObject unit = Instantiate(gameObject, Vector3.zero, Quaternion.identity);
