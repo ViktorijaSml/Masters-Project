@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScreenColor : MonoBehaviour
+public class ScreenManager : MonoBehaviour
 {
-    public static ScreenColor instance;
+    public static ScreenManager instance;
     private Image imageScreen;
     private Color backgroundColor;
     void Awake()

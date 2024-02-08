@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a222ba66df32b714281e3aa9fa2d85e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isCounterClockwise: 0
 --- !u!1 &8191695048653028807
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,3 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28dcbe3e0f9a03143ab7f4ee03b5737c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalRotation: 0
+  previousAngle: 0
+  angleManager: {fileID: 0}

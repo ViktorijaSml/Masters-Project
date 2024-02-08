@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DummyScript : MonoBehaviour, IShowable
+public class DummyManager : MonoBehaviour, IShowable
 {
     //this class is used for units that use an already existing class, so we can use the interface
     //without corrupting the other (used) class

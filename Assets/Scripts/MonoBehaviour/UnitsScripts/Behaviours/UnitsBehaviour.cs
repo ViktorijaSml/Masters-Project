@@ -7,7 +7,6 @@ public class UnitsBehaviour : MonoBehaviour
     private Button unitButton;
     private GameObject unitSimulation, objectPrefab, unitSlot;
    [HideInInspector] public bool disableCreateObject;
-    public GameObject bla { get; set; } 
 
     private void Start()
     {

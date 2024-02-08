@@ -12,7 +12,7 @@ public static class SystemManager
     {
         Debug.Log("System reset..");
         //Set screen to default value: black
-        ScreenColor.instance.SetColorBlack();
+        ScreenManager.instance.SetColorBlack();
         //Remove all labels
         if (LabelManager.instance.GetLabelCount() != 0)
         {
@@ -23,7 +23,7 @@ public static class SystemManager
             }
         }
         //Turn of the led
-        LedsFunctionality.instance.LedOff();
+        LedsManager.instance.LedOff();
         //Reset speaker
         SpeakerManager.instance.SetVolume(0.5f);
         SpeakerManager.instance.ResetAudioClips();

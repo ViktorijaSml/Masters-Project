@@ -2,11 +2,9 @@
 using UnityEngine;
 public class TimerFunctions : MonoBehaviour
 {
-	//Can be initialised only once!
 	public static TimerFunctions instance;
 	private bool isTimerActive = false;
 	int timeout = 0;
-	private int timer;
     public void Awake()
     {
         instance = this; 

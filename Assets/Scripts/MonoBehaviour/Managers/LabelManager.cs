@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UBlockly;
 using UBlockly.UGUI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +10,7 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
     [SerializeField] GameObject binArea;
     public static LabelManager instance;
     public GameObject labelPrefab;
-    private int count = 0;
+    private int numOrder = 0; 
     private List<bool> labelCounts = new List<bool>();
     private Color lastColor = new Color();
 
@@ -36,15 +35,8 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
     public void SetButtonInteractive(bool isInteractive) => GetLabelButton().interactable = isInteractive;   
     public void AddLabelByCorrectOrder()
     {
-        if (labelCounts.Any(x => x == false))
-        {
-            AddLabel(labelCounts.FindIndex(x => x == false));
-        }
-        else
-        {
-            AddLabel(count);
-            count++;
-        }
+        numOrder = (labelCounts.Any(x => x == false)) ? labelCounts.FindIndex(x => x == false) : labelCounts.Count;
+        AddLabel(numOrder);
     }
     public void AddLabel(int numOrder)
     {
@@ -80,7 +72,6 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
             if (labelCounts.Count - 1 == number)
             {
                 labelCounts.RemoveAt(number);
-				count--;
             }
             else
             {
@@ -94,7 +85,7 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
         if (hide)
         {
              lastColor = GetLabelColor(labelName);
-             Color screenColor = ScreenColor.instance.GetScreenColor();
+             Color screenColor = ScreenManager.instance.GetScreenColor();
              SetLabelColor(labelName, screenColor);
         }
         else

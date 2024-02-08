@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class LedsFunctionality : MonoBehaviour
+public class LedsManager : MonoBehaviour
 {
-    public static LedsFunctionality instance;
+    public static LedsManager instance;
 
     void Awake() => instance = this;
     void Start() => LedOff();

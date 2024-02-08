@@ -12,25 +12,25 @@ namespace UBlockly
             switch (value)
             {
                 case "BLACK":
-                    ScreenColor.instance.SetColorBlack();
+                    ScreenManager.instance.SetColorBlack();
                     break;
                 case "RED":
-                    ScreenColor.instance.SetColorRed();
+                    ScreenManager.instance.SetColorRed();
                     break;
                 case "BLUE":
-                    ScreenColor.instance.SetColorBlue();
+                    ScreenManager.instance.SetColorBlue();
                     break;
                 case "YELLOW":
-                    ScreenColor.instance.SetColorYellow();
+                    ScreenManager.instance.SetColorYellow();
                     break;
                 case "GREEN":
-                    ScreenColor.instance.SetColorGreen();
+                    ScreenManager.instance.SetColorGreen();
                     break;
                 case "PURPLE":
-                    ScreenColor.instance.SetColorPurple();
+                    ScreenManager.instance.SetColorPurple();
                     break;
                 case "WHITE":
-                    ScreenColor.instance.SetColorWhite();
+                    ScreenManager.instance.SetColorWhite();
                     break;
             }
         }
@@ -45,7 +45,7 @@ namespace UBlockly
             yield return ctor;
             float value = ctor.Data.NumberValue.Value;
 
-            ScreenColor.instance.SetBrigthness(value);
+            ScreenManager.instance.SetBrigthness(value);
         }
     }
 
@@ -58,7 +58,7 @@ namespace UBlockly
             Number colorGreen = new Number(block.GetFieldValue("RGB_GREEN"));
             Number colorBlue = new Number(block.GetFieldValue("RGB_BLUE"));
 
-            ScreenColor.instance.SetColorRGB(colorRed.Value, colorGreen.Value, colorBlue.Value);
+            ScreenManager.instance.SetColorRGB(colorRed.Value, colorGreen.Value, colorBlue.Value);
             }
     }
 }
