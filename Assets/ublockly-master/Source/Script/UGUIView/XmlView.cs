@@ -90,27 +90,16 @@ namespace UBlockly.UGUI
         {
             m_SavePanel.SetActive(true);
             m_LoadPanel.SetActive(false);
-            DestroyAllLoadObjects();
-		}
-
-        protected virtual void DestroyAllLoadObjects()
-        {
-			for (int i = 1; i < m_ScrollContent.childCount; i++)
-			{
-				GameObject.Destroy(m_ScrollContent.GetChild(i).gameObject);
-			}
-		}
+        }
 
         protected virtual void HideSavePanel()
         {
             m_SavePanel.SetActive(false);
-			DestroyAllLoadObjects();
-		}
+        }
 
         protected virtual void ShowLoadPanel()
         {
-			DestroyAllLoadObjects();
-			m_LoadPanel.SetActive(true);
+            m_LoadPanel.SetActive(true);
             m_SavePanel.SetActive(false);
 
             string[] xmlFiles = Directory.GetFiles(GetSavePath());
@@ -128,8 +117,11 @@ namespace UBlockly.UGUI
         {
             m_LoadPanel.SetActive(false);
 
-			DestroyAllLoadObjects();
-		}
+            for (int i = 1; i < m_ScrollContent.childCount; i++)
+            {
+                GameObject.Destroy(m_ScrollContent.GetChild(i).gameObject);
+            }
+        }
 
         protected virtual void SaveXml()
         {
