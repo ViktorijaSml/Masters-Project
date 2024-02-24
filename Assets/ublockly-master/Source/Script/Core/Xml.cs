@@ -173,17 +173,12 @@ namespace UBlockly
             foreach(Transform label in displayText.transform)
             {
                 MonoBehaviour.Destroy(label.gameObject);
-			}
-
-			foreach (Transform label in displayText.transform)
-			{
 				var labelVariable = workspace.GetVariable(label.name);
 				VariableMap variables = new VariableMap(workspace);
-				Debug.Log(labelVariable.Name);
-
 
 				variables.DeleteVariable(labelVariable);
 			}
+
 		}
 
         /// <summary>
