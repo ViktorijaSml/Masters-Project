@@ -23,37 +23,37 @@
     },
     {
       "CategoryName": "LABEL",
-      "ColorHex": "#db856e",
+      "ColorHex": "#ec6a5c",
       "BlockTypePrefix": "label"
     },
     {
       "CategoryName": "SYSTEM",
-      "ColorHex": "#cf2525",
+      "ColorHex": "#22559c",
       "BlockTypePrefix": "system"
     },
     {
       "CategoryName": "EVENT",
-      "ColorHex": "#a14b48",
+      "ColorHex": "#fdc23e",
       "BlockTypePrefix": "event"
     },
     {
       "CategoryName": "WDT",
-      "ColorHex": "#aa6fd6",
+      "ColorHex": "#66cc00",
       "BlockTypePrefix": "wdt"
     },
     {
       "CategoryName": "RTC",
-      "ColorHex": "#7faaf0",
+      "ColorHex": "#ffcc00",
       "BlockTypePrefix": "rtc"
     },
     {
       "CategoryName": "SPEAKER",
-      "ColorHex": "#cefa8c",
+      "ColorHex": "#4f86c6",
       "BlockTypePrefix": "speaker"
     },
     {
       "CategoryName": "SCREEN",
-      "ColorHex": "#ffca4a",
+      "ColorHex": "#009900",
       "BlockTypePrefix": "screen"
     },
     {
@@ -63,42 +63,42 @@
     },
     {
       "CategoryName": "VARIABLE",
-      "ColorHex": "#8a9fc6",
+      "ColorHex": "#791e94",
       "BlockTypePrefix": "variables"
     },
     {
       "CategoryName": "PROCEDURE",
-      "ColorHex": "#a64c79",
+      "ColorHex": "#995ba5",
       "BlockTypePrefix": "procedures"
     },
     {
       "CategoryName": "LOGIC",
-      "ColorHex": "#47574d",
+      "ColorHex": "#22559c",
       "BlockTypePrefix": "logic"
     },
     {
       "CategoryName": "CONTROL",
-      "ColorHex": "#669966",
+      "ColorHex": "#51a69a",
       "BlockTypePrefix": "controls"
     },
     {
       "CategoryName": "COROUTINE",
-      "ColorHex": "#00a4e3",
+      "ColorHex": "#ee2560",
       "BlockTypePrefix": "coroutine"
     },
     {
       "CategoryName": "MATH",
-      "ColorHex": "#4668a5",
+      "ColorHex": "#30a9de",
       "BlockTypePrefix": "math"
     },
     {
       "CategoryName": "TEXT",
-      "ColorHex": "#f6546a",
+      "ColorHex": "#f17f42",
       "BlockTypePrefix": "text"
     },
     {
       "CategoryName": "LIST",
-      "ColorHex": "#ff8b42",
+      "ColorHex": "#2ec4b6",
       "BlockTypePrefix": "lists"
     }
   ]
