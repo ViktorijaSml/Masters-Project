@@ -8,6 +8,8 @@ TagManager:
   - Units
   - Label
   - UnitSimulation
+  - UnitsList
+  - DisplayText
   layers:
   - Default
   - TransparentFX

@@ -17,13 +17,13 @@ public class LabelBehaviour : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         get { return gameObject.GetComponent<TextMeshProUGUI>().color; }
         set { gameObject.GetComponent<TextMeshProUGUI>().color = value; }
     }
+
     private void Start()
     {
-        startPos = transform.localPosition;
         canvasGroup = GetComponentInParent<VerticalLayoutGroup>();
         rectTransform = GetComponent<RectTransform>();
+        startPos = transform.localPosition;
     }
-
     public void OnBeginDrag(PointerEventData eventData)
     {
 		RefreshCanvasGroup();

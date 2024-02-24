@@ -21,7 +21,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace UBlockly
@@ -102,6 +101,7 @@ namespace UBlockly
         /// <param name="workspace">The WOrkspace</param>
         public static List<string> DomToWorkspace(XmlNode xml, Workspace workspace)
         {
+            ResetAllData(workspace);
             List<string> newBlockIds = new List<string>(); // A list of block ids added by this call.
             var childCount = xml.ChildNodes.Count;
             int width = 0; // Not used in LTR.
@@ -152,10 +152,36 @@ namespace UBlockly
                 {
                     Xml.DomToUnit(xmlChild);
                 }
+                else if (string.Equals(name, "labels"))
+                {
+                    Xml.DomToLabel(xmlChild);
+                }
             }
             workspace.UpdateVariableStore(false);
             workspace.UpdateProcedureDB();
             return newBlockIds;
+        }
+
+        private static void ResetAllData(Workspace workspace)
+        {
+            GameObject displayText = LabelManager.instance.GetDisplayTextObject();
+            GameObject unitSlot = UnitsManager.instance.GetUnitSlot();
+            if (UnitsManager.instance.UnitSlotHasChildren())
+            {
+                MonoBehaviour.Destroy(unitSlot.transform.GetChild(1).gameObject);
+            }
+            foreach(Transform label in displayText.transform)
+            {
+                MonoBehaviour.Destroy(label.gameObject);
+                var labelVariable = workspace.GetVariable(label.name);
+                Debug.Log(labelVariable.Name);
+                if (!string.IsNullOrWhiteSpace(labelVariable.ToString()))
+                {
+                  //  variables.DeleteVariable(labelVariable);
+                }
+            }
+                VariableMap variables = new VariableMap(workspace);
+            variables.Clear();
         }
 
         /// <summary>
@@ -386,6 +412,10 @@ namespace UBlockly
             }
         }
 
+        /// <summary>
+        /// Converts XML data to a unit in the game.
+        /// </summary>
+        /// <param name="xmlUnit"> node that represents unit data</param>
         public static void DomToUnit(XmlNode xmlUnit)
         {
             string unitName = xmlUnit.GetAttribute("name");
@@ -395,13 +425,56 @@ namespace UBlockly
 
 			unitsBehavior.unitButton.onClick.Invoke();
 		}
-
+        /// <summary>
+        /// Retrieves the prefab of a unit based on its name.
+        /// </summary>
+        /// <param name="unitName">Name of the unit.</param>
+        /// <returns>The GameObject prefab of the specified unit, if found; otherwise, null.</returns>
         private static GameObject GetUnitPrefab(string unitName)
         {
 			return GameObject.FindGameObjectWithTag("UnitsList").transform.Cast<Transform>()
 				   .FirstOrDefault(unit => unit.name == unitName)?.gameObject;
 		}
 
+        /// <summary>
+        /// Converts XML data to a label.
+        /// </summary>
+        /// <param name="xmlLabel"> node that represents label data</param>
+        public static void DomToLabel(XmlNode xmlLabel)
+        {
+            int counter = 0;
+            List<bool> list = new List<bool>();
+            foreach(XmlNode xmlChild in xmlLabel.ChildNodes)
+            {
+                var text = xmlChild.GetAttribute("text");
+                var color = xmlChild.GetAttribute("color");
+                var name = xmlChild.InnerXml;
+                int number = int.Parse(name.Substring("Label".Length));
+                if (counter < number)
+                {
+                    for (int i = counter; i < number; i++)
+                    {
+                        list.Add(false);
+                        counter++;
+                    }
+                }
+                counter++;
+
+                list.Add(true);
+                SetLabelAtributes(text, color, LabelManager.instance.AddLabel(list.Count - 1));
+            }
+            LabelManager.instance.LabelList = list;
+        }
+        private static void SetLabelAtributes(string text, string color, GameObject addedLabel)
+        {
+            addedLabel.GetComponent<LabelBehaviour>().Text = text;
+            addedLabel.GetComponent<LabelBehaviour>().FontColor = ParseColor(color);
+        }
+        private static Color ParseColor (string colorInfo)
+        {
+            string[] rgba = colorInfo.Substring(5, colorInfo.Length - 6).Split(", ");
+            return new Color(float.Parse(rgba[0]), float.Parse(rgba[1]), float.Parse(rgba[2]), float.Parse(rgba[3]));
+        }
         /// <summary>
         /// Decode an XML block tag and create a block (and possibly sub blocks) on the workspace.
         /// </summary>

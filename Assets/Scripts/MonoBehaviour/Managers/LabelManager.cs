@@ -14,6 +14,7 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
     private List<bool> labelCounts = new List<bool>();
     private Color lastColor = new Color();
 
+    public List<bool> LabelList { set { labelCounts = value; } }
     private void Awake() => instance = this;
 
     public int GetLabelCount() => labelCounts.Count;
@@ -37,7 +38,7 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
         numOrder = (labelCounts.Any(x => x == false)) ? labelCounts.FindIndex(x => x == false) : labelCounts.Count;
         AddLabel(numOrder);
     }
-    public void AddLabel(int numOrder)
+    public GameObject AddLabel(int numOrder)
     {
         GameObject label = Instantiate(labelPrefab, Vector3.zero, Quaternion.identity);
         GameObject labelParent = GameObject.Find("DisplayText");
@@ -54,6 +55,7 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
         {
             labelCounts[numOrder] = true;
         }
+        return label;
     }
     public void BinFunctionality(GameObject obj)
     {
@@ -65,8 +67,7 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
     }
     public void RemoveLabel(GameObject obj)
     {
-            string numberPart = obj.name.Substring("Label".Length);
-            int number = int.Parse(numberPart);
+            int number = int.Parse(obj.name.Substring("Label".Length));
 
             if (labelCounts.Count - 1 == number)
             {
@@ -92,6 +93,7 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
             SetLabelColor(labelName, lastColor);
         }
     }
+    public GameObject GetDisplayTextObject() => GameObject.FindGameObjectWithTag("DisplayText");
     public void WriteText(string labelName, string text) => GameObject.Find(labelName).GetComponent<LabelBehaviour>().Text = text;
     public Color GetLabelColor (string labelName) => GameObject.Find(labelName).GetComponent<LabelBehaviour>().FontColor;
     public List<GameObject> GetAllLabels()
