@@ -19,7 +19,9 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace UBlockly
@@ -387,8 +389,19 @@ namespace UBlockly
         public static void DomToUnit(XmlNode xmlUnit)
         {
             string unitName = xmlUnit.GetAttribute("name");
-            Resources.Load<GameObject>("Units Images/" + unitName).gameObject.GetComponent<UnitsBehaviour>().unitButton.onClick.Invoke();
-        }
+
+            GameObject prefab = GetUnitPrefab(unitName);
+            UnitsBehaviour unitsBehavior = prefab.GetComponent<UnitsBehaviour>();
+
+			unitsBehavior.unitButton.onClick.Invoke();
+		}
+
+        private static GameObject GetUnitPrefab(string unitName)
+        {
+			return GameObject.FindGameObjectWithTag("UnitsList").transform.Cast<Transform>()
+				   .FirstOrDefault(unit => unit.name == unitName)?.gameObject;
+		}
+
         /// <summary>
         /// Decode an XML block tag and create a block (and possibly sub blocks) on the workspace.
         /// </summary>
