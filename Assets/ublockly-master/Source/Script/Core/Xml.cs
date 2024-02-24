@@ -173,16 +173,18 @@ namespace UBlockly
             foreach(Transform label in displayText.transform)
             {
                 MonoBehaviour.Destroy(label.gameObject);
-                var labelVariable = workspace.GetVariable(label.name);
-                Debug.Log(labelVariable.Name);
-                if (!string.IsNullOrWhiteSpace(labelVariable.ToString()))
-                {
-                  //  variables.DeleteVariable(labelVariable);
-                }
-            }
-                VariableMap variables = new VariableMap(workspace);
-            variables.Clear();
-        }
+			}
+
+			foreach (Transform label in displayText.transform)
+			{
+				var labelVariable = workspace.GetVariable(label.name);
+				VariableMap variables = new VariableMap(workspace);
+				Debug.Log(labelVariable.Name);
+
+
+				variables.DeleteVariable(labelVariable);
+			}
+		}
 
         /// <summary>
         /// Decode an XML DOM and create blocks on the workspace. Position the new 

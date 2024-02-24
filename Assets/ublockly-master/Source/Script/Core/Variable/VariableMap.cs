@@ -177,6 +177,8 @@ namespace UBlockly
         /// <param name="variable"> Variable to delete.</param>
         public void DeleteVariable(VariableModel variable)
         {
+            if (string.IsNullOrWhiteSpace(variable.Type)) return;
+
             var variableList = mVariableMap[variable.Type];
             foreach (var tempVar in variableList)
             {

@@ -431,11 +431,11 @@ namespace UBlockly.UGUI
         /// </summary>
         public abstract void FinishCheckBin(BlockView blockView);
 
-        #endregion
-        
-        #region Monobehavior calls
+		#endregion
 
-        private void Update()
+		#region MonoBehaviour calls
+
+		private void Update()
         {
 //            UpdatePickedBlockView();
         }
