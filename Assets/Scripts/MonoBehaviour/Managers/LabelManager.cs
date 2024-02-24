@@ -17,7 +17,6 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
     private void Awake() => instance = this;
 
     public int GetLabelCount() => labelCounts.Count;
-
     public bool AnyTrueInList() => labelCounts.Any(x => x == true);
 
     public void ShowBin(bool isDraging)
@@ -92,32 +91,33 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
         {
             SetLabelColor(labelName, lastColor);
         }
-    } 
-    public void WriteText(string labelName, string text)
-    {
-        GameObject label = GameObject.Find(labelName);
-        label.GetComponent<TextMeshProUGUI>().text = text;
-
     }
-    public Color GetLabelColor (string labelName)
+    public void WriteText(string labelName, string text) => GameObject.Find(labelName).GetComponent<LabelBehaviour>().Text = text;
+    public Color GetLabelColor (string labelName) => GameObject.Find(labelName).GetComponent<LabelBehaviour>().FontColor;
+    public List<GameObject> GetAllLabels()
     {
-        GameObject label = GameObject.Find(labelName);
-        return label.GetComponent<TextMeshProUGUI>().color;
+        GameObject label;
+        GameObject labelParent = GameObject.Find("DisplayText");
+        List<GameObject> labels = new List<GameObject>();
+        for (int index = 0; index< labelParent.transform.childCount; index++)
+        {
+            label = labelParent.transform.GetChild(index).gameObject;
+            if (label != null) 
+            {
+                labels.Add(label);
+            }
+        }
+        return labels;
     }
     public void SetLabelColorByRGB(string labelName, float red, float green, float blue)
     {
         red = Mathf.Clamp01(red / 255f);
         green = Mathf.Clamp01(green / 255f);
         blue = Mathf.Clamp01(blue / 255f);
-        GameObject label = GameObject.Find(labelName);
-
-        label.GetComponent<TextMeshProUGUI>().color = new Color(red, green, blue);
+        
+        GameObject.Find(labelName).GetComponent<LabelBehaviour>().FontColor = new Color(red, green, blue);
     }
-    public void SetLabelColor(string labelName, Color color) 
-    {
-        GameObject label = GameObject.Find(labelName);
-        label.GetComponent<TextMeshProUGUI>().color = color;
-    }
+    public void SetLabelColor(string labelName, Color color) => GameObject.Find(labelName).GetComponent<LabelBehaviour>().FontColor = color;
     public Color SetColorBlack() => new Color(0f, 0f, 0f);
     public Color SetColorRed() => new Color(255f, 0f, 0f);
     public Color SetColorBlue() => new Color(0f, 0f, 255f);

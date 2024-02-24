@@ -42,6 +42,15 @@ namespace UBlockly
             {
                 xml.AppendChild(BlockToDomWithXY(block, optNoId));
             }
+
+            if (UnitsManager.instance.UnitSlotHasChildren())
+            {
+                xml.AppendChild(UnitsToDom(UnitsManager.instance.GetActiveUnit().name));
+            }
+            if (LabelManager.instance.GetLabelCount() != 0)
+            {
+                xml.AppendChild(LabelsToDom(LabelManager.instance.GetAllLabels()));
+            }
             return xml;
         } 
         
@@ -137,6 +146,10 @@ namespace UBlockly
                     }
                     variablesFirst = false;
                 }
+                else if (string.Equals(name, "unit"))
+                {
+                    Xml.DomToUnit(xmlChild);
+                }
             }
             workspace.UpdateVariableStore(false);
             workspace.UpdateProcedureDB();
@@ -152,7 +165,7 @@ namespace UBlockly
         /// <returns> An array containing new block ids.</returns>
         public static List<string> AppendDomToWorkspace(XmlNode xml, Workspace workspace)
         {
-            // load the new blocks into theworkspace and get the ids of the ne blocks
+            // load the new blocks into theworkspace and get the ids of the new blocks
             var newBlockIds = Xml.DomToWorkspace(xml, workspace);
             return newBlockIds;
         }
@@ -175,6 +188,34 @@ namespace UBlockly
             return variables;
         }
 
+        /// <summary>
+        /// Encode an unit as XML.
+        /// </summary>
+        /// <param name="unitName"> Prefab name of the unit</param>
+        /// <returns> List of XML elements</returns>
+        public static XmlNode UnitsToDom(string unitName)
+        {
+            var unit = XmlUtil.CreateDom("unit");
+            unit.SetAttribute("name", unitName);
+            return unit;
+        }
+        /// <summary>
+        /// Encode labels as XML.
+        /// </summary>
+        /// <param name="labels">List of existing label GameObjects</param>
+        /// <returns> List of XML elements</returns>
+        public static XmlNode LabelsToDom(List<GameObject> labels)
+        {
+            var labelDom = XmlUtil.CreateDom("labels");
+            foreach (var label in labels)
+            {
+                var element = XmlUtil.CreateDom("label", null, label.name);
+                element.SetAttribute("text", label.GetComponent<LabelBehaviour>().Text);
+                element.SetAttribute("color", label.GetComponent<LabelBehaviour>().FontColor.ToString());
+                labelDom.AppendChild(element);
+            }
+            return labelDom;
+        }
         /// <summary>
         /// Encode a block subtree as XML with XY coordinates.
         /// </summary>
@@ -343,7 +384,11 @@ namespace UBlockly
             }
         }
 
-
+        public static void DomToUnit(XmlNode xmlUnit)
+        {
+            string unitName = xmlUnit.GetAttribute("name");
+            Resources.Load<GameObject>("Units Images/" + unitName).gameObject.GetComponent<UnitsBehaviour>().unitButton.onClick.Invoke();
+        }
         /// <summary>
         /// Decode an XML block tag and create a block (and possibly sub blocks) on the workspace.
         /// </summary>

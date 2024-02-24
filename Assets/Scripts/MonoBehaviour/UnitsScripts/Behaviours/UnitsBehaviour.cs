@@ -1,10 +1,9 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UnitsBehaviour : MonoBehaviour
 {
-    private Button unitButton;
+    public Button unitButton;
     private GameObject unitSimulation, objectPrefab, unitSlot;
    [HideInInspector] public bool disableCreateObject;
 

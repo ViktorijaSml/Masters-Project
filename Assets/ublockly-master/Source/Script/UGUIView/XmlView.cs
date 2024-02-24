@@ -21,7 +21,6 @@ using System;
 using System.Collections;
 using System.IO;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
@@ -88,16 +87,15 @@ namespace UBlockly.UGUI
 
         protected virtual void ShowSavePanel()
         {
-            DestroyAllLoadObjects();
 
 			m_SavePanel.SetActive(true);
+            DestroyAllLoadObjects();
             m_LoadPanel.SetActive(false);
         }
 
         protected virtual void HideSavePanel()
         {
             DestroyAllLoadObjects();
-
 			m_SavePanel.SetActive(false);
         }
 

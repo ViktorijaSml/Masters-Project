@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,7 +8,15 @@ public class LabelBehaviour : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     private Vector3 startPos;
     private VerticalLayoutGroup canvasGroup;
     private RectTransform rectTransform;
-
+    public string Text {
+        get { return gameObject.GetComponent<TextMeshProUGUI>().text; }
+        set { gameObject.GetComponent<TextMeshProUGUI>().text = value; }
+    }
+    public Color FontColor
+    {
+        get { return gameObject.GetComponent<TextMeshProUGUI>().color; }
+        set { gameObject.GetComponent<TextMeshProUGUI>().color = value; }
+    }
     private void Start()
     {
         startPos = transform.localPosition;
