@@ -181,6 +181,7 @@ namespace UBlockly
         /// Resets all data in the workspace
         /// </summary>
         /// <param name="workspace"> The workspace to add to.</param>
+        /*
         private static void ResetAllData(Workspace workspace)
         {
             GameObject displayText = LabelManager.instance.GetDisplayTextObject();
@@ -199,15 +200,39 @@ namespace UBlockly
                 workspace.UpdateVariableStore(false);
             }
 		}
+        */
 
-        /// <summary>
-        /// Decode an XML DOM and create blocks on the workspace. Position the new 
-        /// blocks immediately below prior blocks,aligned by theri starting edge.
-        /// </summary>
-        /// <param name="xml"> The XML DOM.</param>
-        /// <param name="workspace"> The workspace to add to.</param>
-        /// <returns> An array containing new block ids.</returns>
-        public static List<string> AppendDomToWorkspace(XmlNode xml, Workspace workspace)
+
+		public static void ResetAllData(Workspace workspace)
+		{
+			GameObject displayText = LabelManager.instance.GetDisplayTextObject();
+			GameObject unitSlot = UnitsManager.instance.GetUnitSlot();
+			if (UnitsManager.instance.UnitSlotHasChildren())
+			{
+				MonoBehaviour.Destroy(unitSlot.transform.GetChild(1).gameObject);
+			}
+			foreach (Transform label in displayText.transform)
+			{
+				MonoBehaviour.Destroy(label.gameObject);
+				var labelVariable = workspace.GetVariable(label.name);
+				VariableMap variables = new VariableMap(workspace);
+
+				if (!string.IsNullOrWhiteSpace(labelVariable.Type))
+				{
+					variables.DeleteVariable(labelVariable);
+				}
+			}
+
+		}
+
+		/// <summary>
+		/// Decode an XML DOM and create blocks on the workspace. Position the new 
+		/// blocks immediately below prior blocks,aligned by theri starting edge.
+		/// </summary>
+		/// <param name="xml"> The XML DOM.</param>
+		/// <param name="workspace"> The workspace to add to.</param>
+		/// <returns> An array containing new block ids.</returns>
+		public static List<string> AppendDomToWorkspace(XmlNode xml, Workspace workspace)
         {
             // load the new blocks into theworkspace and get the ids of the new blocks
             var newBlockIds = Xml.DomToWorkspace(xml, workspace);

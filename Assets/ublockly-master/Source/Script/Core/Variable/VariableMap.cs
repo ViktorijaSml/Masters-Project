@@ -139,7 +139,7 @@ namespace UBlockly
                                         + variable.Type + " which conflicts with the passed in " +
                                         "type, " + optType + ".");
                 }
-                if (!string.IsNullOrEmpty(optId) && !string.Equals(variable.ID, optId))
+                if (!string.IsNullOrEmpty(optId) && !string.Equals(variable.ID, optId) && !name.Contains("Label"))
                 {
                     throw new Exception("Variable " + name + " is already in use and its id is "
                                         + variable.ID + " which conflicts with the passed in " +
@@ -177,8 +177,6 @@ namespace UBlockly
         /// <param name="variable"> Variable to delete.</param>
         public void DeleteVariable(VariableModel variable)
         {
-            if (string.IsNullOrWhiteSpace(variable.Type)) return;
-
             var variableList = mVariableMap[variable.Type];
             foreach (var tempVar in variableList)
             {
