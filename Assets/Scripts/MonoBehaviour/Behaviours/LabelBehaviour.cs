@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,7 +24,9 @@ public class LabelBehaviour : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         canvasGroup = GetComponentInParent<VerticalLayoutGroup>();
         rectTransform = GetComponent<RectTransform>();
         startPos = transform.localPosition;
-    }
+	}
+
+
     public void OnBeginDrag(PointerEventData eventData)
     {
 		RefreshCanvasGroup();

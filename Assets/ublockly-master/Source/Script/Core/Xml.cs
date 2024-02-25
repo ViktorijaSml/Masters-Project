@@ -201,7 +201,6 @@ namespace UBlockly
 					variables.DeleteVariable(labelVariable);
 				}
 			}
-
 		}
 
 		/// <summary>

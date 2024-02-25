@@ -17,6 +17,7 @@ limitations under the License.
 ****************************************************************************/
 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +35,7 @@ namespace UBlockly.UGUI
             get { return mField as FieldDropdown; }
         }
 
-        protected override void OnInit()
+		protected override void OnInit()
         {
             m_ItemPrefab.GetComponent<Toggle>().group.allowSwitchOff = true;
             
@@ -53,7 +54,13 @@ namespace UBlockly.UGUI
                 else toggle.isOn = false;
                 
                 mToggleItems.Add(toggle);
-            }
+
+
+				if (!LabelManager.instance.GetAllLabels().Any(item => item.name == option.Text))
+				{
+					Destroy(itemObj);
+				}
+			}
             
             AddCloseEvent(() =>
             {
