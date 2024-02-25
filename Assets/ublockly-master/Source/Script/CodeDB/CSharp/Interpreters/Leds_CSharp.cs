@@ -5,7 +5,7 @@ namespace UBlockly
     {
         protected override void Execute(Block block)
         {
-            LedsManager.instance.LedOn();
+            LedManager.instance.LedOn();
         }
     }
 
@@ -14,7 +14,7 @@ namespace UBlockly
     {
         protected override void Execute(Block block)
         {
-            LedsManager.instance.LedOff();
+            LedManager.instance.LedOff();
         }
     }
 }

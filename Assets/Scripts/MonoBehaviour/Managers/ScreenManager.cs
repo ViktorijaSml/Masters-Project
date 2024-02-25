@@ -6,6 +6,12 @@ public class ScreenManager : MonoBehaviour
     public static ScreenManager instance;
     private Image imageScreen;
     private Color backgroundColor;
+
+    public Color ScreenColor 
+    { 
+        get { return backgroundColor; }  
+        set { imageScreen.color = value; }  
+    }
     void Awake()
     {
         instance = this;
@@ -18,7 +24,6 @@ public class ScreenManager : MonoBehaviour
     
     // U setBrigthness i setColor moramo spremat u backgroundColor kako bi mogli sacuvat taj broj i mijenat
     // samo tu odredenu stvar
-    public Color GetScreenColor() => backgroundColor;
     public void SetBrigthness(float brightness)
     {
         brightness = Mathf.Clamp01(brightness / 255f);

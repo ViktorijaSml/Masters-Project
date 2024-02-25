@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace UBlockly
@@ -37,21 +38,28 @@ namespace UBlockly
         public static XmlNode WorkspaceToDom(Workspace workspace, bool optNoId = false)
         {
             var xml = XmlUtil.CreateDom("xml");
+            //add variable data
             xml.AppendChild(VariablesToDom(workspace.GetAllVariables()));
+            //add block data
             var blocks = workspace.GetTopBlocks(true);
             foreach (var block in blocks)
             {
                 xml.AppendChild(BlockToDomWithXY(block, optNoId));
             }
-
+            //add unit data
             if (UnitsManager.instance.UnitSlotHasChildren())
             {
                 xml.AppendChild(UnitsToDom(UnitsManager.instance.GetActiveUnit().name));
             }
+            //add labels data
             if (LabelManager.instance.GetLabelCount() != 0)
             {
                 xml.AppendChild(LabelsToDom(LabelManager.instance.GetAllLabels()));
             }
+            //add led data
+            xml.AppendChild(LedToDom(LedManager.instance.isLedActive()));
+            //add screen data
+            xml.AppendChild(ScreenToDom(ScreenManager.instance.ScreenColor));
             return xml;
         } 
         
@@ -156,12 +164,23 @@ namespace UBlockly
                 {
                     Xml.DomToLabel(xmlChild);
                 }
+                else if (string.Equals(name, "led"))
+                {
+                    Xml.DomToLed(xmlChild);
+                }
+                else if (string.Equals(name, "screen"))
+                {
+                    Xml.DomToScreen(xmlChild);
+                }
             }
             workspace.UpdateVariableStore(false);
             workspace.UpdateProcedureDB();
             return newBlockIds;
         }
-
+        /// <summary>
+        /// Resets all data in the workspace
+        /// </summary>
+        /// <param name="workspace"> The workspace to add to.</param>
         private static void ResetAllData(Workspace workspace)
         {
             GameObject displayText = LabelManager.instance.GetDisplayTextObject();
@@ -172,13 +191,13 @@ namespace UBlockly
             }
             foreach(Transform label in displayText.transform)
             {
-                MonoBehaviour.Destroy(label.gameObject);
+                LabelManager.instance.RemoveLabel(label.gameObject);
 				var labelVariable = workspace.GetVariable(label.name);
 				VariableMap variables = new VariableMap(workspace);
-
-				variables.DeleteVariable(labelVariable);
-			}
-
+                variables.DeleteVariable(labelVariable);
+                workspace.DeleteVariableInternal(labelVariable);
+                workspace.UpdateVariableStore(false);
+            }
 		}
 
         /// <summary>
@@ -240,6 +259,30 @@ namespace UBlockly
                 labelDom.AppendChild(element);
             }
             return labelDom;
+        }
+
+        /// <summary>
+        /// Encode led as XML.
+        /// </summary>
+        /// <param name="value">Bool value that represents is Led actives</param>
+        /// <returns> List of XML elements</returns>
+        public static XmlNode LedToDom(bool value)
+        {
+            var led = XmlUtil.CreateDom("led");
+            led.SetAttribute("isActive", value.ToString());
+            return led;
+        }
+
+        /// <summary>
+        /// Encode screen as XML.
+        /// </summary>
+        /// <param name="screenColor">Color (r,g,b,brightness) of the Screen object</param>
+        /// <returns> List of XML elements</returns>
+        public static XmlNode ScreenToDom(Color screenColor)
+        {
+            var screen = XmlUtil.CreateDom("screen");
+            screen.SetAttribute("BackgroundColor", screenColor.ToString());
+            return screen;
         }
         /// <summary>
         /// Encode a block subtree as XML with XY coordinates.
@@ -422,16 +465,6 @@ namespace UBlockly
 
 			unitsBehavior.unitButton.onClick.Invoke();
 		}
-        /// <summary>
-        /// Retrieves the prefab of a unit based on its name.
-        /// </summary>
-        /// <param name="unitName">Name of the unit.</param>
-        /// <returns>The GameObject prefab of the specified unit, if found; otherwise, null.</returns>
-        private static GameObject GetUnitPrefab(string unitName)
-        {
-			return GameObject.FindGameObjectWithTag("UnitsList").transform.Cast<Transform>()
-				   .FirstOrDefault(unit => unit.name == unitName)?.gameObject;
-		}
 
         /// <summary>
         /// Converts XML data to a label.
@@ -462,11 +495,61 @@ namespace UBlockly
             }
             LabelManager.instance.LabelList = list;
         }
+
+        /// <summary>
+        /// Converts XML data to led.
+        /// </summary>
+        /// <param name="xmlLed"> node that represents led data</param>
+        public static void DomToLed(XmlNode xmlLed)
+        {
+            string ledValue = xmlLed.GetAttribute("isActive");
+
+            if (bool.Parse(ledValue))
+            {
+                LedManager.instance.LedOn();
+            }
+            else
+            {
+                LedManager.instance.LedOff();
+            }
+        }
+
+        /// <summary>
+        /// Converts XML data to screen.
+        /// </summary>
+        /// <param name="xmlScreen"> node that represents screen data</param>
+        public static void DomToScreen(XmlNode xmlScreen)
+        {
+            string screenColor = xmlScreen.GetAttribute("BackgroundColor");
+            ScreenManager.instance.ScreenColor = ParseColor(screenColor);
+        }
+
+        /// <summary>
+        /// Sets Label text and fontcolor atributes
+        /// </summary>
+        /// <param name="text">Text that the label shows.</param>
+        /// <param name="color">Color of label text</param>
+        /// <param name="addedLabel">Label object which atributes are being set</param>
         private static void SetLabelAtributes(string text, string color, GameObject addedLabel)
         {
             addedLabel.GetComponent<LabelBehaviour>().Text = text;
             addedLabel.GetComponent<LabelBehaviour>().FontColor = ParseColor(color);
         }
+        /// <summary>
+        /// Retrieves the prefab of a unit based on its name.
+        /// </summary>
+        /// <param name="unitName">Name of the unit.</param>
+        /// <returns>The GameObject prefab of the specified unit, if found; otherwise, null.</returns>
+        private static GameObject GetUnitPrefab(string unitName)
+        {
+			return GameObject.FindGameObjectWithTag("UnitsList").transform.Cast<Transform>()
+				   .FirstOrDefault(unit => unit.name == unitName)?.gameObject;
+		}
+        /// <summary>
+        /// Parses string data to Color
+        /// </summary>
+        /// <param name="colorInfo">String data that needs to be parsed.</param>
+        /// <returns>Parsed Color data</returns>
         private static Color ParseColor (string colorInfo)
         {
             string[] rgba = colorInfo.Substring(5, colorInfo.Length - 6).Split(", ");

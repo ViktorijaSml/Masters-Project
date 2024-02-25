@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class LedsManager : MonoBehaviour
+public class LedManager : MonoBehaviour
 {
-    public static LedsManager instance;
+    public static LedManager instance;
 
     void Awake() => instance = this;
     void Start() => LedOff();
@@ -12,4 +12,7 @@ public class LedsManager : MonoBehaviour
 
     // Turn the LED off
     public void LedOff() => gameObject.SetActive(false);
+
+    public bool isLedActive() => gameObject.activeSelf;
+
 }

@@ -1,4 +1,6 @@
 using System;
+using UBlockly;
+using UBlockly.UGUI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,10 +22,13 @@ public static class SystemManager
             {
                 GameObject label = GameObject.Find("Label" + i);
                 LabelManager.instance.RemoveLabel(label);
+                var labelVariable = BlocklyUI.WorkspaceView.Workspace.GetVariable(label.name);
+                VariableMap variables = new VariableMap(BlocklyUI.WorkspaceView.Workspace);
+                variables.DeleteVariable(labelVariable);
             }
         }
         //Turn of the led
-        LedsManager.instance.LedOff();
+        LedManager.instance.LedOff();
         //Reset speaker
         SpeakerManager.instance.SetVolume(0.5f);
         SpeakerManager.instance.ResetAudioClips();

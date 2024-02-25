@@ -85,7 +85,7 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
         if (hide)
         {
              lastColor = GetLabelColor(labelName);
-             Color screenColor = ScreenManager.instance.GetScreenColor();
+             Color screenColor = ScreenManager.instance.ScreenColor;
              SetLabelColor(labelName, screenColor);
         }
         else
