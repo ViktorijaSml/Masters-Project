@@ -55,11 +55,6 @@ namespace UBlockly.UGUI
                 
                 mToggleItems.Add(toggle);
 
-
-				if (!LabelManager.instance.GetAllLabels().Any(item => item.name == option.Text))
-				{
-					Destroy(itemObj);
-				}
 			}
             
             AddCloseEvent(() =>
