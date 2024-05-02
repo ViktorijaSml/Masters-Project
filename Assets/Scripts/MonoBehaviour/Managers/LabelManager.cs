@@ -10,7 +10,8 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
     [SerializeField] GameObject binArea;
     public static LabelManager instance;
     public GameObject labelPrefab;
-    private int numOrder = 0; 
+    private int numOrder = 0;
+    [SerializeField]
     private List<bool> labelCounts = new List<bool>();
     private Color lastColor = new Color();
 
@@ -67,19 +68,28 @@ public class LabelManager : MonoBehaviour, IShowable, IInteractible
     }
     public void RemoveLabel(GameObject obj)
     {
-            int number = int.Parse(obj.name.Substring("Label".Length));
+        int number = int.Parse(obj.name.Substring("Label".Length));
 
-            if (labelCounts.Count - 1 == number)
-            {
-                labelCounts.RemoveAt(number);
-            }
-            else
-            {
-                labelCounts[number] = false;
-            }
-			BlocklyUI.WorkspaceView.Workspace.DeleteVariable(obj.name);
-			Destroy(obj);
+        //if label is last in the list remove the last element, else just put false value in the list
+        if (labelCounts.Count - 1 == number)
+        {
+            labelCounts.RemoveAt(number);
+        }
+        else
+        {
+            labelCounts[number] = false;
+        }
+
+		BlocklyUI.WorkspaceView.Workspace.DeleteVariable(obj.name);
+		Destroy(obj);
+        
+        //check for case when you have only false values in the list
+        if (!AnyTrueInList())
+        {
+            ResetList();
+        }
     }
+    private void ResetList()=> labelCounts.Clear();
     public void HideLabel(bool hide, string labelName)
     {
         if (hide)

@@ -20,9 +20,11 @@ limitations under the License.
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace UBlockly
 {
@@ -470,33 +472,63 @@ namespace UBlockly
 		}
 
         /// <summary>
-        /// Converts XML data to a label.
+        /// Converts XML data to labels.
         /// </summary>
         /// <param name="xmlLabel"> node that represents label data</param>
         public static void DomToLabel(XmlNode xmlLabel)
         {
-            int counter = 0;
-            List<bool> list = new List<bool>();
-            foreach(XmlNode xmlChild in xmlLabel.ChildNodes)
-            {
-                var text = xmlChild.GetAttribute("text");
-                var color = xmlChild.GetAttribute("color");
-                var name = xmlChild.InnerXml;
-                int number = int.Parse(name.Substring("Label".Length));
-                if (counter < number)
-                {
-                    for (int i = counter; i < number; i++)
-                    {
-                        list.Add(false);
-                        counter++;
-                    }
-                }
-                counter++;
 
-                list.Add(true);
-                SetLabelAtributes(text, color, LabelManager.instance.AddLabel(list.Count - 1));
+            List<bool> numOrderList = new List<bool>(); //model list for number order algorithm (see LabelManager)
+
+            List<int> numberOrder = SortLabelNumbers(xmlLabel);
+
+            List<XmlNode> allXmlNodes = GetAllXmlNodes(xmlLabel);
+
+            for (int i = 0; i <= numberOrder.Last(); i++)
+            {
+                bool found = allXmlNodes.Any(node => node.InnerXml.EndsWith("Label" + i));
+                numOrderList.Add(found);
             }
-            LabelManager.instance.LabelList = list;
+
+            foreach (XmlNode xmlChild in xmlLabel.ChildNodes) //for every label saved in xml
+            {
+                //get data 
+                var labelText = xmlChild.GetAttribute("text");
+                var labelColor = xmlChild.GetAttribute("color");
+                var labelName = xmlChild.InnerXml;
+                int labelOrderNumber = int.Parse(labelName.Substring("Label".Length));
+
+                SetLabelAtributes(labelText, labelColor, LabelManager.instance.AddLabel(labelOrderNumber));
+            }
+
+            //asign the model list to the real one 
+            LabelManager.instance.LabelList = numOrderList;
+        }
+
+        private static List<int> SortLabelNumbers(XmlNode xmlLabel)
+        {
+            List<int> numberOrder = new List<int>();
+            for (int i = 0; i < xmlLabel.ChildNodes.Count; i++)
+            {
+                int getNumber = int.Parse(xmlLabel.ChildNodes[i].InnerXml.Substring("Label".Length));
+                numberOrder.Add(getNumber);
+            }
+            numberOrder.Sort();
+
+            return numberOrder;
+        }
+
+        private static List<XmlNode> GetAllXmlNodes(XmlNode xmlLabel)
+        {
+
+            List<XmlNode> xmlNodes = new List<XmlNode>();
+
+            foreach (XmlNode xmlChild in xmlLabel.ChildNodes) //for every label saved in xml
+            {
+                xmlNodes.Add(xmlChild);
+            }
+
+            return xmlNodes;
         }
 
         /// <summary>
