@@ -20,6 +20,8 @@ limitations under the License.
 using System;
 using System.Collections;
 using System.IO;
+using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -33,15 +35,32 @@ namespace UBlockly.UGUI
     {
         [SerializeField] protected Button m_SaveBtn;
         [SerializeField] protected Button m_LoadBtn;
+        [SerializeField] protected Button m_EditBtn;
+        [SerializeField] protected Button m_DeleteBtn;
+        [SerializeField] protected Button m_OpenNewBtn;
 
         [SerializeField] protected GameObject m_SavePanel;
         [SerializeField] protected InputField m_SaveNameInput;
         [SerializeField] protected Button m_SaveOkBtn;
+        [SerializeField] protected GameObject m_SaveErrorObject;
 
         [SerializeField] protected GameObject m_LoadPanel;
         [SerializeField] protected RectTransform m_ScrollContent;
-        [SerializeField] protected GameObject m_XmlBtnPrefab;
+        [SerializeField] protected GameObject m_XmlOptionPrefab;
+        [SerializeField] protected GameObject m_ConfirmDialogPrefab;
 
+
+        private bool mIsEdit = false;
+        private string mOriginalName;
+        protected string mSavePath;
+        private TMP_Text mErrorMsg;
+
+        private static readonly Regex FilenameRegex = new Regex("^[a-zA-Z0-9_]*$", RegexOptions.Compiled);
+
+        protected bool IsEdit
+        {
+            get { return mIsEdit; }
+        }
         protected bool mIsSavePanelShow
         {
             get { return m_SavePanel.activeInHierarchy; }
@@ -52,7 +71,6 @@ namespace UBlockly.UGUI
             get { return m_LoadPanel.activeInHierarchy; }
         }
         
-        protected string mSavePath;
 
         protected string GetSavePath()
         {
@@ -72,6 +90,7 @@ namespace UBlockly.UGUI
 
             m_SaveBtn.onClick.AddListener(() =>
             {
+                mIsEdit = false;
                 if (!mIsSavePanelShow) ShowSavePanel();
                 else HideSavePanel();
             });
@@ -81,14 +100,21 @@ namespace UBlockly.UGUI
                 if (!mIsLoadPanelShow) ShowLoadPanel();
                 else HideLoadPanel();
             });
-            
-            m_SaveOkBtn.onClick.AddListener(SaveXml);
+
+            m_OpenNewBtn.onClick.AddListener(() => {
+                HideLoadPanel();
+                BlocklyUI.WorkspaceView.CleanViews();
+                Xml.ResetAllData(BlocklyUI.WorkspaceView.Workspace);
+            });
+            m_SaveOkBtn.onClick.AddListener(EditOrSaveXml);
+            mErrorMsg = m_SaveErrorObject.GetComponent<TMP_Text>();
         }
 
         protected virtual void ShowSavePanel()
         {
-
 			m_SavePanel.SetActive(true);
+            m_SaveNameInput.text = null;
+            mErrorMsg.text = "";
             DestroyAllLoadObjects();
             m_LoadPanel.SetActive(false);
         }
@@ -96,7 +122,7 @@ namespace UBlockly.UGUI
         protected virtual void HideSavePanel()
         {
             DestroyAllLoadObjects();
-			m_SavePanel.SetActive(false);
+            m_SavePanel.SetActive(false);
         }
 
         protected virtual void ShowLoadPanel()
@@ -110,21 +136,63 @@ namespace UBlockly.UGUI
             for (int i = 0; i < xmlFiles.Length; i++)
             {
                 string fileName = Path.GetFileNameWithoutExtension(xmlFiles[i]);
-                GameObject btnXml = GameObject.Instantiate(m_XmlBtnPrefab, m_ScrollContent, false);
-                btnXml.SetActive(true);
+                GameObject optionXml = GameObject.Instantiate(m_XmlOptionPrefab, m_ScrollContent, false);
+
+                GameObject btnEdit = optionXml.transform.GetChild(0).gameObject;
+                GameObject btnXml = optionXml.transform.GetChild(1).gameObject;
+                GameObject btnDelete = optionXml.transform.GetChild(2).gameObject;
+
+                optionXml.SetActive(true);
+
+                //Open file feature
                 btnXml.GetComponentInChildren<Text>().text = fileName;
                 btnXml.GetComponent<Button>().onClick.AddListener(() => LoadXml(fileName));
+
+                //Edit feature
+                btnEdit.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    mIsEdit = true;
+                    mOriginalName = fileName;
+                    if (!mIsSavePanelShow) ShowSavePanel();
+                    else HideSavePanel();
+                } );
+
+                //Delete feature
+                btnDelete.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    HideLoadPanel();
+                    GameObject confirmDialog = GameObject.Instantiate(m_ConfirmDialogPrefab, this.transform, false);
+                    confirmDialog.transform.SetAsLastSibling();
+                    ConfirmActionDialog confirmDialogClass = confirmDialog.GetComponent<ConfirmActionDialog>();
+
+                    if (confirmDialog != null)
+                    {
+                        confirmDialogClass.Question = "Are you sure you want to delete this xml file?";
+                        confirmDialogClass.OnConfirm = () =>
+                        {
+                            DeleteXml(fileName);
+                            RemoveConfirmDialog(confirmDialog);
+                        };
+                        confirmDialogClass.OnCancel = () =>
+                        {
+                            RemoveConfirmDialog(confirmDialog);
+                        };
+                    }
+                });
             }
+        }
+
+        protected virtual void RemoveConfirmDialog(GameObject confirmDialog)
+        {
+            Destroy(confirmDialog);
+            ShowLoadPanel();
         }
 
         protected virtual void HideLoadPanel()
         {
             DestroyAllLoadObjects();
-
 			m_LoadPanel.SetActive(false);
-
             DestroyAllLoadObjects();
-
 		}
 
         protected virtual void DestroyAllLoadObjects()
@@ -135,24 +203,100 @@ namespace UBlockly.UGUI
 			}
 		}
 
-        protected virtual void SaveXml()
+        protected virtual void DeleteXml(string fileName)
+        {
+            string filePath = Path.Combine(GetSavePath(), fileName + ".xml");
+
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    File.Delete(filePath);
+                    Debug.Log($"File {fileName}.xml deleted successfully.");
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Failed to delete: {fileName}.xml: {ex.Message}");
+                }
+            }
+            else
+            {
+                Debug.LogError($"File {fileName}.xml does not exist.");
+                return;
+            }
+        }
+        protected virtual void EditXml(string originalFileName)
+        {
+            string newFileName = m_SaveNameInput.text;
+            if (string.IsNullOrEmpty(newFileName))
+            {
+                ShowErrorMessage("File name cannot be empty.");
+                return;
+            }
+
+            string originalPath = Path.Combine(GetSavePath(), originalFileName + ".xml");
+            string newPath = Path.Combine(GetSavePath(), newFileName + ".xml");
+
+            if (File.Exists(newPath))
+            {
+                ShowErrorMessage($"A file named {newFileName}.xml already exists.");
+                return;
+            }
+            if (!FilenameRegex.IsMatch(newFileName))
+            {
+                ShowErrorMessage("Filename contains invalid characters. Use only alphanumeric characters and underscores.");
+                return; 
+            }
+            File.Move(originalPath, newPath);//move content of the file to a new one 
+
+            HideSavePanel();
+            ShowLoadPanel(); 
+        }
+        protected virtual void SaveNewXml() 
         {
             var dom = UBlockly.Xml.WorkspaceToDom(BlocklyUI.WorkspaceView.Workspace);
             string text = UBlockly.Xml.DomToText(dom);
             string path = GetSavePath();
+
+            if (!FilenameRegex.IsMatch(m_SaveNameInput.text))
+            {
+                ShowErrorMessage("Filename contains invalid characters. Use only alphanumeric characters and underscores.");
+                return;
+            }
+
             if (!string.IsNullOrEmpty(m_SaveNameInput.text))
+            {
                 path = System.IO.Path.Combine(path, m_SaveNameInput.text + ".xml");
+                if (File.Exists(path))
+                {
+                    ShowErrorMessage($"A file named {m_SaveNameInput.text}.xml already exists.");
+                    return;
+                }
+            }
             else
-                path = System.IO.Path.Combine(path, "Default.xml");
+            {
+                ShowErrorMessage("File name cannot be empty.");
+                return;
+            }
 
             System.IO.File.WriteAllText(path, text);
-            
+            Debug.Log($"Saved workspace successfully.");
             HideSavePanel();
         }
-
+        protected virtual void EditOrSaveXml()
+        {
+            if (mIsEdit)
+            {
+                EditXml(mOriginalName);
+            }
+            else
+            {
+                SaveNewXml();
+            }
+        }
         protected virtual void LoadXml(string fileName)
         {
-            StartCoroutine(AsyncLoadXml(fileName));
+           StartCoroutine(AsyncLoadXml(fileName));
         }
         
         IEnumerator AsyncLoadXml(string fileName)
@@ -180,6 +324,11 @@ namespace UBlockly.UGUI
             BlocklyUI.WorkspaceView.BuildViews();
             
             HideLoadPanel();
+        }
+        protected virtual void ShowErrorMessage(string msg)
+        {
+            Debug.LogError(msg);
+            mErrorMsg.text = msg;
         }
     }
 }

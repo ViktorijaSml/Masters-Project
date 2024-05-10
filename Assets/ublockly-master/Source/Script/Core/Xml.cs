@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Xml;
+using UBlockly.UGUI;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -195,13 +196,7 @@ namespace UBlockly
 			foreach (Transform label in displayText.transform)
 			{
 				MonoBehaviour.Destroy(label.gameObject);
-				var labelVariable = workspace.GetVariable(label.name);
-				VariableMap variables = new VariableMap(workspace);
-
-				if (!string.IsNullOrWhiteSpace(labelVariable.Type))
-				{
-					variables.DeleteVariable(labelVariable);
-				}
+                BlocklyUI.WorkspaceView.Workspace.DeleteVariable(label.name);
 			}
 		}
 
@@ -477,14 +472,12 @@ namespace UBlockly
         /// <param name="xmlLabel"> node that represents label data</param>
         public static void DomToLabel(XmlNode xmlLabel)
         {
-
             List<bool> numOrderList = new List<bool>(); //model list for number order algorithm (see LabelManager)
-
             List<int> numberOrder = SortLabelNumbers(xmlLabel);
 
             List<XmlNode> allXmlNodes = GetAllXmlNodes(xmlLabel);
 
-            for (int i = 0; i <= numberOrder.Last(); i++)
+            for (int i = 0; i <= numberOrder.Last(); i++)//updating the numOrderList 
             {
                 bool found = allXmlNodes.Any(node => node.InnerXml.EndsWith("Label" + i));
                 numOrderList.Add(found);
@@ -498,6 +491,7 @@ namespace UBlockly
                 var labelName = xmlChild.InnerXml;
                 int labelOrderNumber = int.Parse(labelName.Substring("Label".Length));
 
+                //instantiate the label
                 SetLabelAtributes(labelText, labelColor, LabelManager.instance.AddLabel(labelOrderNumber));
             }
 
@@ -520,14 +514,12 @@ namespace UBlockly
 
         private static List<XmlNode> GetAllXmlNodes(XmlNode xmlLabel)
         {
-
             List<XmlNode> xmlNodes = new List<XmlNode>();
 
-            foreach (XmlNode xmlChild in xmlLabel.ChildNodes) //for every label saved in xml
+            foreach (XmlNode xmlChild in xmlLabel.ChildNodes) 
             {
                 xmlNodes.Add(xmlChild);
             }
-
             return xmlNodes;
         }
 
