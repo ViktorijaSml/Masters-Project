@@ -53,9 +53,10 @@ namespace UBlockly.UGUI
         private bool mIsEdit = false;
         private string mOriginalName;
         protected string mSavePath;
+        private string mLastOpenedFile;
         private TMP_Text mErrorMsg;
 
-        private static readonly Regex FilenameRegex = new Regex("^[a-zA-Z0-9_]*$", RegexOptions.Compiled);
+        private static readonly Regex FilenameRegex = new Regex("^[a-zA-Z0-9_&]*$", RegexOptions.Compiled);
 
         protected bool IsEdit
         {
@@ -65,7 +66,6 @@ namespace UBlockly.UGUI
         {
             get { return m_SavePanel.activeInHierarchy; }
         }
-
         protected bool mIsLoadPanelShow
         {
             get { return m_LoadPanel.activeInHierarchy; }
@@ -103,17 +103,18 @@ namespace UBlockly.UGUI
 
             m_OpenNewBtn.onClick.AddListener(() => {
                 HideLoadPanel();
-                BlocklyUI.WorkspaceView.CleanViews();
-                Xml.ResetAllData(BlocklyUI.WorkspaceView.Workspace);
+                OpenNewFile();
             });
+
             m_SaveOkBtn.onClick.AddListener(EditOrSaveXml);
+
             mErrorMsg = m_SaveErrorObject.GetComponent<TMP_Text>();
         }
 
         protected virtual void ShowSavePanel()
         {
 			m_SavePanel.SetActive(true);
-            m_SaveNameInput.text = null;
+            m_SaveNameInput.text = mLastOpenedFile;
             mErrorMsg.text = "";
             DestroyAllLoadObjects();
             m_LoadPanel.SetActive(false);
@@ -153,6 +154,7 @@ namespace UBlockly.UGUI
                 {
                     mIsEdit = true;
                     mOriginalName = fileName;
+                    mLastOpenedFile = fileName;
                     if (!mIsSavePanelShow) ShowSavePanel();
                     else HideSavePanel();
                 } );
@@ -225,6 +227,7 @@ namespace UBlockly.UGUI
                 return;
             }
         }
+
         protected virtual void EditXml(string originalFileName)
         {
             string newFileName = m_SaveNameInput.text;
@@ -252,6 +255,7 @@ namespace UBlockly.UGUI
             HideSavePanel();
             ShowLoadPanel(); 
         }
+
         protected virtual void SaveNewXml() 
         {
             var dom = UBlockly.Xml.WorkspaceToDom(BlocklyUI.WorkspaceView.Workspace);
@@ -267,11 +271,12 @@ namespace UBlockly.UGUI
             if (!string.IsNullOrEmpty(m_SaveNameInput.text))
             {
                 path = System.IO.Path.Combine(path, m_SaveNameInput.text + ".xml");
-                if (File.Exists(path))
+                if (File.Exists(path) && mIsEdit)
                 {
                     ShowErrorMessage($"A file named {m_SaveNameInput.text}.xml already exists.");
                     return;
                 }
+
             }
             else
             {
@@ -280,9 +285,10 @@ namespace UBlockly.UGUI
             }
 
             System.IO.File.WriteAllText(path, text);
-            Debug.Log($"Saved workspace successfully.");
+            Debug.Log("Saved workspace successfully.");
             HideSavePanel();
         }
+
         protected virtual void EditOrSaveXml()
         {
             if (mIsEdit)
@@ -294,6 +300,7 @@ namespace UBlockly.UGUI
                 SaveNewXml();
             }
         }
+
         protected virtual void LoadXml(string fileName)
         {
            StartCoroutine(AsyncLoadXml(fileName));
@@ -322,9 +329,19 @@ namespace UBlockly.UGUI
             var dom = UBlockly.Xml.TextToDom(inputXml);
             UBlockly.Xml.DomToWorkspace(dom, BlocklyUI.WorkspaceView.Workspace);
             BlocklyUI.WorkspaceView.BuildViews();
-            
+            mLastOpenedFile = fileName;
             HideLoadPanel();
+            Debug.Log($"Loaded file {fileName} successfully.");
         }
+
+        protected virtual void OpenNewFile()
+        {
+            BlocklyUI.WorkspaceView.CleanViews();
+            Xml.ResetAllData(BlocklyUI.WorkspaceView.Workspace);
+            Debug.Log("Opened new (empty) workspace.");
+            mLastOpenedFile = null;
+        }
+
         protected virtual void ShowErrorMessage(string msg)
         {
             Debug.LogError(msg);
