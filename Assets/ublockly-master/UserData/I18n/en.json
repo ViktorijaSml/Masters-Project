@@ -1203,6 +1203,7 @@
   "EVENT_IS_RELEASED": "released",
   "EVENT_OBTAIN_BUTTON": "Obtain button",
   "EVENT_BUTTONS_PRESS": "A + B press",
+  "EVENT_LOOP": "Loop",
   //************Systemm Defines************/
   "SYSTEM_RESET": "System reset",
   //************Dual Button Unit Defines************/

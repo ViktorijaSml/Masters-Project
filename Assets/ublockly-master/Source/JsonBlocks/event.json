@@ -1,5 +1,29 @@
 [
   {
+    "type": "event_loop",
+    "message0": "%{BKY_EVENT_LOOP} %1 %2",
+    "args0": [
+      {
+        "type": "field_label",
+        "name": "LABEL",
+        "align": "RIGHT"
+      },
+      {
+        "type": "field_label",
+        "name": "EMPTYSPACE",
+        "align": "RIGHT"
+      }
+    ],
+    "message1": "%{BKY_CONTROLS_REPEAT_INPUT_DO} %1",
+    "args1": [
+      {
+        "type": "input_statement",
+        "name": "DO"
+      }
+    ],
+    "previousStatement": null
+  },
+  {
     "type": "event_buttonPress",
     "message0": "%{BKY_EVENT_BUTTON} %1 %2",
     "args0": [

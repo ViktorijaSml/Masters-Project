@@ -3,6 +3,26 @@ using UnityEngine;
 
 namespace UBlockly
 {
+    [CodeInterpreter(BlockType = "event_loop")]
+    public class Event_Loop : LoopCmdtor
+    {
+        protected override IEnumerator Execute(Block block)
+        {
+            ResetFlowState();
+
+            while (true)
+            {
+                yield return new WaitForSeconds(1 / 60);
+                yield return CSharp.Interpreter.StatementRun(block, "DO");
+
+                //reset flow control
+                if (NeedBreak) break;
+                if (NeedContinue) ResetFlowState();
+                if (CheckInfiniteLoop()) break;
+            }
+        }
+    }
+
     [CodeInterpreter(BlockType = "event_buttonPress")]
     public class Event_ButtonPress_Cmdtor : EnumeratorCmdtor
     {
