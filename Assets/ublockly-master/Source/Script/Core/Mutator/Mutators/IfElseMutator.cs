@@ -26,7 +26,7 @@ namespace UBlockly
     /// Mutator for the if/else if/else block. This class modifies the block model, but is not
     /// responsible for updating the view hierarchy or showing an editor to the user.
     /// </summary>
-    [MutatorClass(MutatorId = "controls_if_mutator")]
+    [MutatorClass(MutatorId = "logic_if_mutator")]
     public class IfElseMutator : Mutator
     {
         private const string ELSE_INPUT_NAME = "ELSE";

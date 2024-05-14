@@ -24,7 +24,7 @@ using System.Collections;
 
 namespace UBlockly
 {
-    [CodeInterpreter(BlockType = "controls_if")]
+    [CodeInterpreter(BlockType = "logic_if")]
     public class Controls_If_Cmdtor : EnumeratorCmdtor
     {
         protected override IEnumerator Execute(Block block)
@@ -52,7 +52,7 @@ namespace UBlockly
         }
     }
 
-    [CodeInterpreter(BlockType = "controls_ifelse")]
+    [CodeInterpreter(BlockType = "logic_ifelse")]
     public class Controls_IfElse_Cmdtor : Controls_If_Cmdtor
     {
     }

@@ -286,6 +286,7 @@ namespace UBlockly.UGUI
 
             System.IO.File.WriteAllText(path, text);
             Debug.Log("Saved workspace successfully.");
+            mLastOpenedFile = m_SaveNameInput.text;
             HideSavePanel();
         }
 
@@ -337,7 +338,7 @@ namespace UBlockly.UGUI
         protected virtual void OpenNewFile()
         {
             BlocklyUI.WorkspaceView.CleanViews();
-            Xml.ResetAllData(BlocklyUI.WorkspaceView.Workspace);
+            Xml.ResetAllData();
             Debug.Log("Opened new (empty) workspace.");
             mLastOpenedFile = null;
         }

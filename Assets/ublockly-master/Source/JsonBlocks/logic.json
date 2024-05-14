@@ -19,7 +19,7 @@
   },
 
   {
-    "type": "controls_if",
+    "type": "logic_if",
     "message0": "%{BKY_CONTROLS_IF_MSG_IF} %1",
     "args0": [
       {
@@ -39,12 +39,12 @@
     "nextStatement": null,
     "colour": "%{BKY_LOGIC_HUE}",
     "helpUrl": "%{BKY_CONTROLS_IF_HELPURL}",
-    "mutator": "controls_if_mutator",
+    "mutator": "logic_if_mutator",
     "extensions": ["controls_if_tooltip"]
   },
 
   {
-    "type": "controls_ifelse",
+    "type": "logic_ifelse",
     "message0": "%{BKY_CONTROLS_IF_MSG_IF} %1",
     "args0": [
       {

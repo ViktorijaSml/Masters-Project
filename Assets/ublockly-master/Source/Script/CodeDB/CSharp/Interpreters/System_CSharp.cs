@@ -1,3 +1,4 @@
+using UnityEngine;
 
 namespace UBlockly
 {
@@ -6,6 +7,7 @@ namespace UBlockly
     {
         protected override void Execute(Block block)
         {
+            Debug.Log("System reset..");
             SystemManager.SystemReset();
         }
     }
