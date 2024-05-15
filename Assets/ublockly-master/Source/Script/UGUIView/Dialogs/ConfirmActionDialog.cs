@@ -21,12 +21,18 @@ public class ConfirmActionDialog : MonoBehaviour
     {
         if (mConfirmButton != null)
         {
-            mConfirmButton.onClick.AddListener(() => OnConfirm?.Invoke());
+            mConfirmButton.onClick.AddListener(() => {
+                SoundManager.PlaySound(SoundName.ButtonPressUI);
+                OnConfirm?.Invoke(); 
+            });
         }
 
         if (mCancelButton != null)
         {
-            mCancelButton.onClick.AddListener(() => OnCancel?.Invoke());
+            mCancelButton.onClick.AddListener(() => {
+                SoundManager.PlaySound(SoundName.ButtonPressUI, 0.6f);
+                OnCancel?.Invoke(); 
+            });
         }
     }
 }

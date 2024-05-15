@@ -1218,7 +1218,7 @@
   "JOYSTICK_GET_REVERSE_X": "Get joystick Reverse X",
   "JOYSTICK_GET_REVERSE_Y": "Get joystick Reverse Y",
   "JOYSTICK_GET_ISPRESSED": "Get joystick is pressed",
-  "JOYSTICK_RETURN_BINARY": "(return 0 or 1)",
+  "JOYSTICK_RETURN_BINARY": "(return True or False)",
   //************Angle Unit Defines************/
   "ANGLE_GET": "Get angle value",
   //************Env4 Unit Defines************/

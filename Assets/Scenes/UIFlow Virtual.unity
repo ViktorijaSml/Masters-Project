@@ -268,6 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7b22c162c675648a27281a38894028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnitsSlot: {fileID: 196062147}
+  UnitsBack: {fileID: 94205312}
   UnitsSimulation: {fileID: 1938756700}
 --- !u!4 &69268552
 Transform:
@@ -562,19 +564,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 94205313}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 69268551}
-        m_TargetAssemblyTypeName: UnitsManager, Assembly-CSharp
-        m_MethodName: CloseUnits
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &94205313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1623,19 +1613,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 196062145}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 69268551}
-        m_TargetAssemblyTypeName: UnitsManager, Assembly-CSharp
-        m_MethodName: OpenUnits
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &225300633
 GameObject:
   m_ObjectHideFlags: 0
@@ -2441,19 +2419,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 277246387}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4839039300220499690}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &277246387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2823,7 +2789,7 @@ GameObject:
   - component: {fileID: 320418877}
   - component: {fileID: 320418879}
   m_Layer: 5
-  m_Name: Close
+  m_Name: BtnClose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2930,19 +2896,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 320418877}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4837358737966929132}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1001 &323759949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3602,8 +3556,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   binArea: {fileID: 1373021701}
-  labelPrefab: {fileID: 7286513890694573178, guid: e690ff70f5d5f7a4ba1d794098de169a, type: 3}
+  _labelButton: {fileID: 1438762328}
   labelCounts: 
+  labelPrefab: {fileID: 7286513890694573178, guid: e690ff70f5d5f7a4ba1d794098de169a, type: 3}
 --- !u!1001 &376780135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5771,6 +5726,7 @@ MonoBehaviour:
   m_BtnPause: {fileID: 7142114264617443360}
   m_BtnStop: {fileID: 9182021514617851719}
   m_BtnStep: {fileID: 4816207123085979687}
+  m_BtnRefresh: {fileID: 1647074559}
   m_ToggleASync: {fileID: 8173278854192850916}
   m_ToggleSync: {fileID: 6741567921511124972}
   m_ToggleCallstack: {fileID: 1512385493}
@@ -9021,7 +8977,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7223689911313161113, guid: 3afcd78b177000d4f8e39d4d2cb1edaa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3afcd78b177000d4f8e39d4d2cb1edaa, type: 3}
 --- !u!224 &868757812 stripped
 RectTransform:
@@ -13097,7 +13054,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.010898907, y: 0.0055227727}
+  m_AnchoredPosition: {x: 0.010898907, y: -0.007574372}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1212201541
@@ -13156,7 +13113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1212241485
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15196,19 +15153,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1438762326}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 370770992}
-        m_TargetAssemblyTypeName: LabelManager, Assembly-CSharp
-        m_MethodName: AddLabelByCorrectOrder
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1476446443
 GameObject:
   m_ObjectHideFlags: 0
@@ -15292,8 +15237,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 689322532}
   m_HandleRect: {fileID: 689322531}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.9999837
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -15761,7 +15706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.007507324}
+  m_AnchoredPosition: {x: 0, y: -0.018920898}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1516461477
@@ -17031,19 +16976,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1647074557}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1608019276}
-        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: ResetScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1658244028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19460,7 +19393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -263.9801, y: 174}
+  m_AnchoredPosition: {x: -263.98016, y: 174}
   m_SizeDelta: {x: -1073.41, y: -347.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1938756702
@@ -21195,7 +21128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -896.1696, y: 0}
+  m_AnchoredPosition: {x: -896.16956, y: 0}
   m_SizeDelta: {x: -1567.99, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2118627502
@@ -21320,7 +21253,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1009176875}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.99999505
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -22438,7 +22371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 56.09381, y: 0}
+  m_AnchoredPosition: {x: 56.09375, y: 0}
   m_SizeDelta: {x: -112.1875, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4628060384322432600
@@ -23242,6 +23175,8 @@ MonoBehaviour:
   m_EditBtn: {fileID: 1751441725}
   m_DeleteBtn: {fileID: 1088930875}
   m_OpenNewBtn: {fileID: 1361535379}
+  m_CloseBtn1: {fileID: 277246386}
+  m_CloseBtn2: {fileID: 320418879}
   m_SavePanel: {fileID: 4837358737966929132}
   m_SaveNameInput: {fileID: 4808347969701133954}
   m_SaveOkBtn: {fileID: 4806764197934563648}

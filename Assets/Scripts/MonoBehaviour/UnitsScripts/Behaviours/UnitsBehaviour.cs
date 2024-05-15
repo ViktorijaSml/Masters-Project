@@ -13,28 +13,23 @@ public class UnitsBehaviour : MonoBehaviour
 
 		unitButton = GetComponent<Button>();
 		unitSlot = UnitsManager.instance.GetUnitSlot();
-		// Provjerava ima li objekt sposobnost kreiranje vlastitog objekta.
-		// Odnosno, je li objekt kreiran 
+	
 		if (disableCreateObject == false)
 		{
-			// Ako objekt nije kreiran (nema jos modula dodanih),
-			// Dodaje se metoda koja će se pozvati pritiskom na tipku objekta:
-			// "Kreiraj mi taj objekt/modul"
 			unitButton.onClick.AddListener(() =>
 			{
-				Debug.Log("Unit added: " + this.name);
+                SoundManager.PlaySound(SoundName.BlockDragNDrop);
+                Debug.Log("Unit added: " + this.name);
 				CreateUnitObject();
-				UnitsManager.instance.CloseUnits(); //Makni Units prozor
+				UnitsManager.instance.CloseUnits(); 
 			});
 		}
 		else
 		{
-			//Ako je objekt kreiran (dodali smo modul),
-			//Makni prethodni Listener i dodaj novi sa novom metodom:
-			//Zatvori/Makni modul 
 			unitButton.onClick.RemoveAllListeners();
 			unitButton.onClick.AddListener(() =>
 			{
+				SoundManager.PlaySound(SoundName.ButtonPressUI, 0.6f);
 				Debug.Log("Unit deleted: " + this.name);
 				DestroyUnitObject();
 			});
@@ -45,7 +40,6 @@ public class UnitsBehaviour : MonoBehaviour
 
 	public void CreateUnitObject()
     {
-        // Stvaranje novog odabranog objekta
         GameObject unit = Instantiate(gameObject, Vector3.zero, Quaternion.identity);
 
         unit.transform.SetParent(unitSlot.transform, false);
@@ -57,7 +51,6 @@ public class UnitsBehaviour : MonoBehaviour
         unitSimulation.transform.SetParent (UnitsManager.instance.UnitsSimulation.transform, false);
         unitSimulation.gameObject.name = unitSimulation.gameObject.name.Replace("(Clone)", "");
 
-        // Postavljanje svojstava RectTransform za pravilno pozicioniranje i skaliranje
         unit.GetComponent<UnitsBehaviour>().unitSimulation = unitSimulation;
 
         RectTransform rectTransform = unit.GetComponent<RectTransform>();
@@ -73,7 +66,6 @@ public class UnitsBehaviour : MonoBehaviour
 
     public void DestroyUnitObject() 
     {
-        //this.GetComponent<IShowable>().ClearGarbage();
         Destroy(unitSimulation);
         Destroy(gameObject);
     }

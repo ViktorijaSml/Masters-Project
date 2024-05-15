@@ -36,7 +36,7 @@ namespace UBlockly.UGUI
         [SerializeField] protected GameObject m_BlockContentPrefab;
         [SerializeField] protected GameObject m_BinArea;
         protected List <IShowable> m_ShowableList;
- 
+        protected bool mIsBlockPicked;
 
 		protected void Start()
 		{
@@ -44,7 +44,7 @@ namespace UBlockly.UGUI
             {
 				m_MenuListActive.Add(true);
             }
-
+            mIsBlockPicked = false;
             m_ShowableList = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<IShowable>().ToList();
             m_ShowableList.AddRange(UnitsManager.instance.GetUnitsType());
         }
@@ -110,9 +110,21 @@ namespace UBlockly.UGUI
                 toggle.onValueChanged.AddListener((selected) =>
                 {
                     if (selected)
+                    {            
+                        SoundManager.PlaySound(SoundName.CategoryPress);
                         ShowBlockCategory(menuItem.name);
-                    else 
+                    }
+                    else
+                    {   if (!mIsBlockPicked)
+                        {
+                            SoundManager.PlaySound(SoundName.CategoryPress, 0.6f);
+                        }
+                        else
+                        {
+                            mIsBlockPicked = false;
+                        }
                         HideBlockCategory();
+                    }
                 });
                 mMenuList[category.CategoryName] = toggle;
             }
@@ -171,7 +183,6 @@ namespace UBlockly.UGUI
         {
             if (string.IsNullOrEmpty(mActiveCategory))
                 return;
-
             mRootList[mActiveCategory].SetActive(false);
             mMenuList[mActiveCategory].isOn = false;
             m_BlockScrollList.SetActive(false);
@@ -191,8 +202,13 @@ namespace UBlockly.UGUI
             }
         }
 
+        /// <summary>
+        /// Method for hiding block category when block is chosen.
+        /// </summary
         protected override void OnPickBlockView()
         {
+            SoundManager.PlaySound(SoundName.BlockDragNDrop);
+            mIsBlockPicked = true;
             HideBlockCategory();
         }
 

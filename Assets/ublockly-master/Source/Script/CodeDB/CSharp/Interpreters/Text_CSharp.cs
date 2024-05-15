@@ -45,11 +45,7 @@ namespace UBlockly
             CmdEnumerator ctor = CSharp.Interpreter.ValueReturn(block, "TEXT", new DataStruct(""));
             yield return ctor;
             DataStruct input = ctor.Data; 
-            //todo: 暂时用Debug.Log，后面根据UI输出框再定
-            UnityEngine.Debug.Log("c# print: " + input.ToString()); 
-              UnityEngine.Debug.Log("AAAAA: " + ctor.Data);
-              UnityEngine.Debug.Log("AAAAA: " + ctor.Cmdtor);
-              UnityEngine.Debug.Log("AAAAA: " + ctor.Current);
+            Debug.Log("c# print: " + input.ToString()); 
         }
     }
 

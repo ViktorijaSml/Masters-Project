@@ -17,7 +17,7 @@
     "type": "joystick_getIsPressed",
     "message0": "%{BKY_JOYSTICK_GET_ISPRESSED} %{BKY_JOYSTICK_RETURN_BINARY}",
     "args0": [],
-    "output": "Number",
+    "output": "Boolean",
     "inputsInline": true
   },
   {

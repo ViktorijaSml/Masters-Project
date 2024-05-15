@@ -66,49 +66,23 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         handle.anchoredPosition = Vector2.zero;
     }
 
-    private void Update()
-    {
-        for (int i = 0; i < Input.touchCount; i++)
-        {
-            Touch touch = Input.GetTouch(i);
-            Vector2 touchPosition = touch.position;
-            if (RectTransformUtility.RectangleContainsScreenPoint(handle, Input.mousePosition, cam))
-            {
-                switch (touch.phase)
-                {
-                    case TouchPhase.Began:
-                        _isDragging = false; 
-                        _pressTime = Time.time;
-                        _touchStartPosition = touchPosition;
-                        break;
-                    case TouchPhase.Moved:
-                        if(Vector2.Distance(touchPosition, _touchStartPosition) >= _tolerance)   
-                        {
-                            _isDragging = true; 
-                        }
-                        break;
-                    case TouchPhase.Stationary:
-                        if ( !_isDragging && Time.time - _pressTime >= 0.2f)
-                        {
-                            joystickPress.Invoke();
-                        }
-                        break;
-                    case TouchPhase.Ended:
-                    case TouchPhase.Canceled:
-                        _isDragging = false;
-                        break;
-                }
-            }
-        }
-
-    }
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-       // OnDrag(eventData); //forcing the user to drag the handle instead of it just appearing
+        // OnDrag(eventData); //forcing the user to drag the handle instead of it just appearing
+        if (RectTransformUtility.RectangleContainsScreenPoint(handle, Input.mousePosition, cam))
+        {
+            _pressTime = Time.time;
+            _touchStartPosition = eventData.position;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!_isDragging && Vector2.Distance(eventData.position, _touchStartPosition) >= _tolerance)
+        {
+            _isDragging = true;
+        }
+
         cam = null;
         if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
             cam = canvas.worldCamera;
@@ -116,8 +90,10 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         Vector2 position = RectTransformUtility.WorldToScreenPoint(cam, background.position);
         Vector2 radius = background.sizeDelta / 2;
         input = (eventData.position - position) / (radius * canvas.scaleFactor);
+
         FormatInput();
         HandleInput(input.magnitude, input.normalized, radius, cam);
+
         handle.anchoredPosition = input * radius * handleRange;
     }
 
@@ -176,6 +152,14 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
+        if (RectTransformUtility.RectangleContainsScreenPoint(handle, Input.mousePosition, cam))
+        {
+            if (!_isDragging && Time.time - _pressTime >= 0.2f)
+            {
+                joystickPress.Invoke();
+            }
+            _isDragging = false;
+        }
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
     }

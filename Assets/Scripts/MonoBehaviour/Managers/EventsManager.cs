@@ -16,6 +16,8 @@ public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
 	public void OnPointerDown(PointerEventData eventData)
     {
+        SoundManager.PlaySound(SoundName.ButtonPressSimulator);
+
         isPressed = true;
         if (isPressedFirstTime)
         {
@@ -30,6 +32,7 @@ public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         {
             isPressedFirstTime = true;
         }
+
         pressTime = Time.time;
         wasPressedEvent.Invoke();
         eventStates[0] = true;
@@ -37,6 +40,7 @@ public class EventsManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        SoundManager.PlaySound(SoundName.ButtonPressSimulator, 0.6f);
         wasReleasedEvent.Invoke();
         eventStates[1] = true;
 

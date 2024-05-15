@@ -286,7 +286,7 @@ namespace UBlockly.UGUI
         {
             mBlock.UnPlug();
             SetOrphan();
-            
+            SoundManager.PlaySound(SoundName.BlockDragNDrop);
             //record the touch offset relative to the block transform
             Vector2 localPos;
             RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform) ViewTransform.parent, eventData.position,
@@ -334,7 +334,12 @@ namespace UBlockly.UGUI
             {
                 // attach to closest connection
                 mClosestConnection.Connect(mAttachingConnection);
+                SoundManager.PlaySound(SoundName.BlockConnect);
                 mClosestConnection.FireUpdate(Connection.UpdateState.UnHighlight);
+            }
+            else
+            {
+                SoundManager.PlaySound(SoundName.BlockDragNDrop, 0.5f);
             }
             // check over bin
             BlocklyUI.WorkspaceView.Toolbox.FinishCheckBin(this);
