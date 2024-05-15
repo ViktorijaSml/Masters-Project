@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class UnitsManager : MonoBehaviour, IInteractible
 {
+    [SerializeField] private Button UnitsSlot;
+    [SerializeField] private Button UnitsBack;
+
     private CanvasGroup Units;
     public GameObject UnitsSimulation;
     public static UnitsManager instance;
@@ -15,6 +18,21 @@ public class UnitsManager : MonoBehaviour, IInteractible
         instance = this;
         Application.targetFrameRate = 60;
     }
+    void Start()
+    {
+        UnitsSlot.onClick.AddListener(() =>
+        {
+            SoundManager.PlaySound(SoundName.ButtonPressUI);
+            OpenUnits();
+        });
+
+        UnitsBack.onClick.AddListener(() =>
+        {
+            SoundManager.PlaySound(SoundName.ButtonPressUI, 0.6f);
+            CloseUnits();
+        });
+    }
+
 	public List<IShowable> GetUnitsType()
 	{
 		List<IShowable> unitList = new List<IShowable>();
@@ -77,8 +95,14 @@ public class UnitsManager : MonoBehaviour, IInteractible
     public GameObject GetUnitSlot() => GameObject.FindGameObjectWithTag("UnitSlot");
     public Button GetButtonFromUnitSlot() => GetUnitSlot().transform.GetChild(0).GetComponent<Button>();
 
-    public void CloseUnits() =>  Units.enabled = true;
-    public void OpenUnits() =>  Units.enabled = false;
+    public void CloseUnits()
+    {
+        Units.enabled = true;
+    }
+    public void OpenUnits()
+    {
+        Units.enabled = false;
+    }
 
     public void CloseUnitsSimulation() => UnitsSimulation.SetActive(false);
     public void OpenUnitsSimulation() => UnitsSimulation.SetActive(true);

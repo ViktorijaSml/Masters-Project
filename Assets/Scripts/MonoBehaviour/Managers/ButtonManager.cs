@@ -24,14 +24,14 @@ public class ButtonManager : MonoBehaviour
 
 	private void Update()
 	{
-		if(UnityEngine.Input.GetKeyDown(KeyCode.Escape) || UnityEngine.Input.GetKeyDown(KeyCode.Return))
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = !UnityEngine.Input.GetKeyDown(KeyCode.Escape);
+#else
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) || UnityEngine.Input.GetKeyDown(KeyCode.Return))
         {
-            #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-            #else
-                Application.Quit();
-            #endif
-		}
+            Application.Quit();
+        }
+#endif
 	}
 	public void ResetScene() => SystemManager.RefreshApp();
     public void UpdatePressInfo() { 

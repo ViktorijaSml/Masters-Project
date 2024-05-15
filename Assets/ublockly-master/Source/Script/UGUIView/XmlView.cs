@@ -38,6 +38,8 @@ namespace UBlockly.UGUI
         [SerializeField] protected Button m_EditBtn;
         [SerializeField] protected Button m_DeleteBtn;
         [SerializeField] protected Button m_OpenNewBtn;
+        [SerializeField] protected Button m_CloseBtn1;
+        [SerializeField] protected Button m_CloseBtn2;
 
         [SerializeField] protected GameObject m_SavePanel;
         [SerializeField] protected InputField m_SaveNameInput;
@@ -87,9 +89,21 @@ namespace UBlockly.UGUI
         {
             HideSavePanel();
             HideLoadPanel();
+            m_CloseBtn1.onClick.AddListener(() =>
+            {
+                SoundManager.PlaySound(SoundName.ButtonPressUI, 0.6f);
+                HideLoadPanel();
+            });
+
+            m_CloseBtn2.onClick.AddListener(() =>
+            {
+                SoundManager.PlaySound(SoundName.ButtonPressUI, 0.6f);
+                HideSavePanel();
+            });
 
             m_SaveBtn.onClick.AddListener(() =>
             {
+                SoundManager.PlaySound(SoundName.ButtonPressUI);
                 mIsEdit = false;
                 if (!mIsSavePanelShow) ShowSavePanel();
                 else HideSavePanel();
@@ -97,16 +111,21 @@ namespace UBlockly.UGUI
 
             m_LoadBtn.onClick.AddListener(() =>
             {
+                SoundManager.PlaySound(SoundName.ButtonPressUI);
                 if (!mIsLoadPanelShow) ShowLoadPanel();
                 else HideLoadPanel();
             });
 
             m_OpenNewBtn.onClick.AddListener(() => {
+                SoundManager.PlaySound(SoundName.ButtonPressUI);
                 HideLoadPanel();
                 OpenNewFile();
             });
 
-            m_SaveOkBtn.onClick.AddListener(EditOrSaveXml);
+            m_SaveOkBtn.onClick.AddListener(() => {
+                SoundManager.PlaySound(SoundName.ButtonPressUI);
+                EditOrSaveXml();
+                });
 
             mErrorMsg = m_SaveErrorObject.GetComponent<TMP_Text>();
         }
@@ -147,11 +166,15 @@ namespace UBlockly.UGUI
 
                 //Open file feature
                 btnXml.GetComponentInChildren<Text>().text = fileName;
-                btnXml.GetComponent<Button>().onClick.AddListener(() => LoadXml(fileName));
+                btnXml.GetComponent<Button>().onClick.AddListener(() => {
+                    SoundManager.PlaySound(SoundName.ButtonPressUI);
+                    LoadXml(fileName);
+                    });
 
                 //Edit feature
                 btnEdit.GetComponent<Button>().onClick.AddListener(() =>
                 {
+                    SoundManager.PlaySound(SoundName.ButtonPressUI);
                     mIsEdit = true;
                     mOriginalName = fileName;
                     mLastOpenedFile = fileName;
@@ -162,6 +185,7 @@ namespace UBlockly.UGUI
                 //Delete feature
                 btnDelete.GetComponent<Button>().onClick.AddListener(() =>
                 {
+                    SoundManager.PlaySound(SoundName.ButtonPressUI);
                     HideLoadPanel();
                     GameObject confirmDialog = GameObject.Instantiate(m_ConfirmDialogPrefab, this.transform, false);
                     confirmDialog.transform.SetAsLastSibling();
@@ -286,6 +310,7 @@ namespace UBlockly.UGUI
 
             System.IO.File.WriteAllText(path, text);
             Debug.Log("Saved workspace successfully.");
+            mLastOpenedFile = m_SaveNameInput.text;
             HideSavePanel();
         }
 
@@ -337,7 +362,7 @@ namespace UBlockly.UGUI
         protected virtual void OpenNewFile()
         {
             BlocklyUI.WorkspaceView.CleanViews();
-            Xml.ResetAllData(BlocklyUI.WorkspaceView.Workspace);
+            Xml.ResetAllData();
             Debug.Log("Opened new (empty) workspace.");
             mLastOpenedFile = null;
         }

@@ -20,9 +20,7 @@ limitations under the License.
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UBlockly
 {
@@ -47,6 +45,14 @@ namespace UBlockly
             GameObject manager = GameObject.Find("Managers");
             mManagers = manager.GetComponentsInChildren<IInteractible>();
 
+            ButtonManager.instance.ClearAllListenersFromAllButtons();
+            if (UnitsManager.instance.UnitSlotHasChildren())
+            {
+                UnitsManager.instance.OpenUnitsSimulation();
+                //while (UnitsManager.instance.GetActiveUnit() == null) { /*wait until the object is active*/}
+                UnitsManager.instance.GetActiveUnit().GetComponent<IShowable>().ClearGarbage();
+            }
+
             //start runner from the topmost blocks, exclude the procedure definition blocks
             List<Block> blocks = workspace.GetTopBlocks(true).FindAll(block => !ProcedureDB.IsDefinition(block));
             if (blocks.Count == 0)
@@ -55,14 +61,6 @@ namespace UBlockly
                 return;
             }            
             CurStatus = Status.Running;
-
-            ButtonManager.instance.ClearAllListenersFromAllButtons();
-            if (UnitsManager.instance.UnitSlotHasChildren())
-            {
-                UnitsManager.instance.OpenUnitsSimulation();
-                //  while (UnitsManager.instance.GetActiveUnit() == null) { /*wait until the object is active*/}
-                UnitsManager.instance.GetActiveUnit().GetComponent<IShowable>().ClearGarbage();
-            }
 
             foreach (var block in blocks)
             {

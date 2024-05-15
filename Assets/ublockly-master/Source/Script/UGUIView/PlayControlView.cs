@@ -12,6 +12,7 @@ namespace UBlockly.UGUI
         [SerializeField] private Button m_BtnPause;
         [SerializeField] private Button m_BtnStop;
         [SerializeField] private Button m_BtnStep;
+        [SerializeField] private Button m_BtnRefresh;
         [SerializeField] private Toggle m_ToggleASync;
         [SerializeField] private Toggle m_ToggleSync;
         [SerializeField] private Toggle m_ToggleCallstack;
@@ -19,7 +20,6 @@ namespace UBlockly.UGUI
         [SerializeField] private GameObject m_prefabCallstackText;
 
         private WorkspaceView mWorkspaceView;
-        
         private RunnerUpdateStateObserver mObserver;
 
         public void Init(WorkspaceView workspaceView)
@@ -28,10 +28,26 @@ namespace UBlockly.UGUI
             mObserver = new RunnerUpdateStateObserver(this);
             CSharp.Runner.AddObserver(mObserver);
             
-            m_BtnRun.onClick.AddListener(OnRun);
-            m_BtnPause.onClick.AddListener(OnPause);
-            m_BtnStop.onClick.AddListener(OnStop);
-            m_BtnStep.onClick.AddListener(OnStep);
+            m_BtnRun.onClick.AddListener(() => {
+                SoundManager.PlaySound(SoundName.ButtonPressUI);
+                OnRun();
+                });
+            m_BtnPause.onClick.AddListener(() => {
+                SoundManager.PlaySound(SoundName.ButtonPressUI);
+                OnPause();
+            });
+            m_BtnStop.onClick.AddListener(() => {
+                SoundManager.PlaySound(SoundName.ButtonPressUI);
+                OnStop();
+            });
+            m_BtnStep.onClick.AddListener(() => {
+                SoundManager.PlaySound(SoundName.ButtonPressUI);
+                OnStep();
+            });
+            m_BtnRefresh.onClick.AddListener(() => {
+                SoundManager.PlaySound(SoundName.ButtonPressUI);
+                ButtonManager.instance.ResetScene();
+            });
 
             m_ToggleNormal.isOn = true;
             SetMode(Runner.Mode.Normal);            

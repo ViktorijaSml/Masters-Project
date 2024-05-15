@@ -23,6 +23,7 @@ limitations under the License.
 using System;
 using System.Collections;
 using System.Linq;
+using UnityEngine;
 
 namespace UBlockly
 {
@@ -44,11 +45,7 @@ namespace UBlockly
             CmdEnumerator ctor = CSharp.Interpreter.ValueReturn(block, "TEXT", new DataStruct(""));
             yield return ctor;
             DataStruct input = ctor.Data; 
-            //todo: 暂时用Debug.Log，后面根据UI输出框再定
-            UnityEngine.Debug.Log("c# print: " + input.ToString()); 
-              UnityEngine.Debug.Log("AAAAA: " + ctor.Data);
-              UnityEngine.Debug.Log("AAAAA: " + ctor.Cmdtor);
-              UnityEngine.Debug.Log("AAAAA: " + ctor.Current);
+            Debug.Log("c# print: " + input.ToString()); 
         }
     }
 
@@ -68,7 +65,7 @@ namespace UBlockly
                 {
                     CmdEnumerator ctor = CSharp.Interpreter.ValueReturn(block, "ADD" + i, new DataStruct(""));
                     yield return ctor;
-                    elements[i] = ctor.Data.StringValue;
+                    elements[i] = ctor.Data.ToString();
                 }
                 result = string.Join("", elements);
             }
@@ -181,7 +178,7 @@ namespace UBlockly
                         result = arg0Value.StringValue[length-1].ToString();
                         break;
                     case "RANDOM":
-                        result = arg0Value.StringValue[new Random().Next(0,length)].ToString();
+                        result = arg0Value.StringValue[new System.Random().Next(0,length)].ToString();
                         break;
                 }
             }

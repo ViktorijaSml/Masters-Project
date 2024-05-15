@@ -30,6 +30,7 @@ public class LabelBehaviour : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     public void OnBeginDrag(PointerEventData eventData)
     {
 		RefreshCanvasGroup();
+        SoundManager.PlaySound(SoundName.BlockDragNDrop);
 		LabelManager.instance.ShowBin(true);
     }
 
@@ -40,7 +41,8 @@ public class LabelBehaviour : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     {
         transform.localPosition = startPos;
 		RefreshCanvasGroup();
-		LabelManager.instance.ShowBin(false);
+        SoundManager.PlaySound(SoundName.BlockDragNDrop, 0.6f);
+        LabelManager.instance.ShowBin(false);
         LabelManager.instance.BinFunctionality(gameObject);
     }
 

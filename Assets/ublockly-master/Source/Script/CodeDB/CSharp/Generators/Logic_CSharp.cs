@@ -25,7 +25,7 @@ namespace UBlockly
 {
     public partial class CSharpGenerator 
     {
-        [CodeGenerator(BlockType = "controls_if")]
+        [CodeGenerator(BlockType = "logic_if")]
         private string Controls_If(Block block)
         {
             int n = 0;
@@ -59,7 +59,7 @@ namespace UBlockly
             return code.ToString();
         }
 
-        [CodeGenerator(BlockType = "controls_ifelse")]
+        [CodeGenerator(BlockType = "logic_ifelse")]
         private string Controls_IfElse(Block block)
         {
             return Controls_If(block);

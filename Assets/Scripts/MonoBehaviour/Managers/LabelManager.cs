@@ -7,17 +7,27 @@ using UnityEngine.UI;
 
 public class LabelManager : MonoBehaviour, IShowable, IInteractible
 {
-    [SerializeField] GameObject binArea;
+    [SerializeField] private GameObject binArea;
+    [SerializeField] private Button _labelButton;
+    [SerializeField] private List<bool> labelCounts = new List<bool>();
+
     public static LabelManager instance;
     public GameObject labelPrefab;
+
     private int numOrder = 0;
-    [SerializeField]
-    private List<bool> labelCounts = new List<bool>();
     private Color lastColor = new Color();
 
     public List<bool> LabelList { set { labelCounts = value; } }
-    private void Awake() => instance = this;
 
+    private void Awake() => instance = this;
+    private void Start()
+    {
+        _labelButton.onClick.AddListener(() =>
+        {
+            SoundManager.PlaySound(SoundName.ButtonPressUI);
+            AddLabelByCorrectOrder();
+        });
+    }
     public int GetLabelCount() => labelCounts.Count;
     public bool AnyTrueInList() => labelCounts.Any(x => x == true);
 

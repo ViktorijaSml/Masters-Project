@@ -20,12 +20,8 @@ limitations under the License.
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Xml;
-using UBlockly.UGUI;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace UBlockly
 {
@@ -112,7 +108,7 @@ namespace UBlockly
         /// <param name="workspace">The WOrkspace</param>
         public static List<string> DomToWorkspace(XmlNode xml, Workspace workspace)
         {
-            ResetAllData(workspace);
+            ResetAllData();
             List<string> newBlockIds = new List<string>(); // A list of block ids added by this call.
             var childCount = xml.ChildNodes.Count;
             int width = 0; // Not used in LTR.
@@ -185,29 +181,26 @@ namespace UBlockly
         /// Resets all data in the workspace
         /// </summary>
         /// <param name="workspace"> The workspace to add to.</param>
-		public static void ResetAllData(Workspace workspace)
+		public static void ResetAllData()
 		{
-			GameObject displayText = LabelManager.instance.GetDisplayTextObject();
 			GameObject unitSlot = UnitsManager.instance.GetUnitSlot();
+            
 			if (UnitsManager.instance.UnitSlotHasChildren())
 			{
 				MonoBehaviour.Destroy(unitSlot.transform.GetChild(1).gameObject);
 			}
-			foreach (Transform label in displayText.transform)
-			{
-				MonoBehaviour.Destroy(label.gameObject);
-                BlocklyUI.WorkspaceView.Workspace.DeleteVariable(label.name);
-			}
-		}
 
-		/// <summary>
-		/// Decode an XML DOM and create blocks on the workspace. Position the new 
-		/// blocks immediately below prior blocks,aligned by theri starting edge.
-		/// </summary>
-		/// <param name="xml"> The XML DOM.</param>
-		/// <param name="workspace"> The workspace to add to.</param>
-		/// <returns> An array containing new block ids.</returns>
-		public static List<string> AppendDomToWorkspace(XmlNode xml, Workspace workspace)
+            SystemManager.SystemReset();
+        }
+
+        /// <summary>
+        /// Decode an XML DOM and create blocks on the workspace. Position the new 
+        /// blocks immediately below prior blocks,aligned by theri starting edge.
+        /// </summary>
+        /// <param name="xml"> The XML DOM.</param>
+        /// <param name="workspace"> The workspace to add to.</param>
+        /// <returns> An array containing new block ids.</returns>
+        public static List<string> AppendDomToWorkspace(XmlNode xml, Workspace workspace)
         {
             // load the new blocks into theworkspace and get the ids of the new blocks
             var newBlockIds = Xml.DomToWorkspace(xml, workspace);
