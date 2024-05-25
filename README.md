@@ -5,7 +5,9 @@
 
 :blush: Welcome to UIFLow Virtual! This repository contains a coding environment featuring a simulator for the M5StickC Plus microcontroller. 
 This project is a part of the EU-funded <a href="https://roboaquaria-project.eu">RoboAquaria</a> initiative, aimed at raising awareness about marine environment protection, as well as promoting STEM education.
-
+<br>
+<br>
+Try the preview :arrow_right:<a href="https://viktorijasml.github.io/UIFlow-Virtual-Preview/"> **HERE** </a>:arrow_left:
 </div>
 
 # Table of Contents
