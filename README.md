@@ -14,10 +14,10 @@ This project is a part of the EU-funded <a href="https://roboaquaria-project.eu"
 # Table of Contents
 
 - [About the Project](#about-the-project)
-- [Platform Compatibility](#platform-compatibility)
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Run Locally](#run-locally)
+  - [Platform Compatibility](#platform-compatibility)
+  - [Features](#features)
+  - [Prerequisites](#prerequisites)
+  - [Run Locally](#run-locally)
 - [Tutorials](#tutorials)
   - [Adding New Categories and Blocks](#adding-new-categories-and-blocks)
   - [Adding New Units](#adding-new-units)
