@@ -7,7 +7,7 @@
 This project is a part of the EU-funded <a href="https://roboaquaria-project.eu">RoboAquaria</a> initiative, aimed at raising awareness about marine environment protection, as well as promoting STEM education.
 <br>
 <br>
-Try the preview :arrow_right:<a href="https://viktorijasml.github.io/UIFlow-Virtual-Preview/"> **HERE** </a>:arrow_left:
+$${\color{lightblue} TRY  \space THE \space PREVIEW }$$ :arrow_right:<a href="https://viktorijasml.github.io/UIFlow-Virtual-Preview/"> **HERE** </a>:arrow_left:
 </div>
 
 # Table of Contents
@@ -123,7 +123,7 @@ Find a detailed blog on how UBlockly works, as well as an amaizing guide to help
   - When the project is launched and the unit is selected using the *“Unit”* button, a child object with the same name will be instantiated in two locations:
     - Inside `Canvas-Buttons&Screen/Buttons/Right/UnitSlot`: an object representing an image is instantiated from the `Units Images` folder.
     - Inside `Canvas-Units/UnitSimulation`: the object simulating that unit is instantiated from the `Units Objects` folder.
-  - Ensure that objects of the specific unit within both folders have identical names for the system to function correctly.   
+  - :heavy_exclamation_mark: Ensure that objects of the specific unit within both folders have identical names for the system to function correctly.   
 
 **3. Editing the Unit Prefab**
   - Locate the selected unit prefab within the `Units Objects` folder.
