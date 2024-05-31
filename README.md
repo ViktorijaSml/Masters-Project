@@ -155,7 +155,7 @@ Find a detailed blog on how UBlockly works, as well as an amaizing guide to help
 
 Distributed under the Apache 2.0 License. See LICENSE.txt for more information.
 
-## Acknowledgements
+# Acknowledgements
 Thank you for making this possible:
 - [UBlockly by imagicbell](https://github.com/imagicbell/ublockly) @imagicbell
   
