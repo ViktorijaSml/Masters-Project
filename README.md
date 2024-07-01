@@ -81,7 +81,7 @@ This project enchances UBlockly with fixes and new addons:
 - **Units System:** Add new units easily. There are empty prefabs of other units that exist for the microcontroller.
 - **Showing Necessary Categories:** The `IShowable` interface allows categories to be hidden if the element representing the categories isn't active in the simulator.
 - **Refresh Button:** Allows the user to restart the app if an error occurs.
-- **Save file:** Updated saving system to accommodate the new features.
+- **Save file:** Updated saving system to include the new features.
 - **Simulation Mode:** During execution of your code, the ability to add new units and labels is disabled. If an unit is present, a new window will appear for interacting with it.
 
 ## Prerequisites
@@ -117,14 +117,14 @@ Find a detailed blog on how UBlockly works, as well as an amaizing guide to help
   - Active prefabs are displayed in a lighter color, while inactive ones are present but not currently in use.
 
 **2. Identify the Unit for Implementation**
-  - Your initial step involves identifying the specific unit you want to implement.
-  - Activate the unit by checking its box in the `Inspector` window.
+  - Identify the specific unit you want to implement.
+  - Activate it by checking its box in the `Inspector` window.
     
     ![image](https://github.com/ViktorijaSml/UIFlow-Virtual-/assets/73490593/616546a5-5655-43bd-acbb-77894eb93f4b)
   - When the project is launched and the unit is selected using the *“Unit”* button, a child object with the same name will be instantiated in two locations:
     - Inside `Canvas-Buttons&Screen/Buttons/Right/UnitSlot`: an object representing an image is instantiated from the `Units Images` folder.
     - Inside `Canvas-Units/UnitSimulation`: the object simulating that unit is instantiated from the `Units Objects` folder.
-  - :heavy_exclamation_mark: Ensure that objects of the specific unit within both folders have identical names for the system to function correctly.   
+  - :heavy_exclamation_mark: Make sure that objects of the specific unit within both folders have identical names for the system to function correctly.   
 
 **3. Editing the Unit Prefab**
   - Locate the selected unit prefab within the `Units Objects` folder.
@@ -138,7 +138,7 @@ Find a detailed blog on how UBlockly works, as well as an amaizing guide to help
   - This class should inherit from the `IShowable` interface, so that the category appears when the unit is selected.
   - The `[Unit]Manager` class enables the functionality of detecting block commands related to the unit only when the user has selected it.
   - If no additional methods are needed, you can use the `DummyManager` class to fulfill the interface requirement.
-  - :grey_exclamation: Tip: if your desired unit has more requirements to implement, implement them in `[Unit]Behaviour` class. 
+  - :grey_exclamation: Tip: if your desired unit has more features to implement, create its `[Unit]Behaviour` class and implement them there. 
 
 **5. Adding Block Commands**
   - After creating the unit’s simulation, add its block commands.
