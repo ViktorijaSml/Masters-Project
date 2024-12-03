@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,19 @@ public class ScreenManager : MonoBehaviour
     public static ScreenManager instance;
     private Image imageScreen;
     private Color backgroundColor;
+    private readonly Dictionary<string, (int R, int G, int B)> allColors = new Dictionary<string, (int, int, int)>
+        {
+            { "TURQUOISE", (64, 224, 208) },
+            { "ORANGE", (255, 165, 0) },
+            { "BLACK", (0, 0, 0) },
+            { "RED", (255, 0, 0) },
+            { "BLUE", (0, 0, 255) },
+            { "YELLOW", (255, 255, 0) },
+            { "GREEN", (0, 128, 0) },
+            { "PURPLE", (128, 0, 128) },
+            { "WHITE", (255, 255, 255) },
+            { "BROWN", (150, 75, 0) }
+        };
 
     public Color ScreenColor 
     { 
@@ -44,39 +58,9 @@ public class ScreenManager : MonoBehaviour
         backgroundColor = imageScreen.color;
     }
 
-    public void SetColorBlack()
+    public void SetColor(string color)
     {
-        imageScreen.color = new Color(0f, 0f, 0f, backgroundColor.a);
+        imageScreen.color = new Color(allColors[color].R / 255f, allColors[color].G / 255f, allColors[color].B / 255f, backgroundColor.a);
         backgroundColor = imageScreen.color;
     }
-    public void SetColorRed()
-    {
-        imageScreen.color = new Color(255f, 0f, 0f, backgroundColor.a);
-        backgroundColor = imageScreen.color;
-    }
-    public void SetColorBlue()
-    {
-        imageScreen.color = new Color(0f, 0f, 255f, backgroundColor.a);
-        backgroundColor = imageScreen.color;
-    }
-    public void SetColorYellow()
-    {
-        imageScreen.color = new Color(255f, 255f, 0f, backgroundColor.a);
-        backgroundColor = imageScreen.color;
-    }
-    public void SetColorGreen()
-    {
-        imageScreen.color = new Color(0f, 255f, 0f, backgroundColor.a);
-        backgroundColor = imageScreen.color;
-    }
-    public void SetColorPurple()
-    {
-        imageScreen.color = new Color(255f, 0f, 255f, backgroundColor.a);
-        backgroundColor = imageScreen.color;
-    }
-    public void SetColorWhite()
-    {
-        imageScreen.color = new Color(255f, 255f, 255f,backgroundColor.a);
-        backgroundColor = imageScreen.color;
-    }   
 }

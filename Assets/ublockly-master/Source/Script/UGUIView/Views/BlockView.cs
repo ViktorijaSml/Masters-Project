@@ -29,7 +29,8 @@ namespace UBlockly.UGUI
     public class BlockView : BaseView, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
         [SerializeField] private List<Image> m_BgImages = new List<Image>();
-        
+        private float lastClickTime = 0f; // Tracks the time of the last click
+        private readonly float doubleClickThreshold = 0.3f; // Maximum time interval for a double-click (in seconds)
         public override ViewType Type
         {
             get { return ViewType.Block; }
@@ -347,11 +348,26 @@ namespace UBlockly.UGUI
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            //todo: background outline
-            /*if (!eventData.dragging && !InToolbox) 
-                BlocklyUI.WorkspaceView.CloneBlockView(this, XYInCodingArea + BlockViewSettings.Get().BumpAwayOffset);*/
+            // Check if the pointer event is a valid double-click
+            if (!eventData.dragging && !InToolbox)
+                {
+                float timeSinceLastClick = Time.time - lastClickTime;
+
+                if (timeSinceLastClick <= doubleClickThreshold)
+                {
+                    //clone the block a bit below the original one
+                    Vector2 newPosition = new Vector2(
+                        this.transform.localPosition.x + BlockViewSettings.Get().BumpAwayOffset.x,
+                        this.transform.localPosition.y + BlockViewSettings.Get().BumpAwayOffset.y
+                    );
+                    BlocklyUI.WorkspaceView.CloneBlockView(this, newPosition);
+                }
+
+                // Update the last click time
+                lastClickTime = Time.time;
+            }
         }
-        
+
         #endregion
 
         #region Block State Update

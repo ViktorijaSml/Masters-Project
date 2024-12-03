@@ -17,7 +17,7 @@ public static class SystemManager
         ResetDate();
         ResetWDT();
     }
-    public static void ResetScreen() => ScreenManager.instance.SetColorBlack();
+    public static void ResetScreen() => ScreenManager.instance.SetColor("BLACK");
     public static void ResetLed() => LedManager.instance.LedOff();
     public static void ResetSpeaker()
     {

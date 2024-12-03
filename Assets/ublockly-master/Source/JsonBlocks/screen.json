@@ -9,8 +9,11 @@
         "options": [
           [ "%{BKY_COLOR_BLACK}", "BLACK" ],
           [ "%{BKY_COLOR_RED}", "RED" ],
-          [ "%{BKY_COLOR_BLUE}", "BLUE" ],
+          [ "%{BKY_COLOR_ORANGE}", "ORANGE" ],
+          [ "%{BKY_COLOR_BROWN}", "BROWN" ],
           [ "%{BKY_COLOR_YELLOW}", "YELLOW" ],
+          [ "%{BKY_COLOR_BLUE}", "BLUE" ],
+          [ "%{BKY_COLOR_TURQUOISE}", "TURQUOISE" ],
           [ "%{BKY_COLOR_GREEN}", "GREEN" ],
           [ "%{BKY_COLOR_PURPLE}", "PURPLE" ],
           [ "%{BKY_COLOR_WHITE}", "WHITE" ]

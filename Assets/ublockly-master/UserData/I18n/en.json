@@ -1120,7 +1120,10 @@
   "COLOR_YELLOW": "yellow",
   "COLOR_GREEN": "green",
   "COLOR_PURPLE": "purple",
+  "COLOR_ORANGE": "orange",
+  "COLOR_TURQUOISE": "turquoise",
   "COLOR_WHITE": "white",
+  "COLOR_BROWN": "brown",
   //Inputs for function set background color with RGB
   "RGB_RED": "red:",
   "RGB_GREEN": "green:",

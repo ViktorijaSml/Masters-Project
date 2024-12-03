@@ -9,30 +9,7 @@ namespace UBlockly
         {
             string value = block.GetFieldValue("COLOR");
 
-            switch (value)
-            {
-                case "BLACK":
-                    ScreenManager.instance.SetColorBlack();
-                    break;
-                case "RED":
-                    ScreenManager.instance.SetColorRed();
-                    break;
-                case "BLUE":
-                    ScreenManager.instance.SetColorBlue();
-                    break;
-                case "YELLOW":
-                    ScreenManager.instance.SetColorYellow();
-                    break;
-                case "GREEN":
-                    ScreenManager.instance.SetColorGreen();
-                    break;
-                case "PURPLE":
-                    ScreenManager.instance.SetColorPurple();
-                    break;
-                case "WHITE":
-                    ScreenManager.instance.SetColorWhite();
-                    break;
-            }
+            ScreenManager.instance.SetColor(value);
         }
     }
 
