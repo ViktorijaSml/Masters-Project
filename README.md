@@ -71,6 +71,7 @@ This project enchances UBlockly with fixes and new addons:
 - **Runner:** Sections of blocks are executed asynchronously.
 - **Loops:** Infinite loops can run without crashing the app.
 - **Logic blocks:** `If` and `If-else` blocks are placed in the `Logic` category
+- **Clone blocks:** Clone the existing block in the workspace by double-clicking on it.
 
 ### File Management Features
 - Rename File
