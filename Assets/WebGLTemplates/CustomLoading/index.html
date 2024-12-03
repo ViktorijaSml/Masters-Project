@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>UIFlow Virtual</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body>
+    <div id="unity-container" class="unity-desktop">
+	<canvas id="unity-canvas"></canvas>
+      <div id="unity-custom-loading-screen">
+        <div id="custom-loader">
+          <div class="fill"></div>
+          <div class="label"></div>
+		    <canvas id="unity-canvas"></canvas>
+		    <div class="ring">Loading</div>
+        </div>
+		<div class="loading">
+			<p id="message"></p>
+		</div>
+      </div>
+      <div id="unity-warning"> </div>
+    </div>
+  <script src="Build/UnityLoader.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
